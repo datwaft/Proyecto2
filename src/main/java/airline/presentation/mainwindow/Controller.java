@@ -1,4 +1,4 @@
-package airline.logic.mvc;
+package airline.presentation.mainwindow;
 
 public class Controller
 {
