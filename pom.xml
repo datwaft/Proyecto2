@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>proyecto2</groupId>
     <artifactId>Proyecto2</artifactId>
-    <version>0.1</version>
+    <version>Final</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -52,7 +52,8 @@
     </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    <name>Segundo Proyecto - Programación III</name>
 </project>
