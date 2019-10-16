@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public final class RelDatabase
 {
-  public static final String PROPERTIES_FILE_NAME="/connection.properties";        
+  public static final String PROPERTIES_FILE_NAME="/connection/connection.properties";        
   Connection cnx;
   public RelDatabase()
   {

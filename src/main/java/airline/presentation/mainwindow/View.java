@@ -13,7 +13,7 @@ public final class View extends javax.swing.JFrame implements Observer
   {
     initComponents();
     
-    ImageIcon icon = new ImageIcon(getClass().getResource("/plane.png"));
+    ImageIcon icon = new ImageIcon(getClass().getResource("/icons/plane.png"));
     this.setIconImage(icon.getImage());
   }
 
@@ -122,7 +122,7 @@ public final class View extends javax.swing.JFrame implements Observer
   {//GEN-HEADEREND:event_ItemInstitutionalReferenceActionPerformed
     try
     {
-      String path = "/institutional_reference.html";
+      String path = "/html/institutional_reference.html";
       String data = new Scanner(getClass().getResource(path).openStream(), "UTF-8").useDelimiter("\\A").next();
       JLabel label = new JLabel(data);
       
@@ -148,7 +148,7 @@ public final class View extends javax.swing.JFrame implements Observer
   {//GEN-HEADEREND:event_ItemHistoryActionPerformed
     try
     {
-      String path = "/history.html";
+      String path = "/html/history.html";
       String data = new Scanner(getClass().getResource(path).openStream(), "UTF-8").useDelimiter("\\A").next();
       JLabel label = new JLabel(data);
       
@@ -174,7 +174,7 @@ public final class View extends javax.swing.JFrame implements Observer
   {//GEN-HEADEREND:event_ItemContactActionPerformed
     try
     {
-      String path = "/contact.html";
+      String path = "/html/contact.html";
       String data = new Scanner(getClass().getResource(path).openStream(), "UTF-8").useDelimiter("\\A").next();
       JLabel label = new JLabel(data);
       
