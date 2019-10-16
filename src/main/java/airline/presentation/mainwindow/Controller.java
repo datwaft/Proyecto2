@@ -1,5 +1,7 @@
 package airline.presentation.mainwindow;
 
+import javax.swing.JPanel;
+
 public class Controller
 {
   Model model;
@@ -11,5 +13,16 @@ public class Controller
     this.view = view;
     view.setModel(model);
     view.setController(this);
+    model.setController(this);
+  }
+  
+  public void addWindow(JPanel window, String name)
+  {
+    view.addWindow(window, name);
+  }
+  
+  public void swapWindow(String window)
+  {
+    view.swapWindow(window);
   }
 }

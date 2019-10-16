@@ -24,6 +24,9 @@ public class App
     model = new Model();
     view = new View();
     controller = new Controller(model, view);
+    
+    controller.swapWindow("planetype");
+    
     view.setVisible(true);
   }
 }

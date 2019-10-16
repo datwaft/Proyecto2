@@ -18,6 +18,10 @@ public final class View extends javax.swing.JFrame implements Observer
   {
     initComponents();
     
+    windows = new CardLayout();
+    container = this.getContentPane();
+    container.setLayout(windows);
+    
     ImageIcon icon = new ImageIcon(getClass().getResource("/icons/plane.png"));
     this.setIconImage(icon.getImage());
   }
@@ -48,6 +52,7 @@ public final class View extends javax.swing.JFrame implements Observer
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("Proyecto #2: Aerolínea");
+    setMaximumSize(new java.awt.Dimension(800, 500));
     setMinimumSize(new java.awt.Dimension(800, 500));
     setName("mainwindow"); // NOI18N
     setResizable(false);
@@ -238,7 +243,6 @@ public final class View extends javax.swing.JFrame implements Observer
   {
     this.controller = controller;
   }
-  
   
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem ItemContact;
