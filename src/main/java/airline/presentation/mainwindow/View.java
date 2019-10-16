@@ -1,5 +1,7 @@
 package airline.presentation.mainwindow;
 
+import java.awt.CardLayout;
+import java.awt.Container;
 import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
@@ -9,6 +11,9 @@ public final class View extends javax.swing.JFrame implements Observer
   Model model;
   Controller controller;
   
+  CardLayout windows;
+  Container container;
+  
   public View()
   {
     initComponents();
@@ -17,6 +22,17 @@ public final class View extends javax.swing.JFrame implements Observer
     this.setIconImage(icon.getImage());
   }
 
+  public void addWindow(JPanel window, String name)
+  {
+    container.add(window);
+    windows.addLayoutComponent(window, name);
+  }
+  
+  public void swapWindow(String window)
+  {
+    windows.show(container, window);
+  }
+  
   @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents()
