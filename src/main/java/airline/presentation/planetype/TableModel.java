@@ -3,8 +3,6 @@ package airline.presentation.planetype;
 import airline.data.PersistenceManager;
 import airline.data.PlanetypeJpaController;
 import airline.logic.Planetype;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,6 +13,22 @@ public class TableModel extends AbstractTableModel
   public TableModel()
   {
     list = new PlanetypeJpaController(PersistenceManager.getInstance().getEntityManagerFactory()).findPlanetypeEntities();
+  }
+
+  public TableModel(List<Planetype> list)
+  {
+    this.list = list;
+  }
+
+  public List<Planetype> getList()
+  {
+    return list;
+  }
+
+  public void setList(List<Planetype> list)
+  {
+    this.list = list;
+    this.fireTableStructureChanged();
   }
   
   @Override

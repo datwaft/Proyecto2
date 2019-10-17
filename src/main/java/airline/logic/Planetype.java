@@ -8,12 +8,12 @@ import javax.persistence.*;
 @NamedQueries(
 {
   @NamedQuery(name = "Planetype.findAll", query = "SELECT p FROM Planetype p"),
-  @NamedQuery(name = "Planetype.findByIdentifier", query = "SELECT p FROM Planetype p WHERE p.identifier = :identifier"),
-  @NamedQuery(name = "Planetype.findByYear", query = "SELECT p FROM Planetype p WHERE p.year = :year"),
-  @NamedQuery(name = "Planetype.findByModel", query = "SELECT p FROM Planetype p WHERE p.model = :model"),
-  @NamedQuery(name = "Planetype.findByBrand", query = "SELECT p FROM Planetype p WHERE p.brand = :brand"),
-  @NamedQuery(name = "Planetype.findByRowCount", query = "SELECT p FROM Planetype p WHERE p.rowCount = :rowCount"),
-  @NamedQuery(name = "Planetype.findBySeatsRow", query = "SELECT p FROM Planetype p WHERE p.seatsRow = :seatsRow")
+  @NamedQuery(name = "Planetype.findByIdentifier", query = "SELECT p FROM Planetype p WHERE p.identifier like :identifier"),
+  @NamedQuery(name = "Planetype.findByYear", query = "SELECT p FROM Planetype p WHERE cast(p.year as char) like :year"),
+  @NamedQuery(name = "Planetype.findByModel", query = "SELECT p FROM Planetype p WHERE p.model like :model"),
+  @NamedQuery(name = "Planetype.findByBrand", query = "SELECT p FROM Planetype p WHERE p.brand like :brand"),
+  @NamedQuery(name = "Planetype.findByRowCount", query = "SELECT p FROM Planetype p WHERE cast(p.rowCount as char) like :rowCount"),
+  @NamedQuery(name = "Planetype.findBySeatsRow", query = "SELECT p FROM Planetype p WHERE cast(p.seatsRow as char) like :seatsRow")
 })
 public class Planetype implements Serializable
 {
