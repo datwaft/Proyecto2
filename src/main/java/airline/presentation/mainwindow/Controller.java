@@ -16,6 +16,16 @@ public class Controller
     model.setController(this);
   }
   
+  public Model getModel()
+  {
+    return model;
+  }
+
+  public View getView()
+  {
+    return view;
+  }
+  
   public void addWindow(JPanel window, String name)
   {
     view.addWindow(window, name);

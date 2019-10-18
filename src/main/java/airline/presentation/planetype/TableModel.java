@@ -31,6 +31,11 @@ public class TableModel extends AbstractTableModel
     this.fireTableStructureChanged();
   }
   
+  public Planetype getElement(int index)
+  {
+    return this.list.get(index);
+  }
+  
   @Override
   public int getRowCount()
   {

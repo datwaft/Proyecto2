@@ -16,7 +16,12 @@ public class Model extends Observable
   {
     tableModel = new TableModel();
   }
-
+  
+  public Planetype getElement(int row)
+  {
+    return this.tableModel.getElement(row);
+  }
+  
   public TableModel getTableModel()
   {
     return tableModel;

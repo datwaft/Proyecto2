@@ -2,6 +2,7 @@ package airline.presentation.planetype;
 
 import airline.data.PersistenceManager;
 import airline.data.PlanetypeJpaController;
+import airline.exceptions.NonexistentEntityException;
 import airline.logic.Planetype;
 import java.util.List;
 
@@ -18,6 +19,16 @@ public class Controller
     view.setController(this);
     model.setController(this);
   }
+
+  public Model getModel()
+  {
+    return model;
+  }
+
+  public View getView()
+  {
+    return view;
+  }
   
   public void search(String string, int selection)
   {
@@ -33,5 +44,12 @@ public class Controller
       default: list = null; break;
     }
     model.updateTableModel(list);
+  }
+  
+  public void delete(Planetype object) throws Exception
+  {
+    PlanetypeJpaController jpacontroller = new PlanetypeJpaController(PersistenceManager.getInstance().getEntityManagerFactory());
+    jpacontroller.destroy(object.getIdentifier());
+    this.search("", 0);
   }
 }
