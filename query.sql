@@ -4,12 +4,12 @@ insert into planetype values ("001", 2011, "Ace", "Toshiba", 15, 6),
 ("004", 2007, "Beta", "Mitsubishi", 15, 9),
 ("005", 2004, "Twice", "Toshiba", 20, 6);
 
-insert into country values
-("US", "United States"),
+insert into country values ("US", "United States"),
 ("UK", "United Kingdom"),
 ("BO", "Bolivia"),
 ("CA", "Canada"),
 ("CR", "Costa Rica");
+
 select * from planetype p where convert(p.year, char) like "%%%%";
 select * from planetype p where cast(p.year as char) like "%%%%";
 SELECT identifier, brand, model, rownumber, rowseats, year FROM planetype;
