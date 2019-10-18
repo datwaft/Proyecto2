@@ -255,3 +255,4 @@ insert into country values
 select * from planetype p where convert(p.year, char) like "%%%%";
 select * from planetype p where cast(p.year as char) like "%%%%";
 SELECT identifier, brand, model, rownumber, rowseats, year FROM planetype;
+select * from country;
