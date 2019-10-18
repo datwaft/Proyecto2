@@ -1,7 +1,6 @@
 package airline.presentation.planetype;
 
-import airline.data.PersistenceManager;
-import airline.data.PlanetypeJpaController;
+import airline.data.*;
 import airline.logic.Planetype;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -12,7 +11,7 @@ public class TableModel extends AbstractTableModel
 
   public TableModel()
   {
-    list = new PlanetypeJpaController(PersistenceManager.getInstance().getEntityManagerFactory()).findPlanetypeEntities();
+    list = PlanetypeDao.getInstance().findPlanetypeEntities();
   }
 
   public TableModel(List<Planetype> list)
@@ -73,8 +72,8 @@ public class TableModel extends AbstractTableModel
       case 1: return object.getYear();
       case 2: return object.getModel();
       case 3: return object.getBrand();
-      case 4: return object.getRowCount();
-      case 5: return object.getSeatsRow();
+      case 4: return object.getRownumber();
+      case 5: return object.getRowseats();
       default: return "";
     }
   }

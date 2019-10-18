@@ -218,8 +218,8 @@ public class View extends javax.swing.JPanel implements Observer
         object.setYear((int) SpinnerYear.getValue());
         object.setModel(FieldModel.getText());
         object.setBrand(FieldBrand.getText());
-        object.setRowCount(SliderRowCount.getValue());
-        object.setSeatsRow(SliderSeatsRow.getValue());
+        object.setRownumber(SliderRowCount.getValue());
+        object.setRowseats(SliderSeatsRow.getValue());
         
         if (model.getPlanetype() == null)
         {
@@ -292,8 +292,8 @@ public class View extends javax.swing.JPanel implements Observer
       SpinnerYear.setValue(model.getPlanetype().getYear());
       FieldModel.setText(model.getPlanetype().getModel());
       FieldBrand.setText(model.getPlanetype().getBrand());
-      SliderRowCount.setValue(model.getPlanetype().getRowCount());
-      SliderSeatsRow.setValue(model.getPlanetype().getSeatsRow());
+      SliderRowCount.setValue(model.getPlanetype().getRownumber());
+      SliderSeatsRow.setValue(model.getPlanetype().getRowseats());
     }
     
     LabelTitle.setText((model.getPlanetype() == null ? "Añadir" : "Modificar") + " tipo de avión");

@@ -8,12 +8,12 @@ import javax.persistence.*;
 @NamedQueries(
 {
   @NamedQuery(name = "Planetype.findAll", query = "SELECT p FROM Planetype p"),
-  @NamedQuery(name = "Planetype.findByIdentifier", query = "SELECT p FROM Planetype p WHERE p.identifier like :identifier"),
-  @NamedQuery(name = "Planetype.findByYear", query = "SELECT p FROM Planetype p WHERE cast(p.year as char) like :year"),
-  @NamedQuery(name = "Planetype.findByModel", query = "SELECT p FROM Planetype p WHERE p.model like :model"),
-  @NamedQuery(name = "Planetype.findByBrand", query = "SELECT p FROM Planetype p WHERE p.brand like :brand"),
-  @NamedQuery(name = "Planetype.findByRowCount", query = "SELECT p FROM Planetype p WHERE cast(p.rowCount as char) like :rowCount"),
-  @NamedQuery(name = "Planetype.findBySeatsRow", query = "SELECT p FROM Planetype p WHERE cast(p.seatsRow as char) like :seatsRow")
+  @NamedQuery(name = "Planetype.findByIdentifier", query = "SELECT p FROM Planetype p WHERE p.identifier = :identifier"),
+  @NamedQuery(name = "Planetype.findByYear", query = "SELECT p FROM Planetype p WHERE p.year = :year"),
+  @NamedQuery(name = "Planetype.findByModel", query = "SELECT p FROM Planetype p WHERE p.model = :model"),
+  @NamedQuery(name = "Planetype.findByBrand", query = "SELECT p FROM Planetype p WHERE p.brand = :brand"),
+  @NamedQuery(name = "Planetype.findByRownumber", query = "SELECT p FROM Planetype p WHERE p.rownumber = :rownumber"),
+  @NamedQuery(name = "Planetype.findByRowseats", query = "SELECT p FROM Planetype p WHERE p.rowseats = :rowseats")
 })
 public class Planetype implements Serializable
 {
@@ -32,11 +32,11 @@ public class Planetype implements Serializable
   @Column(name = "brand")
   private String brand;
   @Basic(optional = false)
-  @Column(name = "row_count")
-  private int rowCount;
+  @Column(name = "rownumber")
+  private int rownumber;
   @Basic(optional = false)
-  @Column(name = "seats_row")
-  private int seatsRow;
+  @Column(name = "rowseats")
+  private int rowseats;
 
   public Planetype()
   {
@@ -47,14 +47,14 @@ public class Planetype implements Serializable
     this.identifier = identifier;
   }
 
-  public Planetype(String identifier, int year, String model, String brand, int rowCount, int seatsRow)
+  public Planetype(String identifier, int year, String model, String brand, int rownumber, int rowseats)
   {
     this.identifier = identifier;
     this.year = year;
     this.model = model;
     this.brand = brand;
-    this.rowCount = rowCount;
-    this.seatsRow = seatsRow;
+    this.rownumber = rownumber;
+    this.rowseats = rowseats;
   }
 
   public String getIdentifier()
@@ -97,24 +97,24 @@ public class Planetype implements Serializable
     this.brand = brand;
   }
 
-  public int getRowCount()
+  public int getRownumber()
   {
-    return rowCount;
+    return rownumber;
   }
 
-  public void setRowCount(int rowCount)
+  public void setRownumber(int rownumber)
   {
-    this.rowCount = rowCount;
+    this.rownumber = rownumber;
   }
 
-  public int getSeatsRow()
+  public int getRowseats()
   {
-    return seatsRow;
+    return rowseats;
   }
 
-  public void setSeatsRow(int seatsRow)
+  public void setRowseats(int rowseats)
   {
-    this.seatsRow = seatsRow;
+    this.rowseats = rowseats;
   }
 
   @Override

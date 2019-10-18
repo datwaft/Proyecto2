@@ -1,7 +1,6 @@
 package airline.presentation.planetype.addmodify;
 
-import airline.data.PersistenceManager;
-import airline.data.PlanetypeJpaController;
+import airline.data.*;
 import airline.logic.Planetype;
 
 public class Controller
@@ -20,16 +19,14 @@ public class Controller
   
   public void Add(Planetype object) throws Exception
   {
-    PlanetypeJpaController jpacontroller = new PlanetypeJpaController(PersistenceManager.getInstance().getEntityManagerFactory());
-    jpacontroller.create(object);
-    model.getParentController().search("", 0);
+    PlanetypeDao.getInstance().create(object);
+    model.getParentController().update();
   }
   
   public void Modify(Planetype object) throws Exception
   {
-    PlanetypeJpaController jpacontroller = new PlanetypeJpaController(PersistenceManager.getInstance().getEntityManagerFactory());
-    jpacontroller.edit(object);
-    model.getParentController().search("", 0);
+    PlanetypeDao.getInstance().edit(object);
+    model.getParentController().update();
   }
   
   public Model getModel()
