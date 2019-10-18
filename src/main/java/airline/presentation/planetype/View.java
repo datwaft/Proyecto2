@@ -160,7 +160,7 @@ public class View extends javax.swing.JPanel implements Observer
       dialog.setResizable(false);
 
       airline.presentation.planetype.addmodify.Model addmodifyModel = 
-              new airline.presentation.planetype.addmodify.Model(model.getElement(row), dialog, controller);
+              new airline.presentation.planetype.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
       airline.presentation.planetype.addmodify.View addmodifyView = 
               new airline.presentation.planetype.addmodify.View();
       airline.presentation.planetype.addmodify.Controller addmodifyController =
@@ -175,10 +175,10 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonEliminarActionPerformed
   {//GEN-HEADEREND:event_ButtonEliminarActionPerformed
-    int row = this.Table.getSelectedRow();
-    if(row == -1)
+    int[] selectedRows = this.Table.getSelectedRows();
+    if(selectedRows.length == 0)
     {
-      JLabel label = new JLabel("<html><center> No hay ninguna fila seleccionada</center></html>");
+      JLabel label = new JLabel("<html><center> No hay ninguna entrada seleccionada</center></html>");
       Object[] options = {"Aceptar"};
       JOptionPane dialog = new JOptionPane();
       JOptionPane.showOptionDialog(this
@@ -195,7 +195,9 @@ public class View extends javax.swing.JPanel implements Observer
       Object[] options = {"Confimar", "Cancelar"};
       JOptionPane dialog = new JOptionPane();
       Object selection = JOptionPane.showOptionDialog(this
-            , "¿Está seguro de que desea eliminar la entrada? Esta acción no se puede deshacer"
+            , "¿Está seguro de que desea eliminar "
+            + (selectedRows.length == 1 ? "la entrada" :(selectedRows.length + " entradas"))
+            + "? Esta acción no se puede deshacer"
             , "Confirmación de eliminación"
             , JOptionPane.OK_CANCEL_OPTION
             , JOptionPane.WARNING_MESSAGE
@@ -207,7 +209,9 @@ public class View extends javax.swing.JPanel implements Observer
     }
     try
     {
-      controller.delete(model.getElement(row));
+      for (int i = 0; i < selectedRows.length; i++)
+        selectedRows[i] = Table.convertRowIndexToModel(selectedRows[i]);
+      controller.delete(selectedRows);
     }
     catch(Exception ex)
     {

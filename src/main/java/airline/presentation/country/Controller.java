@@ -48,7 +48,14 @@ public class Controller
   
   public void delete(Country object) throws Exception
   {
-    PlanetypeDao.getInstance().destroy(object.getCode());
+    CountryDao.getInstance().destroy(object.getCode());
+    this.update();
+  }
+  
+  public void delete(int[] list) throws Exception
+  {
+    for(int i = 0; i < list.length; ++i)
+      CountryDao.getInstance().destroy(model.getElement(list[i]).getCode());
     this.update();
   }
 }

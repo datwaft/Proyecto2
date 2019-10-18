@@ -55,4 +55,11 @@ public class Controller
     PlanetypeDao.getInstance().destroy(object.getIdentifier());
     this.update();
   }
+  
+  public void delete(int[] list) throws Exception
+  {
+    for(int i = 0; i < list.length; ++i)
+      PlanetypeDao.getInstance().destroy(model.getElement(list[i]).getIdentifier());
+    this.update();
+  }
 }

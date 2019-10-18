@@ -135,94 +135,96 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonAddActionPerformed
   {//GEN-HEADEREND:event_ButtonAddActionPerformed
-//    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir tipo de avión", true);
-//    dialog.setResizable(false);
-//    
-//    airline.presentation.planetype.addmodify.Model addmodifyModel = 
-//            new airline.presentation.planetype.addmodify.Model(null, dialog, controller);
-//    airline.presentation.planetype.addmodify.View addmodifyView = 
-//            new airline.presentation.planetype.addmodify.View();
-//    airline.presentation.planetype.addmodify.Controller addmodifyController =
-//            new airline.presentation.planetype.addmodify.Controller(addmodifyModel, addmodifyView);
-//    
-//
-//    dialog.getContentPane().add(addmodifyView);
-//    dialog.pack();
-//    dialog.setVisible(true);
+    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir país", true);
+    dialog.setResizable(false);
+    
+    airline.presentation.country.addmodify.Model addmodifyModel = 
+            new airline.presentation.country.addmodify.Model(null, dialog, controller);
+    airline.presentation.country.addmodify.View addmodifyView = 
+            new airline.presentation.country.addmodify.View();
+    airline.presentation.country.addmodify.Controller addmodifyController =
+            new airline.presentation.country.addmodify.Controller(addmodifyModel, addmodifyView);
+
+    dialog.getContentPane().add(addmodifyView);
+    dialog.pack();
+    dialog.setVisible(true);
   }//GEN-LAST:event_ButtonAddActionPerformed
 
   private void TableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_TableMouseClicked
   {//GEN-HEADEREND:event_TableMouseClicked
-//    if(evt.getClickCount() == 2)
-//    {
-//      int row = this.Table.getSelectedRow();
-//      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Modificar tipo de avión", true);
-//      dialog.setResizable(false);
-//
-//      airline.presentation.planetype.addmodify.Model addmodifyModel = 
-//              new airline.presentation.planetype.addmodify.Model(model.getElement(row), dialog, controller);
-//      airline.presentation.planetype.addmodify.View addmodifyView = 
-//              new airline.presentation.planetype.addmodify.View();
-//      airline.presentation.planetype.addmodify.Controller addmodifyController =
-//              new airline.presentation.planetype.addmodify.Controller(addmodifyModel, addmodifyView);
-//    
-//
-//      dialog.getContentPane().add(addmodifyView);
-//      dialog.pack();
-//      dialog.setVisible(true);
-//    }
+    if(evt.getClickCount() == 2)
+    {
+      int row = this.Table.getSelectedRow();
+      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Modificar país", true);
+      dialog.setResizable(false);
+
+      airline.presentation.country.addmodify.Model addmodifyModel = 
+              new airline.presentation.country.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
+      airline.presentation.country.addmodify.View addmodifyView = 
+              new airline.presentation.country.addmodify.View();
+      airline.presentation.country.addmodify.Controller addmodifyController =
+              new airline.presentation.country.addmodify.Controller(addmodifyModel, addmodifyView);
+
+      dialog.getContentPane().add(addmodifyView);
+      dialog.pack();
+      dialog.setVisible(true);
+    }
   }//GEN-LAST:event_TableMouseClicked
 
   private void ButtonEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonEliminarActionPerformed
   {//GEN-HEADEREND:event_ButtonEliminarActionPerformed
-//    int row = this.Table.getSelectedRow();
-//    if(row == -1)
-//    {
-//      JLabel label = new JLabel("<html><center> No hay ninguna fila seleccionada</center></html>");
-//      Object[] options = {"Aceptar"};
-//      JOptionPane dialog = new JOptionPane();
-//      JOptionPane.showOptionDialog(this
-//            , label
-//            , "Ha ocurrido un error"
-//            , JOptionPane.DEFAULT_OPTION
-//            , JOptionPane.ERROR_MESSAGE
-//            , null
-//            , options
-//            , options[0]);
-//      return;
-//    }
-//    {
-//      Object[] options = {"Confimar", "Cancelar"};
-//      JOptionPane dialog = new JOptionPane();
-//      Object selection = JOptionPane.showOptionDialog(this
-//            , "¿Está seguro de que desea eliminar la entrada? Esta acción no se puede deshacer"
-//            , "Confirmación de eliminación"
-//            , JOptionPane.OK_CANCEL_OPTION
-//            , JOptionPane.WARNING_MESSAGE
-//            , null
-//            , options
-//            , options[1]);
-//      if(selection.equals(1))
-//        return;
-//    }
-//    try
-//    {
-//      controller.delete(model.getElement(row));
-//    }
-//    catch(Exception ex)
-//    {
-//      JLabel label = new JLabel("<html><center>"+ ex.getMessage() +"</center></html>");
-//      Object[] options = {"Aceptar"};
-//      JOptionPane dialog = new JOptionPane();
-//      JOptionPane.showOptionDialog(this
-//            , label
-//            , "Ha ocurrido un error"
-//            , JOptionPane.DEFAULT_OPTION
-//            , JOptionPane.ERROR_MESSAGE
-//            , null
-//            , options
-//            , options[0]);
-//    }
+    int[] selectedRows = this.Table.getSelectedRows();
+    if(selectedRows.length == 0)
+    {
+      JLabel label = new JLabel("<html><center> No hay ninguna entrada seleccionada</center></html>");
+      Object[] options = {"Aceptar"};
+      JOptionPane dialog = new JOptionPane();
+      JOptionPane.showOptionDialog(this
+            , label
+            , "Ha ocurrido un error"
+            , JOptionPane.DEFAULT_OPTION
+            , JOptionPane.ERROR_MESSAGE
+            , null
+            , options
+            , options[0]);
+      return;
+    }
+    {
+      Object[] options = {"Confimar", "Cancelar"};
+      JOptionPane dialog = new JOptionPane();
+      Object selection = JOptionPane.showOptionDialog(this
+            , "¿Está seguro de que desea eliminar "
+            + (selectedRows.length == 1 ? "la entrada" :(selectedRows.length + " entradas"))
+            + "? Esta acción no se puede deshacer"
+            , "Confirmación de eliminación"
+            , JOptionPane.OK_CANCEL_OPTION
+            , JOptionPane.WARNING_MESSAGE
+            , null
+            , options
+            , options[1]);
+      if(selection.equals(1))
+        return;
+    }
+    try
+    {
+      for (int i = 0; i < selectedRows.length; i++)
+        selectedRows[i] = Table.convertRowIndexToModel(selectedRows[i]);
+      controller.delete(selectedRows);
+    }
+    catch(Exception ex)
+    {
+      JLabel label = new JLabel("<html><center>"+ ex.getMessage() +"</center></html>");
+      Object[] options = {"Aceptar"};
+      JOptionPane dialog = new JOptionPane();
+      JOptionPane.showOptionDialog(this
+            , label
+            , "Ha ocurrido un error"
+            , JOptionPane.DEFAULT_OPTION
+            , JOptionPane.ERROR_MESSAGE
+            , null
+            , options
+            , options[0]);
+    }
   }//GEN-LAST:event_ButtonEliminarActionPerformed
 
   @Override
