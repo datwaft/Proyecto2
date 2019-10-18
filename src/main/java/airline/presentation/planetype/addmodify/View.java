@@ -93,6 +93,7 @@ public class View extends javax.swing.JPanel implements Observer
     SliderSeatsRow.setToolTipText("");
     SliderSeatsRow.setValue(6);
 
+    SpinnerYear.setModel(new javax.swing.SpinnerNumberModel(2000, 1970, 2019, 1));
     SpinnerYear.setValue(2000);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
