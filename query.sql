@@ -10,7 +10,7 @@ insert into country values ("US", "United States"),
 ("CA", "Canada"),
 ("CR", "Costa Rica");
 
-insert into city values ("SJO", "Costa Rica", "CR"),
+insert into city values ("SJO", "San José", "CR"),
 ("UPL", "Upala", "CR"),
 ("LAX", "Los Angeles", "US"),
 ("NYC", "New York", "US"),
