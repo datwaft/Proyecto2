@@ -65,6 +65,14 @@ public class View extends javax.swing.JPanel implements Observer
       }
     });
 
+    TextField.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        TextFieldActionPerformed(evt);
+      }
+    });
+
     LabelType.setText("Tipo de busqueda:");
 
     ComboBoxTypes.setModel(new DefaultComboBoxModel<>(Model.getSearchTypes()));
@@ -226,6 +234,11 @@ public class View extends javax.swing.JPanel implements Observer
             , options[0]);
     }
   }//GEN-LAST:event_ButtonEliminarActionPerformed
+
+  private void TextFieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_TextFieldActionPerformed
+  {//GEN-HEADEREND:event_TextFieldActionPerformed
+    ButtonSearchActionPerformed(evt);
+  }//GEN-LAST:event_TextFieldActionPerformed
 
   @Override
   public void update(Observable o, Object arg)

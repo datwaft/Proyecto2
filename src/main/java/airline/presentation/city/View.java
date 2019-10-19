@@ -1,6 +1,7 @@
 package airline.presentation.city;
 
 import airline.logic.Country;
+import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -64,6 +65,14 @@ public class View extends javax.swing.JPanel implements Observer
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
         ButtonSearchActionPerformed(evt);
+      }
+    });
+
+    TextField.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        TextFieldActionPerformed(evt);
       }
     });
 
@@ -245,17 +254,20 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ComboBoxTypesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ComboBoxTypesActionPerformed
   {//GEN-HEADEREND:event_ComboBoxTypesActionPerformed
+    ButtonSearchActionPerformed(evt);
+  }//GEN-LAST:event_ComboBoxTypesActionPerformed
+
+  private void TextFieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_TextFieldActionPerformed
+  {//GEN-HEADEREND:event_TextFieldActionPerformed
     if(ComboBoxTypes.getSelectedIndex() == 2)
     {
-      ComboBoxCountries.setEnabled(true);
-      TextField.setEnabled(false);
+      controller.searchByCountry((Country)ComboBoxCountries.getSelectedItem());
     }
     else
     {
-      ComboBoxCountries.setEnabled(false);
-      TextField.setEnabled(true);
+      controller.search(TextField.getText(), ComboBoxTypes.getSelectedIndex());
     }
-  }//GEN-LAST:event_ComboBoxTypesActionPerformed
+  }//GEN-LAST:event_TextFieldActionPerformed
 
   @Override
   public void update(Observable o, Object arg)
