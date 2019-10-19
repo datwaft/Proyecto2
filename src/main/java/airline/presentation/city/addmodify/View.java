@@ -1,10 +1,10 @@
-package airline.presentation.country.addmodify;
+package airline.presentation.city.addmodify;
 
 import airline.exceptions.PreexistingEntityException;
+import airline.logic.City;
 import airline.logic.Country;
 import java.util.*;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class View extends javax.swing.JPanel implements Observer
 { 
@@ -28,16 +28,18 @@ public class View extends javax.swing.JPanel implements Observer
     ButtonCancel = new javax.swing.JButton();
     LabelName = new javax.swing.JLabel();
     FieldName = new javax.swing.JTextField();
+    LabelCountry = new javax.swing.JLabel();
+    ComboBoxCountry = new javax.swing.JComboBox<>();
 
     setMaximumSize(new java.awt.Dimension(265, 143));
     setMinimumSize(new java.awt.Dimension(265, 143));
 
     LabelTitle.setFont(new java.awt.Font("Calibri Light", 1, 14)); // NOI18N
     LabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    LabelTitle.setText("Añadir país");
+    LabelTitle.setText("Añadir ciudad");
     LabelTitle.setToolTipText("");
 
-    LabelCode.setText("Código");
+    LabelCode.setText("Código:");
 
     ButtonAccept.setText("Aceptar");
     ButtonAccept.addActionListener(new java.awt.event.ActionListener()
@@ -59,6 +61,10 @@ public class View extends javax.swing.JPanel implements Observer
 
     LabelName.setText("Nombre:");
 
+    LabelCountry.setText("País:");
+
+    ComboBoxCountry.setModel(new DefaultComboBoxModel<Country>(Model.getCountries()));
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -66,23 +72,25 @@ public class View extends javax.swing.JPanel implements Observer
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(LabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addGroup(layout.createSequentialGroup()
-            .addComponent(LabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap())
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addComponent(ButtonAccept)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-            .addComponent(ButtonCancel)
-            .addContainerGap())
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(LabelCode)
-              .addComponent(LabelName))
-            .addGap(18, 18, 18)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(FieldName)
-              .addComponent(FieldCode))
-            .addGap(10, 10, 10))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(ButtonAccept)
+                .addGap(105, 105, 105)
+                .addComponent(ButtonCancel))
+              .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(LabelCode)
+                  .addComponent(LabelCountry)
+                  .addComponent(LabelName))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(FieldName)
+                  .addComponent(ComboBoxCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(FieldCode, javax.swing.GroupLayout.Alignment.TRAILING))))
+            .addGap(0, 0, Short.MAX_VALUE)))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,13 +98,18 @@ public class View extends javax.swing.JPanel implements Observer
         .addContainerGap()
         .addComponent(LabelTitle)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(LabelCode)
-          .addComponent(FieldCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(FieldCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(FieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(LabelName)))
+          .addComponent(LabelCode))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(LabelName)
-          .addComponent(FieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(ComboBoxCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(LabelCountry))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(ButtonCancel)
@@ -115,7 +128,7 @@ public class View extends javax.swing.JPanel implements Observer
         error += "<br>";
       error += "El código está en blanco.";
     }
-    else if(FieldCode.getText().length() > 2)
+    else if(FieldCode.getText().length() > 3)
     {
       if(!error.isBlank())
         error += "<br>";
@@ -139,8 +152,9 @@ public class View extends javax.swing.JPanel implements Observer
     {
       try
       {
-        Country object = new Country(FieldCode.getText());
+        City object = new City(FieldCode.getText());
         object.setName(FieldName.getText());
+        object.setCountry((Country) ComboBoxCountry.getSelectedItem());
         
         if (model.getObject() == null)
         {
@@ -212,9 +226,10 @@ public class View extends javax.swing.JPanel implements Observer
     {
       FieldCode.setText(model.getObject().getCode());
       FieldName.setText(model.getObject().getName());
+      ComboBoxCountry.setSelectedItem(model.getObject().getCountry());
     }
     
-    LabelTitle.setText((model.getObject() == null ? "Añadir" : "Modificar") + " país");
+    LabelTitle.setText((model.getObject() == null ? "Añadir" : "Modificar") + " ciudad");
     FieldCode.setEditable(model.getObject() == null);
   }
   
@@ -242,9 +257,11 @@ public class View extends javax.swing.JPanel implements Observer
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton ButtonAccept;
   private javax.swing.JButton ButtonCancel;
+  private javax.swing.JComboBox<Country> ComboBoxCountry;
   private javax.swing.JTextField FieldCode;
   private javax.swing.JTextField FieldName;
   private javax.swing.JLabel LabelCode;
+  private javax.swing.JLabel LabelCountry;
   private javax.swing.JLabel LabelName;
   private javax.swing.JLabel LabelTitle;
   // End of variables declaration//GEN-END:variables

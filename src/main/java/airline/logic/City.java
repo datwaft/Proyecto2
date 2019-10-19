@@ -1,21 +1,18 @@
 package airline.logic;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "country")
+@Table(name = "city")
 @NamedQueries(
 {
-  @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c"),
-  @NamedQuery(name = "Country.findByCode", query = "SELECT c FROM Country c WHERE c.code = :code"),
-  @NamedQuery(name = "Country.findByName", query = "SELECT c FROM Country c WHERE c.name = :name")
+  @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
+  @NamedQuery(name = "City.findByCode", query = "SELECT c FROM City c WHERE c.code = :code"),
+  @NamedQuery(name = "City.findByName", query = "SELECT c FROM City c WHERE c.name = :name")
 })
-public class Country implements Serializable
+public class City implements Serializable
 {
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-  private List<City> cityList;
   private static final long serialVersionUID = 1L;
   @Id
   @Basic(optional = false)
@@ -24,17 +21,24 @@ public class Country implements Serializable
   @Basic(optional = false)
   @Column(name = "name")
   private String name;
+  @JoinColumns(
+  {
+    @JoinColumn(name = "country", referencedColumnName = "code"),
+    @JoinColumn(name = "country", referencedColumnName = "code")
+  })
+  @ManyToOne(optional = false)
+  private Country country;
 
-  public Country()
+  public City()
   {
   }
 
-  public Country(String code)
+  public City(String code)
   {
     this.code = code;
   }
 
-  public Country(String code, String name)
+  public City(String code, String name)
   {
     this.code = code;
     this.name = name;
@@ -60,6 +64,16 @@ public class Country implements Serializable
     this.name = name;
   }
 
+  public Country getCountry()
+  {
+    return country;
+  }
+
+  public void setCountry(Country country)
+  {
+    this.country = country;
+  }
+
   @Override
   public int hashCode()
   {
@@ -72,11 +86,11 @@ public class Country implements Serializable
   public boolean equals(Object object)
   {
     // TODO: Warning - this method won't work in the case the id fields are not set
-    if (!(object instanceof Country))
+    if (!(object instanceof City))
     {
       return false;
     }
-    Country other = (Country) object;
+    City other = (City) object;
     if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code)))
     {
       return false;
@@ -87,17 +101,7 @@ public class Country implements Serializable
   @Override
   public String toString()
   {
-    return name;
-  }
-
-  public List<City> getCityList()
-  {
-    return cityList;
-  }
-
-  public void setCityList(List<City> cityList)
-  {
-    this.cityList = cityList;
+    return "airline.logic.City[ code=" + code + " ]";
   }
 
 }

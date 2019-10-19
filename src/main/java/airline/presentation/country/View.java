@@ -33,6 +33,7 @@ public class View extends javax.swing.JPanel implements Observer
     setMinimumSize(new java.awt.Dimension(800, 500));
 
     LabelTitle.setFont(new java.awt.Font("Calibri Light", 1, 24)); // NOI18N
+    LabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     LabelTitle.setText("Gestión de paises");
 
     Table.setAutoCreateRowSorter(true);
@@ -84,14 +85,6 @@ public class View extends javax.swing.JPanel implements Observer
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createSequentialGroup()
-                .addComponent(ButtonAdd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButtonEliminar))
-              .addComponent(jScrollPane1))
-            .addContainerGap())
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addGap(0, 108, Short.MAX_VALUE)
             .addComponent(LabelType)
@@ -101,11 +94,16 @@ public class View extends javax.swing.JPanel implements Observer
             .addComponent(TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(18, 18, 18)
             .addComponent(ButtonSearch)
-            .addGap(117, 117, 117))))
-      .addGroup(layout.createSequentialGroup()
-        .addGap(307, 307, 307)
-        .addComponent(LabelTitle)
-        .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(117, 117, 117))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+              .addComponent(LabelTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addComponent(ButtonAdd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonEliminar))
+              .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+            .addContainerGap())))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

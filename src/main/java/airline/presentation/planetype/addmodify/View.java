@@ -43,6 +43,7 @@ public class View extends javax.swing.JPanel implements Observer
     setName("planetype_add"); // NOI18N
 
     LabelTitle.setFont(new java.awt.Font("Calibri Light", 1, 14)); // NOI18N
+    LabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     LabelTitle.setText("Añadir tipo de avión");
     LabelTitle.setToolTipText("");
 
@@ -118,17 +119,13 @@ public class View extends javax.swing.JPanel implements Observer
               .addComponent(FieldBrand)
               .addComponent(SliderSeatsRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
               .addComponent(SliderRowCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(SpinnerYear))
-            .addContainerGap())
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addComponent(LabelTitle)
-            .addGap(132, 132, 132))
+              .addComponent(SpinnerYear)))
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addComponent(ButtonAccept)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ButtonCancel)
-            .addContainerGap())))
+            .addComponent(ButtonCancel))
+          .addComponent(LabelTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +231,7 @@ public class View extends javax.swing.JPanel implements Observer
       }
       catch(PreexistingEntityException ex)
       {
-        JLabel label = new JLabel("<html><center> El identificador ya existe</center></html>");
+        JLabel label = new JLabel("<html><center>El identificador ya existe</center></html>");
         Object[] options = {"Aceptar"};
         JOptionPane dialog = new JOptionPane();
         JOptionPane.showOptionDialog(this
