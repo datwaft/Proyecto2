@@ -252,22 +252,24 @@ public class View extends javax.swing.JPanel implements Observer
     }
   }//GEN-LAST:event_ButtonEliminarActionPerformed
 
-  private void ComboBoxTypesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ComboBoxTypesActionPerformed
-  {//GEN-HEADEREND:event_ComboBoxTypesActionPerformed
-    ButtonSearchActionPerformed(evt);
-  }//GEN-LAST:event_ComboBoxTypesActionPerformed
-
   private void TextFieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_TextFieldActionPerformed
   {//GEN-HEADEREND:event_TextFieldActionPerformed
+    ButtonSearchActionPerformed(evt);
+  }//GEN-LAST:event_TextFieldActionPerformed
+
+  private void ComboBoxTypesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ComboBoxTypesActionPerformed
+  {//GEN-HEADEREND:event_ComboBoxTypesActionPerformed
     if(ComboBoxTypes.getSelectedIndex() == 2)
     {
-      controller.searchByCountry((Country)ComboBoxCountries.getSelectedItem());
+      ComboBoxCountries.setEnabled(true);
+      TextField.setEnabled(false);
     }
     else
     {
-      controller.search(TextField.getText(), ComboBoxTypes.getSelectedIndex());
+      ComboBoxCountries.setEnabled(false);
+      TextField.setEnabled(true);
     }
-  }//GEN-LAST:event_TextFieldActionPerformed
+  }//GEN-LAST:event_ComboBoxTypesActionPerformed
 
   @Override
   public void update(Observable o, Object arg)
