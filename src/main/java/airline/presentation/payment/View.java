@@ -1,5 +1,6 @@
-package airline.presentation.planetype;
+package airline.presentation.payment;
 
+import airline.exceptions.IllegalOrphanException;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -34,7 +35,7 @@ public class View extends javax.swing.JPanel implements Observer
 
     LabelTitle.setFont(new java.awt.Font("Calibri Light", 1, 24)); // NOI18N
     LabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    LabelTitle.setText("Gestión de tipos de aviones");
+    LabelTitle.setText("Gestión de tipos de pago");
 
     Table.setAutoCreateRowSorter(true);
     Table.setModel(new TableModel());
@@ -141,16 +142,15 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonAddActionPerformed
   {//GEN-HEADEREND:event_ButtonAddActionPerformed
-    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir tipo de avión", true);
+    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir tipo de pago", true);
     dialog.setResizable(false);
     
-    airline.presentation.planetype.addmodify.Model addmodifyModel = 
-            new airline.presentation.planetype.addmodify.Model(null, dialog, controller);
-    airline.presentation.planetype.addmodify.View addmodifyView = 
-            new airline.presentation.planetype.addmodify.View();
-    airline.presentation.planetype.addmodify.Controller addmodifyController =
-            new airline.presentation.planetype.addmodify.Controller(addmodifyModel, addmodifyView);
-    
+    airline.presentation.payment.addmodify.Model addmodifyModel = 
+            new airline.presentation.payment.addmodify.Model(null, dialog, controller);
+    airline.presentation.payment.addmodify.View addmodifyView = 
+            new airline.presentation.payment.addmodify.View();
+    airline.presentation.payment.addmodify.Controller addmodifyController =
+            new airline.presentation.payment.addmodify.Controller(addmodifyModel, addmodifyView);
 
     dialog.getContentPane().add(addmodifyView);
     dialog.pack();
@@ -163,16 +163,15 @@ public class View extends javax.swing.JPanel implements Observer
     if(evt.getClickCount() == 2)
     {
       int row = this.Table.getSelectedRow();
-      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Modificar tipo de avión", true);
+      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Modificar tipo de pago", true);
       dialog.setResizable(false);
 
-      airline.presentation.planetype.addmodify.Model addmodifyModel = 
-              new airline.presentation.planetype.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
-      airline.presentation.planetype.addmodify.View addmodifyView = 
-              new airline.presentation.planetype.addmodify.View();
-      airline.presentation.planetype.addmodify.Controller addmodifyController =
-              new airline.presentation.planetype.addmodify.Controller(addmodifyModel, addmodifyView);
-    
+      airline.presentation.payment.addmodify.Model addmodifyModel = 
+              new airline.presentation.payment.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
+      airline.presentation.payment.addmodify.View addmodifyView = 
+              new airline.presentation.payment.addmodify.View();
+      airline.presentation.payment.addmodify.Controller addmodifyController =
+              new airline.presentation.payment.addmodify.Controller(addmodifyModel, addmodifyView);
 
       dialog.getContentPane().add(addmodifyView);
       dialog.pack();
@@ -220,6 +219,20 @@ public class View extends javax.swing.JPanel implements Observer
       for (int i = 0; i < selectedRows.length; i++)
         selectedRows[i] = Table.convertRowIndexToModel(selectedRows[i]);
       controller.delete(selectedRows);
+    }
+    catch(IllegalOrphanException ex)
+    {
+      JLabel label = new JLabel("<html><center>No se puede eliminar porque hay ciudades que quedarían sin país</center></html>");
+      Object[] options = {"Aceptar"};
+      JOptionPane dialog = new JOptionPane();
+      JOptionPane.showOptionDialog(this
+            , label
+            , "Ha ocurrido un error"
+            , JOptionPane.DEFAULT_OPTION
+            , JOptionPane.ERROR_MESSAGE
+            , null
+            , options
+            , options[0]);
     }
     catch(Exception ex)
     {

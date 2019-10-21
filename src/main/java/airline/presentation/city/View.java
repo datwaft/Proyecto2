@@ -172,6 +172,7 @@ public class View extends javax.swing.JPanel implements Observer
 
     dialog.getContentPane().add(addmodifyView);
     dialog.pack();
+    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
     dialog.setVisible(true);
   }//GEN-LAST:event_ButtonAddActionPerformed
 
@@ -192,6 +193,7 @@ public class View extends javax.swing.JPanel implements Observer
 
       dialog.getContentPane().add(addmodifyView);
       dialog.pack();
+      dialog.setLocationRelativeTo(this.model.getWindowController().getView());
       dialog.setVisible(true);
     }
   }//GEN-LAST:event_TableMouseClicked

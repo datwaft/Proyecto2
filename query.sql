@@ -20,6 +20,21 @@ insert into city values ("SJO", "San José", "CR"),
 ("YFO", "Flin FLon", "CA"),
 ("YHM", "Hamilton", "CA");
 
+insert into payment (name) values ("MasterCard"),
+("Visa"),
+("Discover"),
+("American Express"),
+("Paypal"),
+("Google Pay"),
+("Apple Pay");
+
+delete from payment p where p.key < 10000;
+alter table payment auto_increment = 0;
+update payment p set p.name = "Visa" where p.id = 15;
+
 select * from planetype;
 select * from city;
 select * from country;
+select * from payment;
+select id, name FROM payment;
+

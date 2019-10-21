@@ -19,6 +19,10 @@ public class Model extends Observable
   private final airline.presentation.city.View cityView;
   private final airline.presentation.city.Controller cityController;
   
+  private final airline.presentation.payment.Model paymentModel;
+  private final airline.presentation.payment.View paymentView;
+  private final airline.presentation.payment.Controller paymentController;
+  
   public Model()
   {
     planetypeModel = new airline.presentation.planetype.Model();
@@ -32,6 +36,10 @@ public class Model extends Observable
     cityModel = new airline.presentation.city.Model();
     cityView = new airline.presentation.city.View();
     cityController = new airline.presentation.city.Controller(cityModel, cityView);
+    
+    paymentModel = new airline.presentation.payment.Model();
+    paymentView = new airline.presentation.payment.View();
+    paymentController = new airline.presentation.payment.Controller(paymentModel, paymentView);
   }
   
   public Controller getController()
@@ -51,6 +59,9 @@ public class Model extends Observable
     
     cityModel.setWindowController(controller);
     controller.addWindow(cityView, "city");
+    
+    paymentModel.setWindowController(controller);
+    controller.addWindow(paymentView, "payment");
   }
   
   @Override
