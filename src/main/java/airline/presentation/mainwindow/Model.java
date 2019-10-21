@@ -7,39 +7,39 @@ public class Model extends Observable
 {
   private Controller controller;
   
-  private final airline.presentation.planetype.Model planetypeModel;
-  private final airline.presentation.planetype.View planetypeView;
-  private final airline.presentation.planetype.Controller planetypeController;
+  private final airline.presentation.admin.planetype.Model planetypeModel;
+  private final airline.presentation.admin.planetype.View planetypeView;
+  private final airline.presentation.admin.planetype.Controller planetypeController;
   
-  private final airline.presentation.country.Model countryModel;
-  private final airline.presentation.country.View countryView;
-  private final airline.presentation.country.Controller countryController;
+  private final airline.presentation.admin.country.Model countryModel;
+  private final airline.presentation.admin.country.View countryView;
+  private final airline.presentation.admin.country.Controller countryController;
   
-  private final airline.presentation.city.Model cityModel;
-  private final airline.presentation.city.View cityView;
-  private final airline.presentation.city.Controller cityController;
+  private final airline.presentation.admin.city.Model cityModel;
+  private final airline.presentation.admin.city.View cityView;
+  private final airline.presentation.admin.city.Controller cityController;
   
-  private final airline.presentation.payment.Model paymentModel;
-  private final airline.presentation.payment.View paymentView;
-  private final airline.presentation.payment.Controller paymentController;
+  private final airline.presentation.admin.payment.Model paymentModel;
+  private final airline.presentation.admin.payment.View paymentView;
+  private final airline.presentation.admin.payment.Controller paymentController;
   
   public Model()
   {
-    planetypeModel = new airline.presentation.planetype.Model();
-    planetypeView = new airline.presentation.planetype.View();
-    planetypeController = new airline.presentation.planetype.Controller(planetypeModel, planetypeView);
+    planetypeModel = new airline.presentation.admin.planetype.Model();
+    planetypeView = new airline.presentation.admin.planetype.View();
+    planetypeController = new airline.presentation.admin.planetype.Controller(planetypeModel, planetypeView);
     
-    countryModel = new airline.presentation.country.Model();
-    countryView = new airline.presentation.country.View();
-    countryController = new airline.presentation.country.Controller(countryModel, countryView);
+    countryModel = new airline.presentation.admin.country.Model();
+    countryView = new airline.presentation.admin.country.View();
+    countryController = new airline.presentation.admin.country.Controller(countryModel, countryView);
     
-    cityModel = new airline.presentation.city.Model();
-    cityView = new airline.presentation.city.View();
-    cityController = new airline.presentation.city.Controller(cityModel, cityView);
+    cityModel = new airline.presentation.admin.city.Model();
+    cityView = new airline.presentation.admin.city.View();
+    cityController = new airline.presentation.admin.city.Controller(cityModel, cityView);
     
-    paymentModel = new airline.presentation.payment.Model();
-    paymentView = new airline.presentation.payment.View();
-    paymentController = new airline.presentation.payment.Controller(paymentModel, paymentView);
+    paymentModel = new airline.presentation.admin.payment.Model();
+    paymentView = new airline.presentation.admin.payment.View();
+    paymentController = new airline.presentation.admin.payment.Controller(paymentModel, paymentView);
   }
   
   public Controller getController()
