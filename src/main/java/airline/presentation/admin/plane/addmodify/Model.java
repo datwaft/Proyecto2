@@ -1,24 +1,24 @@
-package airline.presentation.admin.city.addmodify;
+package airline.presentation.admin.plane.addmodify;
 
-import airline.logic.City;
+import airline.logic.Plane;
 import java.util.*;
 import javax.swing.JDialog;
 
 public class Model extends Observable
 {
-  private final airline.presentation.admin.city.Controller parentController;
+  private final airline.presentation.admin.plane.Controller parentController;
   private Controller controller;
-  private City object;
+  private Plane object;
   private JDialog parent;
 
-  public Model(City object, JDialog parent, airline.presentation.admin.city.Controller parentController)
+  public Model(Plane object, JDialog parent, airline.presentation.admin.plane.Controller parentController)
   {
     this.object = object;
     this.parent = parent;
     this.parentController = parentController;
   }
   
-  public airline.presentation.admin.city.Controller getParentController()
+  public airline.presentation.admin.plane.Controller getParentController()
   {
     return parentController;
   }
@@ -38,12 +38,12 @@ public class Model extends Observable
     this.parent = parent;
   }
 
-  public City getObject()
+  public Plane getObject()
   {
     return object;
   }
 
-  public void setObject(City object)
+  public void setObject(Plane object)
   {
     this.object = object;
   }

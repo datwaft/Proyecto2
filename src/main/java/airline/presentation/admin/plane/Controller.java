@@ -1,8 +1,8 @@
-package airline.presentation.admin.city;
+package airline.presentation.admin.plane;
 
 import airline.data.*;
-import airline.logic.City;
-import airline.logic.Country;
+import airline.logic.Plane;
+import airline.logic.Planetype;
 import java.util.List;
 import java.util.Vector;
 
@@ -32,7 +32,7 @@ public class Controller
   
   public static Vector<Object> getParents()
   {
-    List<Country> list = CountryDao.getInstance().findAll();
+    List<Planetype> list = PlanetypeDao.getInstance().findAll();
     
     Vector<Object> vector = new Vector<>();
     vector.add("Cualquiera");
@@ -44,42 +44,41 @@ public class Controller
   
   public void search(String string, int selection)
   {
-    List<City> list;
+    List<Plane> list;
     switch (selection)
     {
-      case 0: list = CityDao.getInstance().findByCode(string); break;
-      case 1: list = CityDao.getInstance().findByName(string); break;
+      case 0: list = PlaneDao.getInstance().findByIdentifier(string); break;
       default: list = null; break;
     }
     model.updateTableModel(list);
   }
   
-  public void searchByParent(Country country)
+  public void searchByParent(Planetype planetype)
   {
-    model.updateTableModel(CityDao.getInstance().findByCountry(country));
+    model.updateTableModel(PlaneDao.getInstance().findByPlanetype(planetype));
   }
   
   public void searchAll()
   {
-    model.updateTableModel(CityDao.getInstance().findAll());
+    model.updateTableModel(PlaneDao.getInstance().findAll());
   }
   
   public void update()
   {
-    List<City> list = CityDao.getInstance().findAll();
+    List<Plane> list = PlaneDao.getInstance().findAll();
     model.updateTableModel(list);
   }
   
-  public void delete(City object) throws Exception
+  public void delete(Plane object) throws Exception
   {
-    CityDao.getInstance().destroy(object.getCode());
+    PlaneDao.getInstance().destroy(object.getIdentifier());
     this.update();
   }
   
   public void delete(int[] list) throws Exception
   {
     for(int i = 0; i < list.length; ++i)
-      CityDao.getInstance().destroy(model.getElement(list[i]).getCode());
+      PlaneDao.getInstance().destroy(model.getElement(list[i]).getIdentifier());
     this.update();
   }
 }

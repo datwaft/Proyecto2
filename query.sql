@@ -28,6 +28,11 @@ insert into payment (name) values ("MasterCard"),
 ("Google Pay"),
 ("Apple Pay");
 
+insert into plane values ("AX09", "001"),
+("BX09", "001"),
+("CX09", "001"),
+("PD43", "002");
+
 delete from payment p where p.key < 10000;
 alter table payment auto_increment = 0;
 update payment p set p.name = "Visa" where p.id = 15;
@@ -37,4 +42,5 @@ select * from city;
 select * from country;
 select * from payment;
 select id, name FROM payment;
+select * from plane;
 

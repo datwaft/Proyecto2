@@ -1,8 +1,8 @@
-package airline.presentation.admin.city.addmodify;
+package airline.presentation.admin.plane.addmodify;
 
 import airline.exceptions.PreexistingEntityException;
-import airline.logic.City;
-import airline.logic.Country;
+import airline.logic.Plane;
+import airline.logic.Planetype;
 import java.util.*;
 import javax.swing.*;
 
@@ -22,24 +22,22 @@ public class View extends javax.swing.JPanel implements Observer
   {
 
     LabelTitle = new javax.swing.JLabel();
-    LabelCode = new javax.swing.JLabel();
-    FieldCode = new javax.swing.JTextField();
+    LabelIdentifier = new javax.swing.JLabel();
+    FieldIdentifier = new javax.swing.JTextField();
     ButtonAccept = new javax.swing.JButton();
     ButtonCancel = new javax.swing.JButton();
-    LabelName = new javax.swing.JLabel();
-    FieldName = new javax.swing.JTextField();
-    LabelCountry = new javax.swing.JLabel();
-    ComboBoxCountry = new javax.swing.JComboBox<>();
+    LabelPlaneType = new javax.swing.JLabel();
+    ComboBoxParent = new javax.swing.JComboBox<>();
 
     setMaximumSize(new java.awt.Dimension(265, 143));
     setMinimumSize(new java.awt.Dimension(265, 143));
 
     LabelTitle.setFont(new java.awt.Font("Calibri Light", 1, 14)); // NOI18N
     LabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    LabelTitle.setText("Añadir ciudad");
+    LabelTitle.setText("Añadir avión");
     LabelTitle.setToolTipText("");
 
-    LabelCode.setText("Código:");
+    LabelIdentifier.setText("Identificador:");
 
     ButtonAccept.setText("Aceptar");
     ButtonAccept.addActionListener(new java.awt.event.ActionListener()
@@ -59,11 +57,9 @@ public class View extends javax.swing.JPanel implements Observer
       }
     });
 
-    LabelName.setText("Nombre:");
+    LabelPlaneType.setText("Tipo de avión:");
 
-    LabelCountry.setText("País:");
-
-    ComboBoxCountry.setModel(new DefaultComboBoxModel<>(Controller.getParents()));
+    ComboBoxParent.setModel(new DefaultComboBoxModel<>(Controller.getParents()));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -74,22 +70,18 @@ public class View extends javax.swing.JPanel implements Observer
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(LabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-              .addGroup(layout.createSequentialGroup()
-                .addComponent(ButtonAccept)
-                .addGap(105, 105, 105)
-                .addComponent(ButtonCancel))
-              .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(LabelCode)
-                  .addComponent(LabelCountry)
-                  .addComponent(LabelName))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(FieldName)
-                  .addComponent(ComboBoxCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                  .addComponent(FieldCode, javax.swing.GroupLayout.Alignment.TRAILING))))
-            .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(LabelPlaneType)
+              .addComponent(LabelIdentifier))
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(ComboBoxParent, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(FieldIdentifier, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 0, Short.MAX_VALUE))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(ButtonAccept)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ButtonCancel)))
         .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -98,18 +90,13 @@ public class View extends javax.swing.JPanel implements Observer
         .addContainerGap()
         .addComponent(LabelTitle)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addComponent(FieldCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(FieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(LabelName)))
-          .addComponent(LabelCode))
-        .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(ComboBoxCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(LabelCountry))
+          .addComponent(LabelIdentifier)
+          .addComponent(FieldIdentifier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(21, 21, 21)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(ComboBoxParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(LabelPlaneType))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(ButtonCancel)
@@ -122,39 +109,25 @@ public class View extends javax.swing.JPanel implements Observer
   {//GEN-HEADEREND:event_ButtonAcceptActionPerformed
     String error = "";
     
-    if(FieldCode.getText().isBlank())
+    if(FieldIdentifier.getText().isBlank())
     {
       if(!error.isBlank())
         error += "<br>";
       error += "El código está en blanco.";
     }
-    else if(FieldCode.getText().length() > 3)
+    else if(FieldIdentifier.getText().length() > 12)
     {
       if(!error.isBlank())
         error += "<br>";
       error += "El código es demasiado grande.";
-    }
-    
-    if(FieldName.getText().isBlank())
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El nombre está en blanco.";
-    }
-    else if(FieldName.getText().length() > 45)
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El nombre es demasiado grande.";
     }
 
     if (error.isBlank())
     {
       try
       {
-        City object = new City(FieldCode.getText());
-        object.setName(FieldName.getText());
-        object.setCountry((Country) ComboBoxCountry.getSelectedItem());
+        Plane object = new Plane(FieldIdentifier.getText());
+        object.setType((Planetype) ComboBoxParent.getSelectedItem());
         
         if (model.getObject() == null)
         {
@@ -224,13 +197,12 @@ public class View extends javax.swing.JPanel implements Observer
   {
     if(model.getObject() != null)
     {
-      FieldCode.setText(model.getObject().getCode());
-      FieldName.setText(model.getObject().getName());
-      ComboBoxCountry.setSelectedItem(model.getObject().getCountry());
+      FieldIdentifier.setText(model.getObject().getIdentifier());
+      ComboBoxParent.setSelectedItem(model.getObject().getType());
     }
     
-    LabelTitle.setText((model.getObject() == null ? "Añadir" : "Modificar") + " ciudad");
-    FieldCode.setEditable(model.getObject() == null);
+    LabelTitle.setText((model.getObject() == null ? "Añadir" : "Modificar") + " avión");
+    FieldIdentifier.setEditable(model.getObject() == null);
   }
   
   public Model getModel()
@@ -257,12 +229,10 @@ public class View extends javax.swing.JPanel implements Observer
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton ButtonAccept;
   private javax.swing.JButton ButtonCancel;
-  private javax.swing.JComboBox<Object> ComboBoxCountry;
-  private javax.swing.JTextField FieldCode;
-  private javax.swing.JTextField FieldName;
-  private javax.swing.JLabel LabelCode;
-  private javax.swing.JLabel LabelCountry;
-  private javax.swing.JLabel LabelName;
+  private javax.swing.JComboBox<Object> ComboBoxParent;
+  private javax.swing.JTextField FieldIdentifier;
+  private javax.swing.JLabel LabelIdentifier;
+  private javax.swing.JLabel LabelPlaneType;
   private javax.swing.JLabel LabelTitle;
   // End of variables declaration//GEN-END:variables
 }

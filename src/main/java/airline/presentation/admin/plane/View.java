@@ -1,16 +1,16 @@
-package airline.presentation.admin.city;
+package airline.presentation.admin.plane;
 
 import airline.exceptions.IllegalOrphanException;
-import airline.logic.Country;
+import airline.logic.Planetype;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
 
 public class View extends javax.swing.JPanel implements Observer
-{ 
+{
   Model model;
   Controller controller;
-  
+
   public View()
   {
     initComponents();
@@ -148,10 +148,10 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonSearchActionPerformed
   {//GEN-HEADEREND:event_ButtonSearchActionPerformed
-    if (ComboBoxTypes.getSelectedIndex() == 2)
+    if (ComboBoxTypes.getSelectedIndex() == 1)
     {
-      if(ComboBoxCountries.getSelectedItem().getClass() == Country.class)
-        controller.searchByParent((Country) ComboBoxCountries.getSelectedItem());
+      if(ComboBoxCountries.getSelectedItem().getClass() == Planetype.class)
+        controller.searchByParent((Planetype) ComboBoxCountries.getSelectedItem());
       else
         controller.searchAll();
     }
@@ -165,13 +165,13 @@ public class View extends javax.swing.JPanel implements Observer
   {//GEN-HEADEREND:event_ButtonAddActionPerformed
     JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir ciudad", true);
     dialog.setResizable(false);
-    
-    airline.presentation.admin.city.addmodify.Model addmodifyModel = 
-            new airline.presentation.admin.city.addmodify.Model(null, dialog, controller);
-    airline.presentation.admin.city.addmodify.View addmodifyView = 
-            new airline.presentation.admin.city.addmodify.View();
-    airline.presentation.admin.city.addmodify.Controller addmodifyController =
-            new airline.presentation.admin.city.addmodify.Controller(addmodifyModel, addmodifyView);
+
+    airline.presentation.admin.plane.addmodify.Model addmodifyModel
+      = new airline.presentation.admin.plane.addmodify.Model(null, dialog, controller);
+    airline.presentation.admin.plane.addmodify.View addmodifyView
+      = new airline.presentation.admin.plane.addmodify.View();
+    airline.presentation.admin.plane.addmodify.Controller addmodifyController
+      = new airline.presentation.admin.plane.addmodify.Controller(addmodifyModel, addmodifyView);
 
     dialog.getContentPane().add(addmodifyView);
     dialog.pack();
@@ -181,18 +181,18 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void TableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_TableMouseClicked
   {//GEN-HEADEREND:event_TableMouseClicked
-    if(evt.getClickCount() == 2)
+    if (evt.getClickCount() == 2)
     {
       int row = this.Table.getSelectedRow();
       JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Modificar ciudad", true);
       dialog.setResizable(false);
 
-      airline.presentation.admin.city.addmodify.Model addmodifyModel = 
-              new airline.presentation.admin.city.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
-      airline.presentation.admin.city.addmodify.View addmodifyView = 
-              new airline.presentation.admin.city.addmodify.View();
-      airline.presentation.admin.city.addmodify.Controller addmodifyController =
-              new airline.presentation.admin.city.addmodify.Controller(addmodifyModel, addmodifyView);
+      airline.presentation.admin.plane.addmodify.Model addmodifyModel
+        = new airline.presentation.admin.plane.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
+      airline.presentation.admin.plane.addmodify.View addmodifyView
+        = new airline.presentation.admin.plane.addmodify.View();
+      airline.presentation.admin.plane.addmodify.Controller addmodifyController
+        = new airline.presentation.admin.plane.addmodify.Controller(addmodifyModel, addmodifyView);
 
       dialog.getContentPane().add(addmodifyView);
       dialog.pack();
@@ -204,70 +204,86 @@ public class View extends javax.swing.JPanel implements Observer
   private void ButtonEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonEliminarActionPerformed
   {//GEN-HEADEREND:event_ButtonEliminarActionPerformed
     int[] selectedRows = this.Table.getSelectedRows();
-    if(selectedRows.length == 0)
+    if (selectedRows.length == 0)
     {
       JLabel label = new JLabel("<html><center> No hay ninguna entrada seleccionada</center></html>");
-      Object[] options = {"Aceptar"};
+      Object[] options =
+      {
+        "Aceptar"
+      };
       JOptionPane dialog = new JOptionPane();
-      JOptionPane.showOptionDialog(this
-            , label
-            , "Ha ocurrido un error"
-            , JOptionPane.DEFAULT_OPTION
-            , JOptionPane.ERROR_MESSAGE
-            , null
-            , options
-            , options[0]);
+      JOptionPane.showOptionDialog(this,
+         label,
+         "Ha ocurrido un error",
+         JOptionPane.DEFAULT_OPTION,
+         JOptionPane.ERROR_MESSAGE,
+         null,
+         options,
+         options[0]);
       return;
     }
     {
-      Object[] options = {"Confimar", "Cancelar"};
+      Object[] options =
+      {
+        "Confimar", "Cancelar"
+      };
       JOptionPane dialog = new JOptionPane();
-      Object selection = JOptionPane.showOptionDialog(this
-            , "¿Está seguro de que desea eliminar "
-            + (selectedRows.length == 1 ? "la entrada" :(selectedRows.length + " entradas"))
-            + "? Esta acción no se puede deshacer"
-            , "Confirmación de eliminación"
-            , JOptionPane.OK_CANCEL_OPTION
-            , JOptionPane.WARNING_MESSAGE
-            , null
-            , options
-            , options[1]);
-      if(selection.equals(1))
+      Object selection = JOptionPane.showOptionDialog(this,
+         "¿Está seguro de que desea eliminar "
+        + (selectedRows.length == 1 ? "la entrada" : (selectedRows.length + " entradas"))
+        + "? Esta acción no se puede deshacer",
+         "Confirmación de eliminación",
+         JOptionPane.OK_CANCEL_OPTION,
+         JOptionPane.WARNING_MESSAGE,
+         null,
+         options,
+         options[1]);
+      if (selection.equals(1))
+      {
         return;
+      }
     }
     try
     {
       for (int i = 0; i < selectedRows.length; i++)
+      {
         selectedRows[i] = Table.convertRowIndexToModel(selectedRows[i]);
+      }
       controller.delete(selectedRows);
     }
-    catch(IllegalOrphanException ex)
+    catch (IllegalOrphanException ex)
     {
       JLabel label = new JLabel("<html><center>No se puede eliminar porque hay ciudades que quedarían sin país</center></html>");
-      Object[] options = {"Aceptar"};
+      Object[] options =
+      {
+        "Aceptar"
+      };
       JOptionPane dialog = new JOptionPane();
-      JOptionPane.showOptionDialog(this
-            , label
-            , "Ha ocurrido un error"
-            , JOptionPane.DEFAULT_OPTION
-            , JOptionPane.ERROR_MESSAGE
-            , null
-            , options
-            , options[0]);
+      JOptionPane.showOptionDialog(this,
+         label,
+         "Ha ocurrido un error",
+         JOptionPane.DEFAULT_OPTION,
+         JOptionPane.ERROR_MESSAGE,
+         null,
+         options,
+         options[0]);
     }
-    catch(Exception ex)
+    catch (Exception ex)
     {
-      JLabel label = new JLabel("<html><center>"+ ex.getMessage() +"</center></html>");
-      Object[] options = {"Aceptar"};
+      JLabel label = new JLabel("<html><center>" + ex.getMessage() + "</center></html>");
+      Object[] options =
+      {
+        "Aceptar"
+      };
       JOptionPane dialog = new JOptionPane();
-      JOptionPane.showOptionDialog(this
-            , label
-            , "Ha ocurrido un error"
-            , JOptionPane.DEFAULT_OPTION
-            , JOptionPane.ERROR_MESSAGE
-            , null
-            , options
-            , options[0]);
+      JOptionPane.showOptionDialog(this,
+         label,
+         "Ha ocurrido un error",
+         JOptionPane.DEFAULT_OPTION,
+         JOptionPane.ERROR_MESSAGE,
+         null,
+         options,
+         options[0]);
     }
   }//GEN-LAST:event_ButtonEliminarActionPerformed
 
@@ -278,7 +294,7 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ComboBoxTypesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ComboBoxTypesActionPerformed
   {//GEN-HEADEREND:event_ComboBoxTypesActionPerformed
-    if(ComboBoxTypes.getSelectedIndex() == 2)
+    if (ComboBoxTypes.getSelectedIndex() == 1)
     {
       ComboBoxCountries.setEnabled(true);
       TextField.setEnabled(false);
@@ -295,19 +311,19 @@ public class View extends javax.swing.JPanel implements Observer
   {
     Table.setModel(model.getTableModel());
   }
-  
+
   public Model getModel()
   {
     return model;
   }
 
-  public void setModel(Model model) 
+  public void setModel(Model model)
   {
     this.model = model;
     model.addObserver(this);
   }
 
-  public Controller getController() 
+  public Controller getController()
   {
     return controller;
   }
@@ -316,7 +332,7 @@ public class View extends javax.swing.JPanel implements Observer
   {
     this.controller = controller;
   }
-  
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton ButtonAdd;
   private javax.swing.JButton ButtonEliminar;

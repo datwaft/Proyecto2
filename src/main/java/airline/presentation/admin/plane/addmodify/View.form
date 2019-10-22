@@ -24,32 +24,26 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="LabelTitle" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="ButtonAccept" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                              <Component id="ButtonCancel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LabelCode" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelCountry" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="FieldName" max="32767" attributes="0"/>
-                                  <Component id="ComboBoxCountry" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="FieldCode" alignment="1" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="LabelPlaneType" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelIdentifier" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ComboBoxParent" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="FieldIdentifier" min="-2" pref="192" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="ButtonAccept" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="ButtonCancel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -62,21 +56,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="LabelTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="FieldCode" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="FieldName" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelName" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="LabelCode" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="ComboBoxCountry" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="LabelCountry" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelIdentifier" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="FieldIdentifier" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="ComboBoxParent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelPlaneType" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -95,16 +82,16 @@
           <Font name="Calibri Light" size="14" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="A&#xf1;adir ciudad"/>
+        <Property name="text" type="java.lang.String" value="A&#xf1;adir avi&#xf3;n"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="LabelCode">
+    <Component class="javax.swing.JLabel" name="LabelIdentifier">
       <Properties>
-        <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
+        <Property name="text" type="java.lang.String" value="Identificador:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="FieldCode">
+    <Component class="javax.swing.JTextField" name="FieldIdentifier">
     </Component>
     <Component class="javax.swing.JButton" name="ButtonAccept">
       <Properties>
@@ -122,19 +109,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonCancelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="LabelName">
+    <Component class="javax.swing.JLabel" name="LabelPlaneType">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre:"/>
+        <Property name="text" type="java.lang.String" value="Tipo de avi&#xf3;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="FieldName">
-    </Component>
-    <Component class="javax.swing.JLabel" name="LabelCountry">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Pa&#xed;s:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="ComboBoxCountry">
+    <Component class="javax.swing.JComboBox" name="ComboBoxParent">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new DefaultComboBoxModel&lt;&gt;(Controller.getParents())" type="code"/>

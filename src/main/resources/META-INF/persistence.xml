@@ -6,6 +6,7 @@
     <class>airline.logic.Country</class>
     <class>airline.logic.City</class>
     <class>airline.logic.Payment</class>
+    <class>airline.logic.Plane</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/proyecto2?useTimezone=true&amp;serverTimezone=UTC&amp;user=root&amp;password=losiram01&amp;allowPublicKeyRetrieval=true&amp;useSSL=false"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

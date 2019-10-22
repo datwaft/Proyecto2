@@ -1,5 +1,6 @@
 package airline.presentation.admin.planetype;
 
+import airline.exceptions.IllegalOrphanException;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -220,6 +221,20 @@ public class View extends javax.swing.JPanel implements Observer
       for (int i = 0; i < selectedRows.length; i++)
         selectedRows[i] = Table.convertRowIndexToModel(selectedRows[i]);
       controller.delete(selectedRows);
+    }
+    catch(IllegalOrphanException ex)
+    {
+      JLabel label = new JLabel("<html><center>No se puede eliminar porque hay ciudades que quedarían sin país</center></html>");
+      Object[] options = {"Aceptar"};
+      JOptionPane dialog = new JOptionPane();
+      JOptionPane.showOptionDialog(this
+            , label
+            , "Ha ocurrido un error"
+            , JOptionPane.DEFAULT_OPTION
+            , JOptionPane.ERROR_MESSAGE
+            , null
+            , options
+            , options[0]);
     }
     catch(Exception ex)
     {

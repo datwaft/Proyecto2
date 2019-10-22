@@ -1,8 +1,8 @@
-package airline.presentation.admin.city.addmodify;
+package airline.presentation.admin.plane.addmodify;
 
 import airline.data.*;
-import airline.logic.City;
-import airline.logic.Country;
+import airline.logic.Plane;
+import airline.logic.Planetype;
 import java.util.List;
 import java.util.Vector;
 
@@ -22,24 +22,24 @@ public class Controller
   
   public static Vector<Object> getParents()
   {
-    List<Country> countries = CountryDao.getInstance().findAll();
+    List<Planetype> list = PlanetypeDao.getInstance().findAll();
     
     Vector<Object> vector = new Vector<>();
-    for(int i = 0; i < countries.size(); ++i)
-      vector.add(countries.get(i));
+    for(int i = 0; i < list.size(); ++i)
+      vector.add(list.get(i));
     
     return vector;
   }
   
-  public void Add(City object) throws Exception
+  public void Add(Plane object) throws Exception
   {
-    CityDao.getInstance().create(object);
+    PlaneDao.getInstance().create(object);
     model.getParentController().update();
   }
   
-  public void Modify(City object) throws Exception
+  public void Modify(Plane object) throws Exception
   {
-    CityDao.getInstance().edit(object);
+    PlaneDao.getInstance().edit(object);
     model.getParentController().update();
   }
   
