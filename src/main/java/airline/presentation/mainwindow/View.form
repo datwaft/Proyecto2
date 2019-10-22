@@ -12,6 +12,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="ItemExit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir del programa"/>
+                <Property name="iconTextGap" type="int" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ItemExitActionPerformed"/>
@@ -27,6 +28,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="ItemInstitutionalReference">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Referente institucional"/>
+                <Property name="iconTextGap" type="int" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ItemInstitutionalReferenceActionPerformed"/>
@@ -35,6 +37,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="ItemHistory">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Historia de la empresa"/>
+                <Property name="iconTextGap" type="int" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ItemHistoryActionPerformed"/>
@@ -43,6 +46,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="ItemContact">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Contactenos"/>
+                <Property name="iconTextGap" type="int" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ItemContactActionPerformed"/>
@@ -56,9 +60,6 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Proyecto #2: Aerol&#xed;nea"/>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[800, 500]"/>
-    </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[800, 500]"/>
     </Property>

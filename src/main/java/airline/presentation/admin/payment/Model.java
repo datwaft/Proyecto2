@@ -47,6 +47,7 @@ public class Model extends Observable
   public void setController(Controller controller)
   {
     this.controller = controller;
+    this.controller.update();
     this.setChanged();
     this.notifyObservers();  
   }

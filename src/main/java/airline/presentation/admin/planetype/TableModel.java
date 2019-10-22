@@ -1,7 +1,7 @@
 package airline.presentation.admin.planetype;
 
-import airline.data.*;
 import airline.logic.Planetype;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -11,7 +11,7 @@ public class TableModel extends AbstractTableModel
 
   public TableModel()
   {
-    list = PlanetypeDao.getInstance().findPlanetypeEntities();
+    list = new ArrayList<>();
   }
 
   public TableModel(List<Planetype> list)

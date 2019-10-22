@@ -1,7 +1,7 @@
 package airline.presentation.admin.country;
 
-import airline.data.*;
 import airline.logic.Country;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -11,7 +11,7 @@ public class TableModel extends AbstractTableModel
 
   public TableModel()
   {
-    list = CountryDao.getInstance().findCountryEntities();
+    list = new ArrayList<>();
   }
 
   public TableModel(List<Country> list)

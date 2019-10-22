@@ -1,8 +1,6 @@
 package airline.presentation.admin.city;
 
-import airline.data.CountryDao;
 import airline.logic.City;
-import airline.logic.Country;
 import java.util.*;
 
 public class Model extends Observable
@@ -47,6 +45,7 @@ public class Model extends Observable
   public void setController(Controller controller)
   {
     this.controller = controller;
+    this.controller.update();
     this.setChanged();
     this.notifyObservers();  
   }
@@ -71,17 +70,6 @@ public class Model extends Observable
       searchTypes.add("Ciudad");
     }
     return searchTypes;
-  }
-  
-  public static Vector<Country> getCountries()
-  {
-    List<Country> countries = CountryDao.getInstance().findAll();
-    
-    Vector<Country> vector = new Vector<>();
-    for(int i = 0; i < countries.size(); ++i)
-      vector.add(countries.get(i));
-    
-    return vector;
   }
   
   @Override

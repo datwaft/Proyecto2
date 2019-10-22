@@ -1,7 +1,7 @@
 package airline.presentation.admin.payment;
 
-import airline.data.*;
 import airline.logic.Payment;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -11,7 +11,7 @@ public class TableModel extends AbstractTableModel
 
   public TableModel()
   {
-    list = PaymentDao.getInstance().findPaymentEntities();
+    list = new ArrayList<>();
   }
 
   public TableModel(List<Payment> list)

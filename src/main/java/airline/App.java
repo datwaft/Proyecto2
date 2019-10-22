@@ -18,14 +18,14 @@ public class App
     } 
     catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) 
     {
-      System.err.println("error: invalid look and feel.");
+      System.err.println("Error with look and feel: " + e.getMessage());
     }
     
     model = new Model();
     view = new View();
     controller = new Controller(model, view);
     
-    controller.swapWindow("payment");
+    controller.swapWindow("planetype");
     
     view.setVisible(true);
   }

@@ -1,7 +1,6 @@
 package airline.presentation.admin.city;
 
 import airline.logic.Country;
-import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -96,7 +95,7 @@ public class View extends javax.swing.JPanel implements Observer
       }
     });
 
-    ComboBoxCountries.setModel(new DefaultComboBoxModel<Country>(Model.getCountries()));
+    ComboBoxCountries.setModel(new DefaultComboBoxModel<Country>(Controller.getCountries()));
     ComboBoxCountries.setEnabled(false);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

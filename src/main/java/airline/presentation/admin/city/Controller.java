@@ -4,6 +4,7 @@ import airline.data.*;
 import airline.logic.City;
 import airline.logic.Country;
 import java.util.List;
+import java.util.Vector;
 
 public class Controller
 {
@@ -27,6 +28,17 @@ public class Controller
   public View getView()
   {
     return view;
+  }
+  
+  public static Vector<Country> getCountries()
+  {
+    List<Country> countries = CountryDao.getInstance().findAll();
+    
+    Vector<Country> vector = new Vector<>();
+    for(int i = 0; i < countries.size(); ++i)
+      vector.add(countries.get(i));
+    
+    return vector;
   }
   
   public void search(String string, int selection)

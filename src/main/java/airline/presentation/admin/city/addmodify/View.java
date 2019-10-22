@@ -63,7 +63,7 @@ public class View extends javax.swing.JPanel implements Observer
 
     LabelCountry.setText("País:");
 
-    ComboBoxCountry.setModel(new DefaultComboBoxModel<Country>(Model.getCountries()));
+    ComboBoxCountry.setModel(new DefaultComboBoxModel<Country>(Controller.getCountries()));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);

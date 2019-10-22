@@ -1,7 +1,7 @@
 package airline.presentation.admin.city;
 
-import airline.data.*;
 import airline.logic.City;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -11,7 +11,7 @@ public class TableModel extends AbstractTableModel
 
   public TableModel()
   {
-    list = CityDao.getInstance().findCityEntities();
+    list = new ArrayList<>();
   }
 
   public TableModel(List<City> list)
