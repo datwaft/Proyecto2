@@ -1,6 +1,7 @@
 package airline.logic;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -21,6 +22,10 @@ public class City implements Serializable
   @Basic(optional = false)
   @Column(name = "name")
   private String name;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin")
+  private List<Flight> flightList;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "destination")
+  private List<Flight> flightList1;
   @JoinColumns(
   {
     @JoinColumn(name = "country", referencedColumnName = "code"),
@@ -64,6 +69,26 @@ public class City implements Serializable
     this.name = name;
   }
 
+  public List<Flight> getFlightList()
+  {
+    return flightList;
+  }
+
+  public void setFlightList(List<Flight> flightList)
+  {
+    this.flightList = flightList;
+  }
+
+  public List<Flight> getFlightList1()
+  {
+    return flightList1;
+  }
+
+  public void setFlightList1(List<Flight> flightList1)
+  {
+    this.flightList1 = flightList1;
+  }
+
   public Country getCountry()
   {
     return country;
@@ -101,7 +126,10 @@ public class City implements Serializable
   @Override
   public String toString()
   {
-    return "airline.logic.City[ code=" + code + " ]";
+    if (this.country == null)
+      return this.name;
+    else
+      return this.name + ", " + this.country.getName();
   }
 
 }

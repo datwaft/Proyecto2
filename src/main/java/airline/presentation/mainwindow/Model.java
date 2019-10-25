@@ -27,6 +27,10 @@ public class Model extends Observable
   private final airline.presentation.admin.plane.View planeView;
   private final airline.presentation.admin.plane.Controller planeController;
   
+  private final airline.presentation.admin.flight.Model flightModel;
+  private final airline.presentation.admin.flight.View flightView;
+  private final airline.presentation.admin.flight.Controller flightController;
+  
   public Model()
   {
     planetypeModel = new airline.presentation.admin.planetype.Model();
@@ -48,6 +52,10 @@ public class Model extends Observable
     planeModel = new airline.presentation.admin.plane.Model();
     planeView = new airline.presentation.admin.plane.View();
     planeController = new airline.presentation.admin.plane.Controller(planeModel, planeView);
+    
+    flightModel = new airline.presentation.admin.flight.Model();
+    flightView = new airline.presentation.admin.flight.View();
+    flightController = new airline.presentation.admin.flight.Controller(flightModel, flightView);
   }
   
   public Controller getController()
@@ -73,6 +81,9 @@ public class Model extends Observable
     
     planeModel.setWindowController(controller);
     controller.addWindow(planeView, "plane");
+    
+    flightModel.setWindowController(controller);
+    controller.addWindow(flightView, "flight");
   }
   
   @Override

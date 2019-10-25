@@ -172,8 +172,7 @@ public class CountryJpaController implements Serializable
         {
           illegalOrphanMessages = new ArrayList<String>();
         }
-        illegalOrphanMessages.add("This Country (" + country + ") cannot be destroyed since the City "
-                + cityListOrphanCheckCity + " in its cityList field has a non-nullable country field.");
+        illegalOrphanMessages.add("This Country (" + country + ") cannot be destroyed since the City " + cityListOrphanCheckCity + " in its cityList field has a non-nullable country field.");
       }
       if (illegalOrphanMessages != null)
       {

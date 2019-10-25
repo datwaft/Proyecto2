@@ -14,8 +14,6 @@ import javax.persistence.*;
 })
 public class Country implements Serializable
 {
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-  private List<City> cityList;
   private static final long serialVersionUID = 1L;
   @Id
   @Basic(optional = false)
@@ -24,6 +22,8 @@ public class Country implements Serializable
   @Basic(optional = false)
   @Column(name = "name")
   private String name;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
+  private List<City> cityList;
 
   public Country()
   {
@@ -60,6 +60,16 @@ public class Country implements Serializable
     this.name = name;
   }
 
+  public List<City> getCityList()
+  {
+    return cityList;
+  }
+
+  public void setCityList(List<City> cityList)
+  {
+    this.cityList = cityList;
+  }
+
   @Override
   public int hashCode()
   {
@@ -87,17 +97,7 @@ public class Country implements Serializable
   @Override
   public String toString()
   {
-    return name;
-  }
-
-  public List<City> getCityList()
-  {
-    return cityList;
-  }
-
-  public void setCityList(List<City> cityList)
-  {
-    this.cityList = cityList;
+    return this.name;
   }
 
 }
