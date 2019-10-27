@@ -37,7 +37,7 @@ public class View extends javax.swing.JPanel implements Observer
 
     LabelTitle.setFont(new java.awt.Font("Calibri Light", 1, 24)); // NOI18N
     LabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    LabelTitle.setText("Gestión de ciudades");
+    LabelTitle.setText("Gestión de aviones");
 
     Table.setAutoCreateRowSorter(true);
     Table.setModel(new TableModel());

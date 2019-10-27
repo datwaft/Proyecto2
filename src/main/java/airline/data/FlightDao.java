@@ -4,7 +4,6 @@ import airline.logic.City;
 import airline.logic.Flight;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 public class FlightDao extends FlightJpaController
 { 

@@ -1,7 +1,6 @@
-package airline.presentation.admin.city;
+package airline.presentation.admin.trip;
 
 import airline.exceptions.IllegalOrphanException;
-import airline.logic.Country;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -27,23 +26,26 @@ public class View extends javax.swing.JPanel implements Observer
     ButtonAdd = new javax.swing.JButton();
     ButtonSearch = new javax.swing.JButton();
     TextField = new javax.swing.JTextField();
-    LabelType = new javax.swing.JLabel();
     ComboBoxTypes = new javax.swing.JComboBox<>();
     ButtonEliminar = new javax.swing.JButton();
-    ComboBoxCountries = new javax.swing.JComboBox<>();
+    ComboBoxOutward = new javax.swing.JComboBox<>();
+    ComboBoxInward = new javax.swing.JComboBox<>();
+    ComboBoxPlanes = new javax.swing.JComboBox<>();
+    jLabel2 = new javax.swing.JLabel();
+    jLabel3 = new javax.swing.JLabel();
+    jLabel1 = new javax.swing.JLabel();
 
     setMaximumSize(new java.awt.Dimension(800, 500));
     setMinimumSize(new java.awt.Dimension(800, 500));
     setPreferredSize(new java.awt.Dimension(800, 500));
-    setRequestFocusEnabled(false);
-    setVerifyInputWhenFocusTarget(false);
 
     LabelTitle.setFont(new java.awt.Font("Calibri Light", 1, 24)); // NOI18N
     LabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    LabelTitle.setText("Gestión de ciudades");
+    LabelTitle.setText("Gestión de viajes");
 
     Table.setAutoCreateRowSorter(true);
     Table.setModel(new TableModel());
+    Table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
     Table.addMouseListener(new java.awt.event.MouseAdapter()
     {
       public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -79,16 +81,7 @@ public class View extends javax.swing.JPanel implements Observer
       }
     });
 
-    LabelType.setText("Tipo de busqueda:");
-
     ComboBoxTypes.setModel(new DefaultComboBoxModel<>(Model.getSearchTypes()));
-    ComboBoxTypes.addActionListener(new java.awt.event.ActionListener()
-    {
-      public void actionPerformed(java.awt.event.ActionEvent evt)
-      {
-        ComboBoxTypesActionPerformed(evt);
-      }
-    });
 
     ButtonEliminar.setText("Eliminar");
     ButtonEliminar.addActionListener(new java.awt.event.ActionListener()
@@ -99,32 +92,66 @@ public class View extends javax.swing.JPanel implements Observer
       }
     });
 
-    ComboBoxCountries.setModel(new DefaultComboBoxModel<>(Controller.getParents()));
-    ComboBoxCountries.setEnabled(false);
+    ComboBoxOutward.setModel(new DefaultComboBoxModel<>(Controller.getFlights()));
+
+    ComboBoxInward.setModel(new DefaultComboBoxModel<>(Controller.getFlightsWithNone()));
+
+    ComboBoxPlanes.setModel(new DefaultComboBoxModel<>(Controller.getPlanes()));
+
+    jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel2.setText("Vuelo de vuelta");
+    jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+    jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel3.setText("Vuelo de ida");
+    jLabel3.setToolTipText("");
+    jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+    jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel1.setText("Avión");
+    jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(LabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addGroup(layout.createSequentialGroup()
-            .addComponent(ButtonAdd)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ButtonEliminar))
-          .addComponent(jScrollPane1)
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addComponent(LabelType)
-            .addGap(18, 18, 18)
-            .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
-            .addComponent(ComboBoxCountries, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(ButtonSearch)))
+            .addGap(10, 10, 10)
+            .addComponent(LabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(layout.createSequentialGroup()
+            .addGap(55, 55, 55)
+            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(10, 10, 10)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(10, 10, 10)
+            .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(8, 8, 8)
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(layout.createSequentialGroup()
+            .addGap(55, 55, 55)
+            .addComponent(ComboBoxOutward, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(10, 10, 10)
+            .addComponent(ComboBoxPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(10, 10, 10)
+            .addComponent(TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(6, 6, 6)
+            .addComponent(ComboBoxInward, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(6, 6, 6)
+            .addComponent(ButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(layout.createSequentialGroup()
+            .addGap(10, 10, 10)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addGap(0, 0, Short.MAX_VALUE))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(ButtonAdd)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(ButtonEliminar)
         .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -132,76 +159,78 @@ public class View extends javax.swing.JPanel implements Observer
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
         .addComponent(LabelTitle)
+        .addGap(2, 2, 2)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addGap(4, 4, 4)
+            .addComponent(jLabel3))
+          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(6, 6, 6)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(ComboBoxOutward, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(ComboBoxPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(ButtonSearch)
+          .addGroup(layout.createSequentialGroup()
+            .addGap(1, 1, 1)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(ComboBoxInward)
+              .addComponent(TextField))))
+        .addGap(9, 9, 9)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(LabelType)
-          .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(ButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(ComboBoxCountries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(19, 19, 19)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(ButtonAdd)
-          .addComponent(ButtonEliminar))
+          .addComponent(ButtonEliminar)
+          .addComponent(ButtonAdd))
         .addContainerGap())
     );
   }// </editor-fold>//GEN-END:initComponents
 
   private void ButtonSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonSearchActionPerformed
   {//GEN-HEADEREND:event_ButtonSearchActionPerformed
-    if (ComboBoxTypes.getSelectedIndex() == 2)
-    {
-      if(ComboBoxCountries.getSelectedItem().getClass() == Country.class)
-        controller.searchByParent((Country) ComboBoxCountries.getSelectedItem());
-      else
-        controller.searchAll();
-    }
-    else
-    {
-      controller.search(TextField.getText(), ComboBoxTypes.getSelectedIndex());
-    }
+    controller.search(TextField.getText(), ComboBoxPlanes.getSelectedItem(), ComboBoxOutward.getSelectedItem()
+      , ComboBoxInward.getSelectedItem(), ComboBoxTypes.getSelectedIndex());
   }//GEN-LAST:event_ButtonSearchActionPerformed
 
   private void ButtonAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonAddActionPerformed
   {//GEN-HEADEREND:event_ButtonAddActionPerformed
-    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir ciudad", true);
-    dialog.setResizable(false);
-    
-    airline.presentation.admin.city.addmodify.Model addmodifyModel = 
-            new airline.presentation.admin.city.addmodify.Model(null, dialog, controller);
-    airline.presentation.admin.city.addmodify.View addmodifyView = 
-            new airline.presentation.admin.city.addmodify.View();
-    airline.presentation.admin.city.addmodify.Controller addmodifyController =
-            new airline.presentation.admin.city.addmodify.Controller(addmodifyModel, addmodifyView);
-
-    dialog.getContentPane().add(addmodifyView);
-    dialog.pack();
-    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
-    dialog.setVisible(true);
+//    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir tipo de avión", true);
+//    dialog.setResizable(false);
+//    
+//    airline.presentation.admin.flight.addmodify.Model addmodifyModel = 
+//            new airline.presentation.admin.flight.addmodify.Model(null, dialog, controller);
+//    airline.presentation.admin.flight.addmodify.View addmodifyView = 
+//            new airline.presentation.admin.flight.addmodify.View();
+//    airline.presentation.admin.flight.addmodify.Controller addmodifyController =
+//            new airline.presentation.admin.flight.addmodify.Controller(addmodifyModel, addmodifyView);
+//    
+//    dialog.getContentPane().add(addmodifyView);
+//    dialog.pack();
+//    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+//    dialog.setVisible(true);
   }//GEN-LAST:event_ButtonAddActionPerformed
 
   private void TableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_TableMouseClicked
   {//GEN-HEADEREND:event_TableMouseClicked
-    if(evt.getClickCount() == 2)
-    {
-      int row = this.Table.getSelectedRow();
-      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Modificar ciudad", true);
-      dialog.setResizable(false);
-
-      airline.presentation.admin.city.addmodify.Model addmodifyModel = 
-              new airline.presentation.admin.city.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
-      airline.presentation.admin.city.addmodify.View addmodifyView = 
-              new airline.presentation.admin.city.addmodify.View();
-      airline.presentation.admin.city.addmodify.Controller addmodifyController =
-              new airline.presentation.admin.city.addmodify.Controller(addmodifyModel, addmodifyView);
-
-      dialog.getContentPane().add(addmodifyView);
-      dialog.pack();
-      dialog.setLocationRelativeTo(this.model.getWindowController().getView());
-      dialog.setVisible(true);
-    }
+//    if(evt.getClickCount() == 2)
+//    {
+//      int row = this.Table.getSelectedRow();
+//      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Modificar tipo de avión", true);
+//      dialog.setResizable(false);
+//
+//      airline.presentation.admin.flight.addmodify.Model addmodifyModel = 
+//              new airline.presentation.admin.flight.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
+//      airline.presentation.admin.flight.addmodify.View addmodifyView = 
+//              new airline.presentation.admin.flight.addmodify.View();
+//      airline.presentation.admin.flight.addmodify.Controller addmodifyController =
+//              new airline.presentation.admin.flight.addmodify.Controller(addmodifyModel, addmodifyView);
+//    
+//      dialog.getContentPane().add(addmodifyView);
+//      dialog.pack();
+//      dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+//      dialog.setVisible(true);
+//    }
   }//GEN-LAST:event_TableMouseClicked
 
   private void ButtonEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonEliminarActionPerformed
@@ -279,20 +308,6 @@ public class View extends javax.swing.JPanel implements Observer
     ButtonSearchActionPerformed(evt);
   }//GEN-LAST:event_TextFieldActionPerformed
 
-  private void ComboBoxTypesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ComboBoxTypesActionPerformed
-  {//GEN-HEADEREND:event_ComboBoxTypesActionPerformed
-    if(ComboBoxTypes.getSelectedIndex() == 2)
-    {
-      ComboBoxCountries.setEnabled(true);
-      TextField.setEnabled(false);
-    }
-    else
-    {
-      ComboBoxCountries.setEnabled(false);
-      TextField.setEnabled(true);
-    }
-  }//GEN-LAST:event_ComboBoxTypesActionPerformed
-
   @Override
   public void update(Observable o, Object arg)
   {
@@ -324,12 +339,16 @@ public class View extends javax.swing.JPanel implements Observer
   private javax.swing.JButton ButtonAdd;
   private javax.swing.JButton ButtonEliminar;
   private javax.swing.JButton ButtonSearch;
-  private javax.swing.JComboBox<Object> ComboBoxCountries;
+  private javax.swing.JComboBox<Object> ComboBoxInward;
+  private javax.swing.JComboBox<Object> ComboBoxOutward;
+  private javax.swing.JComboBox<Object> ComboBoxPlanes;
   private javax.swing.JComboBox<String> ComboBoxTypes;
   private javax.swing.JLabel LabelTitle;
-  private javax.swing.JLabel LabelType;
   private javax.swing.JTable Table;
   private javax.swing.JTextField TextField;
+  private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
   private javax.swing.JScrollPane jScrollPane1;
   // End of variables declaration//GEN-END:variables
 }

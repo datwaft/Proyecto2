@@ -42,8 +42,9 @@ insert into flight (origin, destination, weekday, departure, duration, price, di
 ("NYC", "SJO", 6, "15:00", "02:00", 850, 0.65),
 ("LON", "SJO", 7, "12:00", "02:30", 500, 0);
 
-insert into flight (identifier, origin, destination, weekday, departure, duration, price, discount) values
-(null, "SJO", "LAX", 1, "10:45", "01:30", 700, 0);
+insert into trip (plane, outward, departure, inward, arrival) values
+("AX09", 1, CURDATE(), 5, CURDATE()),
+("BX09", 1, CURDATE(), null, null);
 
 select * from planetype;
 select * from city;
@@ -51,4 +52,4 @@ select * from country;
 select * from payment;
 select * from plane;
 select * from flight;
-
+select * from trip;

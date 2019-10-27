@@ -3,6 +3,7 @@ package airline.logic;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -53,6 +54,10 @@ public class Flight implements Serializable
   @JoinColumn(name = "destination", referencedColumnName = "code")
   @ManyToOne(optional = false)
   private City destination;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "outward")
+  private List<Trip> tripList;
+  @OneToMany(mappedBy = "inward")
+  private List<Trip> tripList1;
 
   public Flight()
   {
@@ -163,6 +168,26 @@ public class Flight implements Serializable
     this.destination = destination;
   }
 
+  public List<Trip> getTripList()
+  {
+    return tripList;
+  }
+
+  public void setTripList(List<Trip> tripList)
+  {
+    this.tripList = tripList;
+  }
+
+  public List<Trip> getTripList1()
+  {
+    return tripList1;
+  }
+
+  public void setTripList1(List<Trip> tripList1)
+  {
+    this.tripList1 = tripList1;
+  }
+
   @Override
   public int hashCode()
   {
@@ -190,7 +215,7 @@ public class Flight implements Serializable
   @Override
   public String toString()
   {
-    return "airline.logic.Flight[ identifier=" + identifier + " ]";
+    return this.origin.getCode() + " - " + this.destination.getCode() + " " + this.identifier;
   }
 
 }

@@ -126,7 +126,7 @@ public class City implements Serializable
   @Override
   public String toString()
   {
-    if (this.country == null)
+    if(this.country == null)
       return this.name;
     else
       return this.name + ", " + this.country.getName();

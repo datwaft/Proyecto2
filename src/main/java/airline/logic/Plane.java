@@ -1,6 +1,7 @@
 package airline.logic;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +21,8 @@ public class Plane implements Serializable
   @JoinColumn(name = "type", referencedColumnName = "identifier")
   @ManyToOne(optional = false)
   private Planetype type;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "plane")
+  private List<Trip> tripList;
 
   public Plane()
   {
@@ -50,6 +53,16 @@ public class Plane implements Serializable
     this.type = type;
   }
 
+  public List<Trip> getTripList()
+  {
+    return tripList;
+  }
+
+  public void setTripList(List<Trip> tripList)
+  {
+    this.tripList = tripList;
+  }
+
   @Override
   public int hashCode()
   {
@@ -77,7 +90,7 @@ public class Plane implements Serializable
   @Override
   public String toString()
   {
-    return "airline.logic.Plane[ identifier=" + identifier + " ]";
+    return this.type.toString() + " " + this.identifier;
   }
 
 }

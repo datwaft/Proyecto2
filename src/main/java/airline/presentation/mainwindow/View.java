@@ -59,7 +59,6 @@ public final class View extends javax.swing.JFrame implements Observer
     MenuFile.setText("Programa");
 
     ItemExit.setText("Salir del programa");
-    ItemExit.setIconTextGap(0);
     ItemExit.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -74,7 +73,6 @@ public final class View extends javax.swing.JFrame implements Observer
     MenuAbout.setText("Información");
 
     ItemInstitutionalReference.setText("Referente institucional");
-    ItemInstitutionalReference.setIconTextGap(0);
     ItemInstitutionalReference.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -85,7 +83,6 @@ public final class View extends javax.swing.JFrame implements Observer
     MenuAbout.add(ItemInstitutionalReference);
 
     ItemHistory.setText("Historia de la empresa");
-    ItemHistory.setIconTextGap(0);
     ItemHistory.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -96,7 +93,6 @@ public final class View extends javax.swing.JFrame implements Observer
     MenuAbout.add(ItemHistory);
 
     ItemContact.setText("Contactenos");
-    ItemContact.setIconTextGap(0);
     ItemContact.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)

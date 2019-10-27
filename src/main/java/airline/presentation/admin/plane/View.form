@@ -82,7 +82,7 @@
           <Font name="Calibri Light" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de ciudades"/>
+        <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de aviones"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
