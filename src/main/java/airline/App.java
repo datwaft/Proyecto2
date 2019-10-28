@@ -25,7 +25,7 @@ public class App
     view = new View();
     controller = new Controller(model, view);
     
-    controller.swapWindow("trip");
+    controller.swapWindow("admin");
     
     view.setVisible(true);
   }

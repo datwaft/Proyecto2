@@ -31,6 +31,7 @@ public class View extends javax.swing.JPanel implements Observer
     ComboBoxTypes = new javax.swing.JComboBox<>();
     ButtonEliminar = new javax.swing.JButton();
     ComboBoxCountries = new javax.swing.JComboBox<>();
+    ButtonReturn = new javax.swing.JButton();
 
     setMaximumSize(new java.awt.Dimension(800, 500));
     setMinimumSize(new java.awt.Dimension(800, 500));
@@ -99,6 +100,15 @@ public class View extends javax.swing.JPanel implements Observer
     ComboBoxCountries.setModel(new DefaultComboBoxModel<>(Controller.getParents()));
     ComboBoxCountries.setEnabled(false);
 
+    ButtonReturn.setText("Regresar");
+    ButtonReturn.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonReturnActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -106,30 +116,38 @@ public class View extends javax.swing.JPanel implements Observer
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(LabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addGroup(layout.createSequentialGroup()
-            .addComponent(ButtonAdd)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(ButtonAdd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonEliminar))
+              .addComponent(jScrollPane1)
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(LabelType)
+                .addGap(18, 18, 18)
+                .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addComponent(ComboBoxCountries, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ButtonSearch)))
+            .addContainerGap())
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(ButtonReturn)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ButtonEliminar))
-          .addComponent(jScrollPane1)
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addComponent(LabelType)
-            .addGap(18, 18, 18)
-            .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
-            .addComponent(ComboBoxCountries, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(ButtonSearch)))
-        .addContainerGap())
+            .addComponent(LabelTitle)
+            .addGap(299, 299, 299))))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(LabelTitle)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGap(6, 6, 6)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(LabelTitle)
+          .addComponent(ButtonReturn))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(LabelType)
           .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,10 +324,16 @@ public class View extends javax.swing.JPanel implements Observer
     }
   }//GEN-LAST:event_ComboBoxTypesActionPerformed
 
+  private void ButtonReturnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonReturnActionPerformed
+  {//GEN-HEADEREND:event_ButtonReturnActionPerformed
+    model.getWindowController().swapWindow("admin");
+  }//GEN-LAST:event_ButtonReturnActionPerformed
+
   @Override
   public void update(Observable o, Object arg)
   {
     Table.setModel(model.getTableModel());
+    ComboBoxCountries.setModel(new DefaultComboBoxModel<>(Controller.getParents()));
   }
 
   public Model getModel()
@@ -336,6 +360,7 @@ public class View extends javax.swing.JPanel implements Observer
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton ButtonAdd;
   private javax.swing.JButton ButtonEliminar;
+  private javax.swing.JButton ButtonReturn;
   private javax.swing.JButton ButtonSearch;
   private javax.swing.JComboBox<Object> ComboBoxCountries;
   private javax.swing.JComboBox<String> ComboBoxTypes;

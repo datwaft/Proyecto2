@@ -35,6 +35,7 @@ public class View extends javax.swing.JPanel implements Observer
     ComboBoxWeekdays = new javax.swing.JComboBox<>();
     jLabel2 = new javax.swing.JLabel();
     jLabel3 = new javax.swing.JLabel();
+    ButtonReturn = new javax.swing.JButton();
 
     setMaximumSize(new java.awt.Dimension(800, 500));
     setMinimumSize(new java.awt.Dimension(800, 500));
@@ -118,6 +119,15 @@ public class View extends javax.swing.JPanel implements Observer
     jLabel3.setToolTipText("");
     jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+    ButtonReturn.setText("Regresar");
+    ButtonReturn.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonReturnActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -126,36 +136,44 @@ public class View extends javax.swing.JPanel implements Observer
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addComponent(ComboBoxOrigin, 0, 153, Short.MAX_VALUE)
-              .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(layout.createSequentialGroup()
-                .addComponent(ComboBoxWeekdays, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ButtonAdd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonEliminar))
+              .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                  .addComponent(ComboBoxOrigin, 0, 153, Short.MAX_VALUE)
+                  .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-              .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addComponent(ComboBoxDestination, 0, 150, Short.MAX_VALUE)
-              .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(ButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addComponent(LabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(layout.createSequentialGroup()
-            .addComponent(ButtonAdd)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(ComboBoxWeekdays, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                  .addComponent(ComboBoxDestination, 0, 150, Short.MAX_VALUE)
+                  .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap())
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(ButtonReturn)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ButtonEliminar))
-          .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
-        .addContainerGap())
+            .addComponent(LabelTitle)
+            .addGap(305, 305, 305))))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(LabelTitle)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(LabelTitle)
+          .addComponent(ButtonReturn))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
           .addComponent(ComboBoxTypes)
@@ -326,11 +344,19 @@ public class View extends javax.swing.JPanel implements Observer
     }
   }//GEN-LAST:event_ComboBoxTypesActionPerformed
 
+  private void ButtonReturnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonReturnActionPerformed
+  {//GEN-HEADEREND:event_ButtonReturnActionPerformed
+    model.getWindowController().swapWindow("admin");
+  }//GEN-LAST:event_ButtonReturnActionPerformed
+
   @Override
   public void update(Observable o, Object arg)
   {
     Table.setModel(model.getTableModel());
     setColumnWidths(Table, 70, 140, 140, 70, 70, 70, 70, 70);
+    ComboBoxOrigin.setModel(new DefaultComboBoxModel<>(Controller.getCities()));
+    ComboBoxWeekdays.setModel(new DefaultComboBoxModel<>(Model.getWeekdays()));
+    ComboBoxDestination.setModel(new DefaultComboBoxModel<>(Controller.getCities()));
   }
   
   public static void setColumnWidths(JTable table, int... widths) 
@@ -375,6 +401,7 @@ public class View extends javax.swing.JPanel implements Observer
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton ButtonAdd;
   private javax.swing.JButton ButtonEliminar;
+  private javax.swing.JButton ButtonReturn;
   private javax.swing.JButton ButtonSearch;
   private javax.swing.JComboBox<Object> ComboBoxDestination;
   private javax.swing.JComboBox<Object> ComboBoxOrigin;

@@ -34,6 +34,7 @@ public class View extends javax.swing.JPanel implements Observer
     jLabel2 = new javax.swing.JLabel();
     jLabel3 = new javax.swing.JLabel();
     jLabel1 = new javax.swing.JLabel();
+    ButtonReturn = new javax.swing.JButton();
 
     setMaximumSize(new java.awt.Dimension(800, 500));
     setMinimumSize(new java.awt.Dimension(800, 500));
@@ -114,15 +115,21 @@ public class View extends javax.swing.JPanel implements Observer
     jLabel1.setText("Avión");
     jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+    ButtonReturn.setText("Regresar");
+    ButtonReturn.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonReturnActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addGap(10, 10, 10)
-            .addComponent(LabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addGroup(layout.createSequentialGroup()
             .addGap(55, 55, 55)
             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,20 +153,29 @@ public class View extends javax.swing.JPanel implements Observer
           .addGroup(layout.createSequentialGroup()
             .addGap(10, 10, 10)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addGap(0, 0, Short.MAX_VALUE))
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        .addGap(0, 10, Short.MAX_VALUE))
+      .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(ButtonAdd)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(ButtonEliminar)
-        .addContainerGap())
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(ButtonAdd)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ButtonEliminar)
+            .addContainerGap())
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(ButtonReturn)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(LabelTitle)
+            .addGap(310, 310, 310))))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(LabelTitle)
-        .addGap(2, 2, 2)
+        .addGap(6, 6, 6)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(LabelTitle)
+          .addComponent(ButtonReturn))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
             .addGap(4, 4, 4)
@@ -308,10 +324,18 @@ public class View extends javax.swing.JPanel implements Observer
     ButtonSearchActionPerformed(evt);
   }//GEN-LAST:event_TextFieldActionPerformed
 
+  private void ButtonReturnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonReturnActionPerformed
+  {//GEN-HEADEREND:event_ButtonReturnActionPerformed
+    model.getWindowController().swapWindow("admin");
+  }//GEN-LAST:event_ButtonReturnActionPerformed
+
   @Override
   public void update(Observable o, Object arg)
   {
     Table.setModel(model.getTableModel());
+    ComboBoxOutward.setModel(new DefaultComboBoxModel<>(Controller.getFlights()));
+    ComboBoxPlanes.setModel(new DefaultComboBoxModel<>(Controller.getPlanes()));
+    ComboBoxInward.setModel(new DefaultComboBoxModel<>(Controller.getFlightsWithNone()));
   }
   
   public Model getModel()
@@ -338,6 +362,7 @@ public class View extends javax.swing.JPanel implements Observer
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton ButtonAdd;
   private javax.swing.JButton ButtonEliminar;
+  private javax.swing.JButton ButtonReturn;
   private javax.swing.JButton ButtonSearch;
   private javax.swing.JComboBox<Object> ComboBoxInward;
   private javax.swing.JComboBox<Object> ComboBoxOutward;

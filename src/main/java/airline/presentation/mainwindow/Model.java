@@ -7,63 +7,15 @@ public class Model extends Observable
 {
   private Controller controller;
   
-  private final airline.presentation.admin.planetype.Model planetypeModel;
-  private final airline.presentation.admin.planetype.View planetypeView;
-  private final airline.presentation.admin.planetype.Controller planetypeController;
-  
-  private final airline.presentation.admin.country.Model countryModel;
-  private final airline.presentation.admin.country.View countryView;
-  private final airline.presentation.admin.country.Controller countryController;
-  
-  private final airline.presentation.admin.city.Model cityModel;
-  private final airline.presentation.admin.city.View cityView;
-  private final airline.presentation.admin.city.Controller cityController;
-  
-  private final airline.presentation.admin.payment.Model paymentModel;
-  private final airline.presentation.admin.payment.View paymentView;
-  private final airline.presentation.admin.payment.Controller paymentController;
-  
-  private final airline.presentation.admin.plane.Model planeModel;
-  private final airline.presentation.admin.plane.View planeView;
-  private final airline.presentation.admin.plane.Controller planeController;
-  
-  private final airline.presentation.admin.flight.Model flightModel;
-  private final airline.presentation.admin.flight.View flightView;
-  private final airline.presentation.admin.flight.Controller flightController;
-  
-  private final airline.presentation.admin.trip.Model tripModel;
-  private final airline.presentation.admin.trip.View tripView;
-  private final airline.presentation.admin.trip.Controller tripController;
+  private final airline.presentation.admin.Model adminModel;
+  private final airline.presentation.admin.View adminView;
+  private final airline.presentation.admin.Controller adminController;
   
   public Model()
   {
-    planetypeModel = new airline.presentation.admin.planetype.Model();
-    planetypeView = new airline.presentation.admin.planetype.View();
-    planetypeController = new airline.presentation.admin.planetype.Controller(planetypeModel, planetypeView);
-    
-    countryModel = new airline.presentation.admin.country.Model();
-    countryView = new airline.presentation.admin.country.View();
-    countryController = new airline.presentation.admin.country.Controller(countryModel, countryView);
-    
-    cityModel = new airline.presentation.admin.city.Model();
-    cityView = new airline.presentation.admin.city.View();
-    cityController = new airline.presentation.admin.city.Controller(cityModel, cityView);
-    
-    paymentModel = new airline.presentation.admin.payment.Model();
-    paymentView = new airline.presentation.admin.payment.View();
-    paymentController = new airline.presentation.admin.payment.Controller(paymentModel, paymentView);
-    
-    planeModel = new airline.presentation.admin.plane.Model();
-    planeView = new airline.presentation.admin.plane.View();
-    planeController = new airline.presentation.admin.plane.Controller(planeModel, planeView);
-    
-    flightModel = new airline.presentation.admin.flight.Model();
-    flightView = new airline.presentation.admin.flight.View();
-    flightController = new airline.presentation.admin.flight.Controller(flightModel, flightView);
-    
-    tripModel = new airline.presentation.admin.trip.Model();
-    tripView = new airline.presentation.admin.trip.View();
-    tripController = new airline.presentation.admin.trip.Controller(tripModel, tripView);
+    adminModel = new airline.presentation.admin.Model();
+    adminView = new airline.presentation.admin.View();
+    adminController = new airline.presentation.admin.Controller(adminModel, adminView);
   }
   
   public Controller getController()
@@ -75,26 +27,8 @@ public class Model extends Observable
   {
     this.controller = controller;
     
-    planetypeModel.setWindowController(controller);
-    controller.addWindow(planetypeView, "planetype");
-    
-    countryModel.setWindowController(controller);
-    controller.addWindow(countryView, "country");
-    
-    cityModel.setWindowController(controller);
-    controller.addWindow(cityView, "city");
-    
-    paymentModel.setWindowController(controller);
-    controller.addWindow(paymentView, "payment");
-    
-    planeModel.setWindowController(controller);
-    controller.addWindow(planeView, "plane");
-    
-    flightModel.setWindowController(controller);
-    controller.addWindow(flightView, "flight");
-    
-    tripModel.setWindowController(controller);
-    controller.addWindow(tripView, "trip");
+    adminModel.setWindowController(this.controller);
+    this.controller.addWindow(adminView, "admin");
   }
   
   @Override
