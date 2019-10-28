@@ -195,42 +195,42 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonAddActionPerformed
   {//GEN-HEADEREND:event_ButtonAddActionPerformed
-//    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir tipo de avión", true);
-//    dialog.setResizable(false);
-//    
-//    airline.presentation.admin.flight.addmodify.Model addmodifyModel = 
-//            new airline.presentation.admin.flight.addmodify.Model(null, dialog, controller);
-//    airline.presentation.admin.flight.addmodify.View addmodifyView = 
-//            new airline.presentation.admin.flight.addmodify.View();
-//    airline.presentation.admin.flight.addmodify.Controller addmodifyController =
-//            new airline.presentation.admin.flight.addmodify.Controller(addmodifyModel, addmodifyView);
-//    
-//    dialog.getContentPane().add(addmodifyView);
-//    dialog.pack();
-//    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
-//    dialog.setVisible(true);
+    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir viaje", true);
+    dialog.setResizable(false);
+    
+    airline.presentation.admin.trip.addmodify.Model addmodifyModel = 
+            new airline.presentation.admin.trip.addmodify.Model(null, dialog, controller);
+    airline.presentation.admin.trip.addmodify.View addmodifyView = 
+            new airline.presentation.admin.trip.addmodify.View();
+    airline.presentation.admin.trip.addmodify.Controller addmodifyController =
+            new airline.presentation.admin.trip.addmodify.Controller(addmodifyModel, addmodifyView);
+    
+    dialog.getContentPane().add(addmodifyView);
+    dialog.pack();
+    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+    dialog.setVisible(true);
   }//GEN-LAST:event_ButtonAddActionPerformed
 
   private void TableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_TableMouseClicked
   {//GEN-HEADEREND:event_TableMouseClicked
-//    if(evt.getClickCount() == 2)
-//    {
-//      int row = this.Table.getSelectedRow();
-//      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Modificar tipo de avión", true);
-//      dialog.setResizable(false);
-//
-//      airline.presentation.admin.flight.addmodify.Model addmodifyModel = 
-//              new airline.presentation.admin.flight.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
-//      airline.presentation.admin.flight.addmodify.View addmodifyView = 
-//              new airline.presentation.admin.flight.addmodify.View();
-//      airline.presentation.admin.flight.addmodify.Controller addmodifyController =
-//              new airline.presentation.admin.flight.addmodify.Controller(addmodifyModel, addmodifyView);
-//    
-//      dialog.getContentPane().add(addmodifyView);
-//      dialog.pack();
-//      dialog.setLocationRelativeTo(this.model.getWindowController().getView());
-//      dialog.setVisible(true);
-//    }
+    if(evt.getClickCount() == 2)
+    {
+      int row = this.Table.getSelectedRow();
+      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Modificar viaje", true);
+      dialog.setResizable(false);
+
+      airline.presentation.admin.trip.addmodify.Model addmodifyModel = 
+              new airline.presentation.admin.trip.addmodify.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, controller);
+      airline.presentation.admin.trip.addmodify.View addmodifyView = 
+              new airline.presentation.admin.trip.addmodify.View();
+      airline.presentation.admin.trip.addmodify.Controller addmodifyController =
+              new airline.presentation.admin.trip.addmodify.Controller(addmodifyModel, addmodifyView);
+    
+      dialog.getContentPane().add(addmodifyView);
+      dialog.pack();
+      dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+      dialog.setVisible(true);
+    }
   }//GEN-LAST:event_TableMouseClicked
 
   private void ButtonEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonEliminarActionPerformed
@@ -275,7 +275,7 @@ public class View extends javax.swing.JPanel implements Observer
     }
     catch(IllegalOrphanException ex)
     {
-      JLabel label = new JLabel("<html><center>No se puede eliminar porque hay ciudades que quedarían sin país</center></html>");
+      JLabel label = new JLabel("<html><center>No se puede ya que objetos quedarían huerfanos.</center></html>");
       Object[] options = {"Aceptar"};
       JOptionPane dialog = new JOptionPane();
       JOptionPane.showOptionDialog(this

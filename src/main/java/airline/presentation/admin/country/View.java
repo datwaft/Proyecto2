@@ -222,7 +222,7 @@ public class View extends javax.swing.JPanel implements Observer
     }
     catch(IllegalOrphanException ex)
     {
-      JLabel label = new JLabel("<html><center>No se puede eliminar porque hay ciudades que quedarían sin país</center></html>");
+      JLabel label = new JLabel("<html><center>No se puede ya que objetos quedarían huerfanos.</center></html>");
       Object[] options = {"Aceptar"};
       JOptionPane dialog = new JOptionPane();
       JOptionPane.showOptionDialog(this

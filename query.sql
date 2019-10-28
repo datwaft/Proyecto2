@@ -43,8 +43,9 @@ insert into flight (origin, destination, weekday, departure, duration, price, di
 ("LON", "SJO", 7, "12:00", "02:30", 500, 0);
 
 insert into trip (plane, outward, departure, inward, arrival) values
-("AX09", 1, CURDATE(), 5, CURDATE()),
-("BX09", 1, CURDATE(), null, null);
+("AX09", 1, "2019-10-21", 5, "2019-10-25"),
+("BX09", 1, "2019-10-28", null, null),
+("PD43", 6, "2019-11-02", null, null);
 
 select * from planetype;
 select * from city;

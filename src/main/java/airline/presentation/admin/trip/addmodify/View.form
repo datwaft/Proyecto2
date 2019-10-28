@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="name" type="java.lang.String" value="planetype_add" noResource="true"/>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="ButtonAccept" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="229" max="32767" attributes="0"/>
+                      <Component id="ButtonCancel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="LabelTitle" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="LabelArrival" alignment="0" pref="98" max="32767" attributes="0"/>
+                          <Component id="LabelOutward" max="32767" attributes="0"/>
+                          <Component id="LabelIdentifier" alignment="0" max="32767" attributes="0"/>
+                          <Component id="LabelPlane" alignment="0" max="32767" attributes="0"/>
+                          <Component id="LabelDeparture" max="32767" attributes="0"/>
+                          <Component id="LabelInward" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="FieldIdentifier" pref="267" max="32767" attributes="0"/>
+                          <Component id="ComboBoxPlane" max="32767" attributes="0"/>
+                          <Component id="ComboBoxOutward" max="32767" attributes="0"/>
+                          <Component id="SpinnerDeparture" alignment="0" max="32767" attributes="0"/>
+                          <Component id="ComboBoxInward" alignment="0" max="32767" attributes="0"/>
+                          <Component id="SpinnerArrival" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="LabelTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="LabelIdentifier" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="FieldIdentifier" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="ComboBoxPlane" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelPlane" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="ComboBoxOutward" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelOutward" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="LabelDeparture" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="SpinnerDeparture" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="LabelInward" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="ComboBoxInward" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="LabelArrival" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="SpinnerArrival" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="ButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ButtonAccept" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="LabelTitle">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Calibri Light" size="14" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="A&#xf1;adir viaje"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelIdentifier">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Identificador:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="FieldIdentifier">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="ButtonAccept">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Aceptar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonAcceptActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="ButtonCancel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonCancelActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="ComboBoxPlane">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new DefaultComboBoxModel&lt;&gt;(Controller.getPlanes())" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelPlane">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Avi&#xf3;n:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="ComboBoxOutward">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new DefaultComboBoxModel&lt;&gt;(Controller.getFlights())" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboBoxOutwardActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelOutward">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Viaje de ida:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelDeparture">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fecha de salida:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="SpinnerDeparture">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="now" stepSize="5" type="date"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner()&#xa;{&#xa;  @Override&#xa;  public void setEditor(JComponent editor)&#xa;  {&#xa;    super.setEditor(editor);&#xa;    this.fireStateChanged();&#xa;  }&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="JSpinner.DateEditor departureEditor = new JSpinner.DateEditor(SpinnerDeparture, &quot;EEEE yyyy-MM-dd&quot;);&#xa;departureEditor.getFormat().setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;));&#xa;SpinnerDeparture.setEditor(departureEditor);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelInward">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Viaje de vuelta:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="ComboBoxInward">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new DefaultComboBoxModel&lt;&gt;(Controller.getFlightsWithNone((Flight)ComboBoxOutward.getSelectedItem()))" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboBoxInwardActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelArrival">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fecha de llegada:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="SpinnerArrival">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="now" stepSize="5" type="date"/>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner()&#xa;{&#xa;  @Override&#xa;  public void setEditor(JComponent editor)&#xa;  {&#xa;    super.setEditor(editor);&#xa;    this.fireStateChanged();&#xa;  }&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="JSpinner.DateEditor arrivalEditor = new JSpinner.DateEditor(SpinnerArrival, &quot;EEEE yyyy-MM-dd&quot;);&#xa;arrivalEditor.getFormat().setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;));&#xa;SpinnerArrival.setEditor(arrivalEditor);"/>
+      </AuxValues>
+    </Component>
+  </SubComponents>
+</Form>
