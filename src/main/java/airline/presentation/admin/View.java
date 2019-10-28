@@ -143,6 +143,13 @@ public class View extends javax.swing.JPanel implements Observer
     });
 
     ButtonReturn.setText("Regresar");
+    ButtonReturn.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonReturnActionPerformed(evt);
+      }
+    });
 
     LabelReports.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     LabelReports.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -167,12 +174,6 @@ public class View extends javax.swing.JPanel implements Observer
     this.setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(ButtonReturn)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(LabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
-        .addContainerGap())
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
         .addGap(86, 86, 86)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +187,7 @@ public class View extends javax.swing.JPanel implements Observer
               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                   .addComponent(LabelLectureOnly)
-                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(ButtonPayment, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -209,17 +210,23 @@ public class View extends javax.swing.JPanel implements Observer
               .addComponent(ButtonClientByPlane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
               .addComponent(ButtonTopFlights, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         .addGap(86, 86, 86))
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(ButtonReturn)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(LabelTitle)
+        .addGap(271, 271, 271))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(LabelTitle)
+          .addComponent(ButtonReturn))
+        .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
           .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(LabelTitle)
-              .addComponent(ButtonReturn))
-            .addGap(18, 18, 18)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(LabelLectureOnly)
               .addComponent(LabelModifiable))
@@ -305,6 +312,11 @@ public class View extends javax.swing.JPanel implements Observer
   {//GEN-HEADEREND:event_ButtonTripActionPerformed
     controller.changeWindow("trip");
   }//GEN-LAST:event_ButtonTripActionPerformed
+
+  private void ButtonReturnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonReturnActionPerformed
+  {//GEN-HEADEREND:event_ButtonReturnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_ButtonReturnActionPerformed
 
   @Override
   public void update(Observable o, Object arg)
