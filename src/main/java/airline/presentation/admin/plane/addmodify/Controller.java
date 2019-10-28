@@ -39,7 +39,7 @@ public class Controller
   
   public void Modify(Plane object) throws Exception
   {
-    PlaneDao.getInstance().edit(object);
+    PlaneDao.getInstance().update(object);
     model.getParentController().update();
   }
   

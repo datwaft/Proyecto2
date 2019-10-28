@@ -17,6 +17,30 @@ public class FlightDao extends FlightJpaController
     return FlightDaoHolder.INSTANCE;
   }
 
+  public void update(Flight object)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      Flight other = em.find(Flight.class, object.getIdentifier());
+
+      em.getTransaction().begin();
+      other.setOrigin(object.getOrigin());
+      other.setDestination(object.getDestination());
+      other.setWeekday(object.getWeekday());
+      other.setDeparture(object.getDeparture());
+      other.setDuration(object.getDuration());
+      other.setPrice(object.getPrice());
+      other.setDiscount(object.getDiscount());
+      em.getTransaction().commit();
+      em.getEntityManagerFactory().getCache().evict(Flight.class, object.getIdentifier());
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   public List<Flight> findAll()
   {
     EntityManager em = getEntityManager();

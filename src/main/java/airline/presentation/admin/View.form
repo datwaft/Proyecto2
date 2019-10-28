@@ -30,53 +30,30 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="86" pref="86" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ButtonReservation" alignment="1" min="-2" pref="315" max="-2" attributes="0"/>
-                          <Component id="ButtonTicket" alignment="1" min="-2" pref="315" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="LabelLectureOnly" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="47" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="ButtonPayment" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="ButtonCountry" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="ButtonCity" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="ButtonPlanetype" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="ButtonFlight" alignment="0" pref="278" max="32767" attributes="0"/>
-                                  <Component id="ButtonTrip" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="ButtonPlane" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ButtonFacturedByMonth" max="32767" attributes="0"/>
-                          <Component id="ButtonUser" max="32767" attributes="0"/>
-                          <Component id="LabelModifiable" max="32767" attributes="0"/>
-                          <Component id="LabelReports" alignment="0" max="32767" attributes="0"/>
-                          <Component id="ButtonRevenueByYear" alignment="0" max="32767" attributes="0"/>
-                          <Component id="ButtonClientByPlane" alignment="0" max="32767" attributes="0"/>
-                          <Component id="ButtonTopFlights" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="LabelModifiable" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonCity" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonFlight" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonTrip" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonPlane" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonPlanetype" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonCountry" max="32767" attributes="0"/>
+                  <Component id="ButtonPayment" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="ButtonFacturedByMonth" pref="342" max="32767" attributes="0"/>
+                  <Component id="ButtonUser" max="32767" attributes="0"/>
+                  <Component id="LabelReadOnly" max="32767" attributes="0"/>
+                  <Component id="LabelReports" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonRevenueByYear" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonClientByPlane" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonTopFlights" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonReservation" max="32767" attributes="0"/>
+                  <Component id="ButtonTicket" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -99,8 +76,8 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="LabelLectureOnly" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelModifiable" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelReadOnly" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -112,7 +89,7 @@
                           <Component id="ButtonCountry" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ButtonReservation" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ButtonCity" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ButtonTicket" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -122,7 +99,7 @@
                   </Group>
                   <Component id="LabelReports" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="ButtonPlane" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="ButtonFacturedByMonth" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -137,7 +114,7 @@
                   <Component id="ButtonTrip" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ButtonClientByPlane" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="ButtonTopFlights" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="177" max="32767" attributes="0"/>
           </Group>
@@ -154,21 +131,21 @@
         <Property name="text" type="java.lang.String" value="Men&#xfa; de administraci&#xf3;n"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="LabelLectureOnly">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Administraci&#xf3;n de elementos de solo lectura"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="LabelModifiable">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Administraci&#xf3;n de elementos modificables"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelReadOnly">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Administraci&#xf3;n de elementos de solo lectura"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="ButtonPayment">

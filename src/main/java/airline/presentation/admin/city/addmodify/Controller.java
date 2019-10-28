@@ -39,7 +39,7 @@ public class Controller
   
   public void Modify(City object) throws Exception
   {
-    CityDao.getInstance().edit(object);
+    CityDao.getInstance().update(object);
     model.getParentController().update();
   }
   

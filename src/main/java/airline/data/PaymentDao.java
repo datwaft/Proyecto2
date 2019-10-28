@@ -11,6 +11,23 @@ public class PaymentDao extends PaymentJpaController
     super(PersistenceManager.getInstance().getEntityManagerFactory());
   }
   
+  public void update(Payment object)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      Payment other = em.find(Payment.class, object.getId());
+
+      em.getTransaction().begin();
+      other.setName(object.getName());
+      em.getTransaction().commit();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   public List<Payment> findAll()
   {
     EntityManager em = getEntityManager();

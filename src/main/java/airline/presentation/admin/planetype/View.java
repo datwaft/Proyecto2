@@ -284,6 +284,11 @@ public class View extends javax.swing.JPanel implements Observer
     Table.setModel(model.getTableModel());
   }
   
+  public void initialize()
+  {
+    
+  }
+  
   public Model getModel()
   {
     return model;

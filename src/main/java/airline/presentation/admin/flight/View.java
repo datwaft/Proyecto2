@@ -354,6 +354,10 @@ public class View extends javax.swing.JPanel implements Observer
   {
     Table.setModel(model.getTableModel());
     setColumnWidths(Table, 70, 140, 140, 70, 70, 70, 70, 70);
+  }
+  
+  public void initialize()
+  {
     ComboBoxOrigin.setModel(new DefaultComboBoxModel<>(Controller.getCities()));
     ComboBoxWeekdays.setModel(new DefaultComboBoxModel<>(Model.getWeekdays()));
     ComboBoxDestination.setModel(new DefaultComboBoxModel<>(Controller.getCities()));

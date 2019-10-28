@@ -46,6 +46,12 @@ public class Controller
     model.updateTableModel(list);
   }
   
+  public void initialize()
+  {
+    this.update();
+    view.initialize();
+  }
+  
   public void delete(Country object) throws Exception
   {
     CountryDao.getInstance().destroy(object.getCode());

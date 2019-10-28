@@ -70,6 +70,12 @@ public class Controller
     model.updateTableModel(list);
   }
   
+  public void initialize()
+  {
+    this.update();
+    view.initialize();
+  }
+  
   public void delete(City object) throws Exception
   {
     CityDao.getInstance().destroy(object.getCode());

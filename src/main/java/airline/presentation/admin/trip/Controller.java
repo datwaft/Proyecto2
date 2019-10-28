@@ -82,6 +82,12 @@ public class Controller
     model.updateTableModel(list);
   }
   
+  public void initialize()
+  {
+    this.update();
+    view.initialize();
+  }
+  
   public void delete(Trip object) throws Exception
   {
     TripDao.getInstance().destroy(object.getIdentifier());

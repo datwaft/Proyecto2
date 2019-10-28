@@ -69,7 +69,7 @@ public class Controller
   
   public void Modify(Flight object) throws Exception
   {
-    FlightDao.getInstance().edit(object);
+    FlightDao.getInstance().update(object);
     model.getParentController().update();
   }
   

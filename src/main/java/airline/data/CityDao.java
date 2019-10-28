@@ -12,6 +12,24 @@ public class CityDao extends CityJpaController
     super(PersistenceManager.getInstance().getEntityManagerFactory());
   }
   
+  public void update(City object)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      City other = em.find(City.class, object.getCode());
+
+      em.getTransaction().begin();
+      other.setName(object.getName());
+      other.setCountry(object.getCountry());
+      em.getTransaction().commit();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   public List<City> findAll()
   {
     EntityManager em = getEntityManager();

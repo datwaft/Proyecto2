@@ -11,6 +11,27 @@ public class TripDao extends TripJpaController
     super(PersistenceManager.getInstance().getEntityManagerFactory());
   }
   
+  public void update(Trip object)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      Trip other = em.find(Trip.class, object.getIdentifier());
+
+      em.getTransaction().begin();
+      other.setPlane(object.getPlane());
+      other.setOutward(object.getOutward());
+      other.setDeparture(object.getDeparture());
+      other.setInward(object.getInward());
+      other.setArrival(object.getArrival());
+      em.getTransaction().commit();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   public List<Trip> findAll()
   {
     EntityManager em = getEntityManager();

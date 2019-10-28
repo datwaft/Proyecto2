@@ -79,6 +79,12 @@ public class Controller
     model.updateTableModel(list);
   }
   
+  public void initialize()
+  {
+    this.update();
+    view.initialize();
+  }
+  
   public void delete(Flight object) throws Exception
   {
     FlightDao.getInstance().destroy(object.getIdentifier());

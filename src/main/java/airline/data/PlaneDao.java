@@ -12,6 +12,23 @@ public class PlaneDao extends PlaneJpaController
     super(PersistenceManager.getInstance().getEntityManagerFactory());
   }
 
+  public void update(Plane object)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      Plane other = em.find(Plane.class, object.getIdentifier());
+
+      em.getTransaction().begin();
+      other.setType(object.getType());
+      em.getTransaction().commit();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   public List<Plane> findAll()
   {
     EntityManager em = getEntityManager();

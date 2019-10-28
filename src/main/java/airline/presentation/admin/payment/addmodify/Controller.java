@@ -25,7 +25,7 @@ public class Controller
   
   public void Modify(Payment object) throws Exception
   {
-    PaymentDao.getInstance().edit(object);
+    PaymentDao.getInstance().update(object);
     model.getParentController().update();
   }
   

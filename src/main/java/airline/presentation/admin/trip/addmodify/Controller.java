@@ -76,7 +76,7 @@ public class Controller
   
   public void Modify(Trip object) throws Exception
   {
-    TripDao.getInstance().edit(object);
+    TripDao.getInstance().update(object);
     model.getParentController().update();
   }
   

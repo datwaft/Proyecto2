@@ -333,9 +333,13 @@ public class View extends javax.swing.JPanel implements Observer
   public void update(Observable o, Object arg)
   {
     Table.setModel(model.getTableModel());
-    ComboBoxCountries.setModel(new DefaultComboBoxModel<>(Controller.getParents()));
   }
 
+  public void initialize()
+  {
+    ComboBoxCountries.setModel(new DefaultComboBoxModel<>(Controller.getParents()));
+  }
+  
   public Model getModel()
   {
     return model;

@@ -333,6 +333,10 @@ public class View extends javax.swing.JPanel implements Observer
   public void update(Observable o, Object arg)
   {
     Table.setModel(model.getTableModel());
+  }
+  
+  public void initialize()
+  {
     ComboBoxOutward.setModel(new DefaultComboBoxModel<>(Controller.getFlights()));
     ComboBoxPlanes.setModel(new DefaultComboBoxModel<>(Controller.getPlanes()));
     ComboBoxInward.setModel(new DefaultComboBoxModel<>(Controller.getFlightsWithNone()));

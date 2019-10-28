@@ -25,7 +25,7 @@ public class Controller
   
   public void Modify(Planetype object) throws Exception
   {
-    PlanetypeDao.getInstance().edit(object);
+    PlanetypeDao.getInstance().update(object);
     model.getParentController().update();
   }
   

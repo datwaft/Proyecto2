@@ -18,13 +18,13 @@ public class Controller
   {
     switch(window)
     {
-      case "city": model.cityController.update();
-      case "country": model.countryController.update();
-      case "flight": model.flightController.update();
-      case "payment": model.paymentController.update();
-      case "plane": model.planeController.update();
-      case "planetype": model.planetypeController.update();
-      case "trip": model.tripController.update();
+      case "city": model.cityController.initialize();
+      case "country": model.countryController.initialize();
+      case "flight": model.flightController.initialize();
+      case "payment": model.paymentController.initialize();
+      case "plane": model.planeController.initialize();
+      case "planetype": model.planetypeController.initialize();
+      case "trip": model.tripController.initialize();
     }
     model.getWindowController().swapWindow(window);
   }

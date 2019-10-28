@@ -25,7 +25,7 @@ public class Controller
   
   public void Modify(Country object) throws Exception
   {
-    CountryDao.getInstance().edit(object);
+    CountryDao.getInstance().update(object);
     model.getParentController().update();
   }
   

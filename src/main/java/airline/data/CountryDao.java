@@ -11,6 +11,23 @@ public class CountryDao extends CountryJpaController
     super(PersistenceManager.getInstance().getEntityManagerFactory());
   }
   
+  public void update(Country object)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      Country other = em.find(Country.class, object.getCode());
+
+      em.getTransaction().begin();
+      other.setName(object.getName());
+      em.getTransaction().commit();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   public List<Country> findAll()
   {
     EntityManager em = getEntityManager();

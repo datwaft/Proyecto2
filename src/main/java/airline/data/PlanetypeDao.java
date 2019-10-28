@@ -11,6 +11,27 @@ public class PlanetypeDao extends PlanetypeJpaController
     super(PersistenceManager.getInstance().getEntityManagerFactory());
   }
   
+  public void update(Planetype object)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      Planetype other = em.find(Planetype.class, object.getIdentifier());
+
+      em.getTransaction().begin();
+      other.setBrand(object.getBrand());
+      other.setModel(object.getModel());
+      other.setRownumber(object.getRownumber());
+      other.setRowseats(object.getRowseats());
+      other.setYear(object.getYear());
+      em.getTransaction().commit();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   public List<Planetype> findAll()
   {
     EntityManager em = getEntityManager();
