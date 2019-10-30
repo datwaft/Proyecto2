@@ -1,7 +1,7 @@
 package airline.presentation.admin.planetype;
 
-import airline.data.*;
 import airline.logic.Planetype;
+import airline.logic.PlanetypeModel;
 import java.util.List;
 
 public class Controller
@@ -33,12 +33,12 @@ public class Controller
     List<Planetype> list;
     switch (selection)
     {
-      case 0: list = PlanetypeDao.getInstance().findByIdentifier(string); break;
-      case 1: list = PlanetypeDao.getInstance().findByYear(string); break;
-      case 2: list = PlanetypeDao.getInstance().findByModel(string); break;
-      case 3: list = PlanetypeDao.getInstance().findByBrand(string); break;
-      case 4: list = PlanetypeDao.getInstance().findByRownumber(string); break;
-      case 5: list = PlanetypeDao.getInstance().findByRowseats(string); break;
+      case 0: list = PlanetypeModel.getInstance().findByIdentifier(string); break;
+      case 1: list = PlanetypeModel.getInstance().findByYear(string); break;
+      case 2: list = PlanetypeModel.getInstance().findByModel(string); break;
+      case 3: list = PlanetypeModel.getInstance().findByBrand(string); break;
+      case 4: list = PlanetypeModel.getInstance().findByRownumber(string); break;
+      case 5: list = PlanetypeModel.getInstance().findByRowseats(string); break;
       default: list = null; break;
     }
     model.updateTableModel(list);
@@ -46,7 +46,7 @@ public class Controller
   
   public void update()
   {
-    List<Planetype> list = PlanetypeDao.getInstance().findAll();
+    List<Planetype> list = PlanetypeModel.getInstance().findAll();
     model.updateTableModel(list);
   }
   
@@ -58,14 +58,14 @@ public class Controller
   
   public void delete(Planetype object) throws Exception
   {
-    PlanetypeDao.getInstance().destroy(object.getIdentifier());
+    PlanetypeModel.getInstance().destroy(object.getIdentifier());
     this.update();
   }
   
   public void delete(int[] list) throws Exception
   {
     for(int i = 0; i < list.length; ++i)
-      PlanetypeDao.getInstance().destroy(model.getElement(list[i]).getIdentifier());
+      PlanetypeModel.getInstance().destroy(model.getElement(list[i]).getIdentifier());
     this.update();
   }
 }

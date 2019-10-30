@@ -1,7 +1,7 @@
 package airline.presentation.admin.planetype.addmodify;
 
-import airline.data.*;
 import airline.logic.Planetype;
+import airline.logic.PlanetypeModel;
 
 public class Controller
 {
@@ -19,13 +19,13 @@ public class Controller
   
   public void Add(Planetype object) throws Exception
   {
-    PlanetypeDao.getInstance().create(object);
+    PlanetypeModel.getInstance().create(object);
     model.getParentController().update();
   }
   
   public void Modify(Planetype object) throws Exception
   {
-    PlanetypeDao.getInstance().update(object);
+    PlanetypeModel.getInstance().update(object);
     model.getParentController().update();
   }
   

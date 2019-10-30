@@ -1,6 +1,5 @@
 package airline.presentation.admin.trip.addmodify;
 
-import airline.data.*;
 import airline.logic.*;
 import java.util.List;
 import java.util.Vector;
@@ -21,7 +20,7 @@ public class Controller
   
   public static Vector<Object> getPlanes()
   {
-    List<Plane> aux = PlaneDao.getInstance().findAll();
+    List<Plane> aux = PlaneModel.getInstance().findAll();
     Vector<Object> vector = new Vector<>();
     for(int i = 0; i < aux.size(); ++i)
     {
@@ -32,7 +31,7 @@ public class Controller
   
   public static Vector<Object> getFlights()
   {
-    List<Flight> aux = FlightDao.getInstance().findAll();
+    List<Flight> aux = FlightModel.getInstance().findAll();
     Vector<Object> vector = new Vector<>();
     for(int i = 0; i < aux.size(); ++i)
     {
@@ -43,7 +42,7 @@ public class Controller
   
   public static Vector<Object> getFlightsWithNone(Flight flight)
   {
-    List<Flight> aux = FlightDao.getInstance().findByCities(flight.getDestination(), flight.getOrigin());
+    List<Flight> aux = FlightModel.getInstance().findByCities(flight.getDestination(), flight.getOrigin());
     Vector<Object> vector = new Vector<>();
     vector.add("Ninguno");
     for(int i = 0; i < aux.size(); ++i)
@@ -70,13 +69,13 @@ public class Controller
   
   public void Add(Trip object) throws Exception
   {
-    TripDao.getInstance().create(object);
+    TripModel.getInstance().create(object);
     model.getParentController().update();
   }
   
   public void Modify(Trip object) throws Exception
   {
-    TripDao.getInstance().update(object);
+    TripModel.getInstance().update(object);
     model.getParentController().update();
   }
   

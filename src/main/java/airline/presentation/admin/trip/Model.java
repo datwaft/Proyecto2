@@ -10,7 +10,6 @@ public class Model extends Observable
   private airline.presentation.mainwindow.Controller windowController;
   
   private static Vector<String> searchTypes = null;
-  private static Vector<String> weekdays = null;
   private TableModel tableModel;
 
   public Model()

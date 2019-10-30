@@ -1,7 +1,7 @@
 package airline.presentation.admin.payment.addmodify;
 
-import airline.data.*;
 import airline.logic.Payment;
+import airline.logic.PaymentModel;
 
 public class Controller
 {
@@ -19,13 +19,13 @@ public class Controller
   
   public void Add(Payment object) throws Exception
   {
-    PaymentDao.getInstance().create(object);
+    PaymentModel.getInstance().create(object);
     model.getParentController().update();
   }
   
   public void Modify(Payment object) throws Exception
   {
-    PaymentDao.getInstance().update(object);
+    PaymentModel.getInstance().update(object);
     model.getParentController().update();
   }
   

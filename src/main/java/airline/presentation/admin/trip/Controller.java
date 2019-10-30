@@ -1,6 +1,5 @@
 package airline.presentation.admin.trip;
 
-import airline.data.*;
 import airline.logic.*;
 import java.util.List;
 import java.util.Vector;
@@ -31,7 +30,7 @@ public class Controller
   
   public static Vector<Object> getFlights()
   {
-    List<Flight> list = FlightDao.getInstance().findAll();
+    List<Flight> list = FlightModel.getInstance().findAll();
     Vector<Object> vector = new Vector<>();
     vector.add("Cualquiera");
     for(int i = 0; i < list.size(); ++i)
@@ -41,7 +40,7 @@ public class Controller
   
   public static Vector<Object> getFlightsWithNone()
   {
-    List<Flight> list = FlightDao.getInstance().findAll();
+    List<Flight> list = FlightModel.getInstance().findAll();
     Vector<Object> vector = new Vector<>();
     vector.add("Cualquiera");
     vector.add("Ninguno");
@@ -52,7 +51,7 @@ public class Controller
   
   public static Vector<Object> getPlanes()
   {
-    List<Plane> list = PlaneDao.getInstance().findAll();
+    List<Plane> list = PlaneModel.getInstance().findAll();
     Vector<Object> vector = new Vector<>();
     vector.add("Cualquiera");
     for(int i = 0; i < list.size(); ++i)
@@ -68,9 +67,9 @@ public class Controller
     List<Trip> list;
     switch (selection)
     {
-      case 0: list = TripDao.getInstance().findByIdentifier(string, plane, outward, inward); break;
-      case 1: list = TripDao.getInstance().findByDeparture(string, plane, outward, inward); break;
-      case 2: list = TripDao.getInstance().findByArrival(string, plane, outward, inward); break;
+      case 0: list = TripModel.getInstance().findByIdentifier(string, plane, outward, inward); break;
+      case 1: list = TripModel.getInstance().findByDeparture(string, plane, outward, inward); break;
+      case 2: list = TripModel.getInstance().findByArrival(string, plane, outward, inward); break;
       default: list = null; break;
     }
     model.updateTableModel(list);
@@ -78,7 +77,7 @@ public class Controller
   
   public void update()
   {
-    List<Trip> list = TripDao.getInstance().findAll();
+    List<Trip> list = TripModel.getInstance().findAll();
     model.updateTableModel(list);
   }
   
@@ -90,14 +89,14 @@ public class Controller
   
   public void delete(Trip object) throws Exception
   {
-    TripDao.getInstance().destroy(object.getIdentifier());
+    TripModel.getInstance().destroy(object.getIdentifier());
     this.update();
   }
   
   public void delete(int[] list) throws Exception
   {
     for(int i = 0; i < list.length; ++i)
-      TripDao.getInstance().destroy(model.getElement(list[i]).getIdentifier());
+      TripModel.getInstance().destroy(model.getElement(list[i]).getIdentifier());
     this.update();
   }
 }

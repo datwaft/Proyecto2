@@ -7,15 +7,15 @@ public class Model extends Observable
 {
   private Controller controller;
   
-  private final airline.presentation.admin.Model adminModel;
-  private final airline.presentation.admin.View adminView;
-  private final airline.presentation.admin.Controller adminController;
+  private final airline.presentation.welcome.Model welcomeModel;
+  private final airline.presentation.welcome.View welcomeView;
+  public final airline.presentation.welcome.Controller welcomeController;
   
   public Model()
   {
-    adminModel = new airline.presentation.admin.Model();
-    adminView = new airline.presentation.admin.View();
-    adminController = new airline.presentation.admin.Controller(adminModel, adminView);
+    welcomeModel = new airline.presentation.welcome.Model();
+    welcomeView = new airline.presentation.welcome.View();
+    welcomeController = new airline.presentation.welcome.Controller(welcomeModel, welcomeView);
   }
   
   public Controller getController()
@@ -27,8 +27,8 @@ public class Model extends Observable
   {
     this.controller = controller;
     
-    adminModel.setWindowController(this.controller);
-    this.controller.addWindow(adminView, "admin");
+    welcomeModel.setWindowController(this.controller);
+    this.controller.addWindow(welcomeView, "welcome");
   }
   
   @Override

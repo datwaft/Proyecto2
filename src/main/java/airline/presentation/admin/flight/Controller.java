@@ -1,8 +1,6 @@
 package airline.presentation.admin.flight;
 
-import airline.data.*;
-import airline.logic.Flight;
-import airline.logic.City;
+import airline.logic.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -32,7 +30,7 @@ public class Controller
   
   public static Vector<Object> getCities()
   {
-    List<City> list = CityDao.getInstance().findAll();
+    List<City> list = CityModel.getInstance().findAll();
     Vector<Object> vector = new Vector<>();
     vector.add(new City("", "Cualquiera"));
     for(int i = 0; i < list.size(); ++i)
@@ -45,14 +43,14 @@ public class Controller
     List<Flight> list;
     switch (selection)
     {
-      case 0: list = FlightDao.getInstance().findByIdentifier("", origin, destination); break;
-      case 1: list = FlightDao.getInstance().findByIdentifier(string, origin, destination); break;
-      case 2: list = FlightDao.getInstance().findByWeekday(parseWeekday(string), origin, destination); break;
-      case 3: list = FlightDao.getInstance().findByDeparture(string, origin, destination); break;
-      case 4: list = FlightDao.getInstance().findByDuration(string, origin, destination); break;
-      case 5: list = FlightDao.getInstance().findByArrival(string, origin, destination); break;
-      case 6: list = FlightDao.getInstance().findByPrice(string, origin, destination); break;
-      case 7: list = FlightDao.getInstance().findByDiscount(string, origin, destination); break;
+      case 0: list = FlightModel.getInstance().findByIdentifier("", origin, destination); break;
+      case 1: list = FlightModel.getInstance().findByIdentifier(string, origin, destination); break;
+      case 2: list = FlightModel.getInstance().findByWeekday(parseWeekday(string), origin, destination); break;
+      case 3: list = FlightModel.getInstance().findByDeparture(string, origin, destination); break;
+      case 4: list = FlightModel.getInstance().findByDuration(string, origin, destination); break;
+      case 5: list = FlightModel.getInstance().findByArrival(string, origin, destination); break;
+      case 6: list = FlightModel.getInstance().findByPrice(string, origin, destination); break;
+      case 7: list = FlightModel.getInstance().findByDiscount(string, origin, destination); break;
       default: list = null; break;
     }
     model.updateTableModel(list);
@@ -75,7 +73,7 @@ public class Controller
   
   public void update()
   {
-    List<Flight> list = FlightDao.getInstance().findAll();
+    List<Flight> list = FlightModel.getInstance().findAll();
     model.updateTableModel(list);
   }
   
@@ -87,14 +85,14 @@ public class Controller
   
   public void delete(Flight object) throws Exception
   {
-    FlightDao.getInstance().destroy(object.getIdentifier());
+    FlightModel.getInstance().destroy(object.getIdentifier());
     this.update();
   }
   
   public void delete(int[] list) throws Exception
   {
     for(int i = 0; i < list.length; ++i)
-      FlightDao.getInstance().destroy(model.getElement(list[i]).getIdentifier());
+      FlightModel.getInstance().destroy(model.getElement(list[i]).getIdentifier());
     this.update();
   }
 }

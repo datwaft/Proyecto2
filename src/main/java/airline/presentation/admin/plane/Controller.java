@@ -1,8 +1,6 @@
 package airline.presentation.admin.plane;
 
-import airline.data.*;
-import airline.logic.Plane;
-import airline.logic.Planetype;
+import airline.logic.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -32,7 +30,7 @@ public class Controller
   
   public static Vector<Object> getParents()
   {
-    List<Planetype> list = PlanetypeDao.getInstance().findAll();
+    List<Planetype> list = PlanetypeModel.getInstance().findAll();
     
     Vector<Object> vector = new Vector<>();
     vector.add("Cualquiera");
@@ -47,7 +45,7 @@ public class Controller
     List<Plane> list;
     switch (selection)
     {
-      case 0: list = PlaneDao.getInstance().findByIdentifier(string); break;
+      case 0: list = PlaneModel.getInstance().findByIdentifier(string); break;
       default: list = null; break;
     }
     model.updateTableModel(list);
@@ -55,17 +53,17 @@ public class Controller
   
   public void searchByParent(Planetype planetype)
   {
-    model.updateTableModel(PlaneDao.getInstance().findByPlanetype(planetype));
+    model.updateTableModel(PlaneModel.getInstance().findByPlanetype(planetype));
   }
   
   public void searchAll()
   {
-    model.updateTableModel(PlaneDao.getInstance().findAll());
+    model.updateTableModel(PlaneModel.getInstance().findAll());
   }
   
   public void update()
   {
-    List<Plane> list = PlaneDao.getInstance().findAll();
+    List<Plane> list = PlaneModel.getInstance().findAll();
     model.updateTableModel(list);
   }
   
@@ -77,14 +75,14 @@ public class Controller
   
   public void delete(Plane object) throws Exception
   {
-    PlaneDao.getInstance().destroy(object.getIdentifier());
+    PlaneModel.getInstance().destroy(object.getIdentifier());
     this.update();
   }
   
   public void delete(int[] list) throws Exception
   {
     for(int i = 0; i < list.length; ++i)
-      PlaneDao.getInstance().destroy(model.getElement(list[i]).getIdentifier());
+      PlaneModel.getInstance().destroy(model.getElement(list[i]).getIdentifier());
     this.update();
   }
 }

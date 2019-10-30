@@ -1,8 +1,6 @@
 package airline.presentation.admin.city.addmodify;
 
-import airline.data.*;
-import airline.logic.City;
-import airline.logic.Country;
+import airline.logic.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -22,7 +20,7 @@ public class Controller
   
   public static Vector<Object> getParents()
   {
-    List<Country> countries = CountryDao.getInstance().findAll();
+    List<Country> countries = CountryModel.getInstance().findAll();
     
     Vector<Object> vector = new Vector<>();
     for(int i = 0; i < countries.size(); ++i)
@@ -33,13 +31,13 @@ public class Controller
   
   public void Add(City object) throws Exception
   {
-    CityDao.getInstance().create(object);
+    CityModel.getInstance().create(object);
     model.getParentController().update();
   }
   
   public void Modify(City object) throws Exception
   {
-    CityDao.getInstance().update(object);
+    CityModel.getInstance().update(object);
     model.getParentController().update();
   }
   

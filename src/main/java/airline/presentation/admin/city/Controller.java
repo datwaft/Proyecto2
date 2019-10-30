@@ -1,8 +1,6 @@
 package airline.presentation.admin.city;
 
-import airline.data.*;
-import airline.logic.City;
-import airline.logic.Country;
+import airline.logic.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -32,7 +30,7 @@ public class Controller
   
   public static Vector<Object> getParents()
   {
-    List<Country> list = CountryDao.getInstance().findAll();
+    List<Country> list = CountryModel.getInstance().findAll();
     
     Vector<Object> vector = new Vector<>();
     vector.add("Cualquiera");
@@ -47,8 +45,8 @@ public class Controller
     List<City> list;
     switch (selection)
     {
-      case 0: list = CityDao.getInstance().findByCode(string); break;
-      case 1: list = CityDao.getInstance().findByName(string); break;
+      case 0: list = CityModel.getInstance().findByCode(string); break;
+      case 1: list = CityModel.getInstance().findByName(string); break;
       default: list = null; break;
     }
     model.updateTableModel(list);
@@ -56,17 +54,17 @@ public class Controller
   
   public void searchByParent(Country country)
   {
-    model.updateTableModel(CityDao.getInstance().findByCountry(country));
+    model.updateTableModel(CityModel.getInstance().findByCountry(country));
   }
   
   public void searchAll()
   {
-    model.updateTableModel(CityDao.getInstance().findAll());
+    model.updateTableModel(CityModel.getInstance().findAll());
   }
   
   public void update()
   {
-    List<City> list = CityDao.getInstance().findAll();
+    List<City> list = CityModel.getInstance().findAll();
     model.updateTableModel(list);
   }
   
@@ -78,14 +76,14 @@ public class Controller
   
   public void delete(City object) throws Exception
   {
-    CityDao.getInstance().destroy(object.getCode());
+    CityModel.getInstance().destroy(object.getCode());
     this.update();
   }
   
   public void delete(int[] list) throws Exception
   {
     for(int i = 0; i < list.length; ++i)
-      CityDao.getInstance().destroy(model.getElement(list[i]).getCode());
+      CityModel.getInstance().destroy(model.getElement(list[i]).getCode());
     this.update();
   }
 }

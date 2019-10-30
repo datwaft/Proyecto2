@@ -40,6 +40,7 @@ insert into flight (origin, destination, weekday, departure, duration, price, di
 ("SJO", "LON", 4, "06:05", "01:30", 650, 1),
 ("LAX", "SJO", 5, "08:00", "01:00", 750, 0),
 ("NYC", "SJO", 6, "15:00", "02:00", 850, 0.65),
+("YHM", "SJO", 7, "10:00", "20:00", 2000, 0),
 ("LON", "SJO", 7, "12:00", "02:30", 500, 0);
 
 insert into trip (plane, outward, departure, inward, arrival) values

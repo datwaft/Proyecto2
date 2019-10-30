@@ -1,7 +1,7 @@
 package airline.presentation.admin.country;
 
-import airline.data.*;
 import airline.logic.Country;
+import airline.logic.CountryModel;
 import java.util.List;
 
 public class Controller
@@ -33,8 +33,8 @@ public class Controller
     List<Country> list;
     switch (selection)
     {
-      case 0: list = CountryDao.getInstance().findByCode(string); break;
-      case 1: list = CountryDao.getInstance().findByName(string); break;
+      case 0: list = CountryModel.getInstance().findByCode(string); break;
+      case 1: list = CountryModel.getInstance().findByName(string); break;
       default: list = null; break;
     }
     model.updateTableModel(list);
@@ -42,7 +42,7 @@ public class Controller
   
   public void update()
   {
-    List<Country> list = CountryDao.getInstance().findAll();
+    List<Country> list = CountryModel.getInstance().findAll();
     model.updateTableModel(list);
   }
   
@@ -54,14 +54,14 @@ public class Controller
   
   public void delete(Country object) throws Exception
   {
-    CountryDao.getInstance().destroy(object.getCode());
+    CountryModel.getInstance().destroy(object.getCode());
     this.update();
   }
   
   public void delete(int[] list) throws Exception
   {
     for(int i = 0; i < list.length; ++i)
-      CountryDao.getInstance().destroy(model.getElement(list[i]).getCode());
+      CountryModel.getInstance().destroy(model.getElement(list[i]).getCode());
     this.update();
   }
 }

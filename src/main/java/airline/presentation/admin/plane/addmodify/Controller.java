@@ -1,8 +1,6 @@
 package airline.presentation.admin.plane.addmodify;
 
-import airline.data.*;
-import airline.logic.Plane;
-import airline.logic.Planetype;
+import airline.logic.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -22,7 +20,7 @@ public class Controller
   
   public static Vector<Object> getParents()
   {
-    List<Planetype> list = PlanetypeDao.getInstance().findAll();
+    List<Planetype> list = PlanetypeModel.getInstance().findAll();
     
     Vector<Object> vector = new Vector<>();
     for(int i = 0; i < list.size(); ++i)
@@ -33,13 +31,13 @@ public class Controller
   
   public void Add(Plane object) throws Exception
   {
-    PlaneDao.getInstance().create(object);
+    PlaneModel.getInstance().create(object);
     model.getParentController().update();
   }
   
   public void Modify(Plane object) throws Exception
   {
-    PlaneDao.getInstance().update(object);
+    PlaneModel.getInstance().update(object);
     model.getParentController().update();
   }
   

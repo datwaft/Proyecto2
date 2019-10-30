@@ -1,7 +1,7 @@
 package airline.presentation.admin.country.addmodify;
 
-import airline.data.*;
 import airline.logic.Country;
+import airline.logic.CountryModel;
 
 public class Controller
 {
@@ -19,13 +19,13 @@ public class Controller
   
   public void Add(Country object) throws Exception
   {
-    CountryDao.getInstance().create(object);
+    CountryModel.getInstance().create(object);
     model.getParentController().update();
   }
   
   public void Modify(Country object) throws Exception
   {
-    CountryDao.getInstance().update(object);
+    CountryModel.getInstance().update(object);
     model.getParentController().update();
   }
   

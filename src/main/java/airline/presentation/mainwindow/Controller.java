@@ -35,4 +35,13 @@ public class Controller
   {
     view.swapWindow(window);
   }
+  
+  public void changeWindow(String window)
+  {
+    switch(window)
+    {
+      case "welcome": model.welcomeController.initialize();
+    }
+    this.swapWindow(window);
+  }
 }

@@ -1,8 +1,6 @@
 package airline.presentation.admin.flight.addmodify;
 
-import airline.data.*;
-import airline.logic.City;
-import airline.logic.Flight;
+import airline.logic.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -22,7 +20,7 @@ public class Controller
   
   public static Vector<Object> getCities()
   {
-    List<City> list = CityDao.getInstance().findAll();
+    List<City> list = CityModel.getInstance().findAll();
     Vector<Object> vector = new Vector<>();
     for(int i = 0; i < list.size(); ++i)
       vector.add(list.get(i));
@@ -63,13 +61,13 @@ public class Controller
   
   public void Add(Flight object) throws Exception
   {
-    FlightDao.getInstance().create(object);
+    FlightModel.getInstance().create(object);
     model.getParentController().update();
   }
   
   public void Modify(Flight object) throws Exception
   {
-    FlightDao.getInstance().update(object);
+    FlightModel.getInstance().update(object);
     model.getParentController().update();
   }
   
