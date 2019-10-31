@@ -28,6 +28,11 @@ public class Controller
     return view;
   }
   
+  public void changeWindow(String window)
+  {
+    model.getWindowController().swapWindow(window);
+  }
+  
   public static Vector<Object> getCities()
   {
     List<City> list = CityModel.getInstance().findAll();

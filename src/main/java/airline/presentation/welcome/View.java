@@ -3,8 +3,7 @@ package airline.presentation.welcome;
 import airline.logic.City;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.TableColumnModel;
 
 public class View extends javax.swing.JPanel implements Observer
@@ -62,6 +61,13 @@ public class View extends javax.swing.JPanel implements Observer
     LabelTitle.setText("Bienvenido");
 
     ButtonAdmin.setText("Menú de administrador");
+    ButtonAdmin.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonAdminActionPerformed(evt);
+      }
+    });
 
     ButtonUser.setText("Menú de usuario");
     ButtonUser.setMaximumSize(new java.awt.Dimension(131, 21));
@@ -355,6 +361,24 @@ public class View extends javax.swing.JPanel implements Observer
   {//GEN-HEADEREND:event_TextFieldTripActionPerformed
     ButtonSearchTripActionPerformed(evt);
   }//GEN-LAST:event_TextFieldTripActionPerformed
+
+  private void ButtonAdminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonAdminActionPerformed
+  {//GEN-HEADEREND:event_ButtonAdminActionPerformed
+    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir viaje", true);
+    dialog.setResizable(false);
+    
+    airline.presentation.login.Model loginModel = 
+            new airline.presentation.login.Model(true, dialog, controller);
+    airline.presentation.login.View loginView = 
+            new airline.presentation.login.View();
+    airline.presentation.login.Controller loginController =
+            new airline.presentation.login.Controller(loginModel, loginView);
+    
+    dialog.getContentPane().add(loginView);
+    dialog.pack();
+    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+    dialog.setVisible(true);
+  }//GEN-LAST:event_ButtonAdminActionPerformed
 
   @Override
   public void update(Observable o, Object arg)

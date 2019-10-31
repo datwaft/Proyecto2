@@ -302,7 +302,7 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonReturnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonReturnActionPerformed
   {//GEN-HEADEREND:event_ButtonReturnActionPerformed
-    // TODO add your handling code here:
+    model.getWindowController().changeWindow("welcome");
   }//GEN-LAST:event_ButtonReturnActionPerformed
 
   @Override

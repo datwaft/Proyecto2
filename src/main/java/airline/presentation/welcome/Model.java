@@ -11,7 +11,7 @@ public class Model extends Observable
   
   private final airline.presentation.admin.Model adminModel;
   private final airline.presentation.admin.View adminView;
-  private final airline.presentation.admin.Controller adminController;
+  public final airline.presentation.admin.Controller adminController;
   
   private static Vector<String> searchTypesTrip = null;
   private static Vector<String> searchTypesFlight = null;
