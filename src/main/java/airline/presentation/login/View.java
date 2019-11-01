@@ -37,6 +37,22 @@ public class View extends javax.swing.JPanel implements Observer
 
     LabelPassword.setText("Contraseña:");
 
+    FieldUsername.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        FieldUsernameActionPerformed(evt);
+      }
+    });
+
+    FieldPassword.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        FieldPasswordActionPerformed(evt);
+      }
+    });
+
     ButtonLogin.setText("Iniciar sesión");
     ButtonLogin.addActionListener(new java.awt.event.ActionListener()
     {
@@ -179,6 +195,16 @@ public class View extends javax.swing.JPanel implements Observer
     dialog.setLocationRelativeTo(this.model.getWindowController().getView());
     dialog.setVisible(true);
   }//GEN-LAST:event_ButtonRegisterActionPerformed
+
+  private void FieldPasswordActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_FieldPasswordActionPerformed
+  {//GEN-HEADEREND:event_FieldPasswordActionPerformed
+    ButtonLoginActionPerformed(evt);
+  }//GEN-LAST:event_FieldPasswordActionPerformed
+
+  private void FieldUsernameActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_FieldUsernameActionPerformed
+  {//GEN-HEADEREND:event_FieldUsernameActionPerformed
+    ButtonLoginActionPerformed(evt);
+  }//GEN-LAST:event_FieldUsernameActionPerformed
 
   @Override
   public void update(Observable o, Object arg)

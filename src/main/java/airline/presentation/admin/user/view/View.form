@@ -50,10 +50,10 @@
                           <Component id="FieldName" alignment="0" max="32767" attributes="0"/>
                           <Component id="FieldLastname" alignment="0" max="32767" attributes="0"/>
                           <Component id="FieldEmail" alignment="1" max="32767" attributes="0"/>
-                          <Component id="SpinnerBirthday" alignment="1" max="32767" attributes="0"/>
                           <Component id="FieldWorkphone" alignment="0" max="32767" attributes="0"/>
                           <Component id="ScrollPaneAddress" alignment="1" pref="314" max="32767" attributes="0"/>
                           <Component id="FieldCellphone" alignment="0" max="32767" attributes="0"/>
+                          <Component id="FieldBirthday" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -105,7 +105,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="LabelBirthday" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="SpinnerBirthday" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="FieldBirthday" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -136,7 +136,7 @@
           <Font name="Calibri Light" size="14" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Registrarse"/>
+        <Property name="text" type="java.lang.String" value="Ver informaci&#xf3;n del usuario"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
@@ -154,6 +154,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="FieldUsername">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LabelPassword">
       <Properties>
@@ -161,6 +167,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="FieldPassword">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LabelName">
       <Properties>
@@ -168,6 +180,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="FieldName">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LabelLastname">
       <Properties>
@@ -175,6 +193,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="FieldLastname">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LabelEmail">
       <Properties>
@@ -182,22 +206,17 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="FieldEmail">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LabelBirthday">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fecha de nacimiento:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JSpinner" name="SpinnerBirthday">
-      <Properties>
-        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-          <SpinnerModel initial="now" stepSize="5" type="date"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner()&#xa;{&#xa;  @Override&#xa;  public void setEditor(JComponent editor)&#xa;  {&#xa;    super.setEditor(editor);&#xa;    this.fireStateChanged();&#xa;  }&#xa;}"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="JSpinner.DateEditor editor = new JSpinner.DateEditor(SpinnerBirthday, &quot;yyyy-MM-dd&quot;);&#xa;editor.getFormat().setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;));&#xa;SpinnerBirthday.setEditor(editor);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="LabelAddress">
       <Properties>
@@ -213,6 +232,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="AreaAddress">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monospaced" size="10" style="0"/>
@@ -228,6 +248,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="FieldWorkphone">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LabelCellphone">
       <Properties>
@@ -235,6 +261,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="FieldCellphone">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="FieldBirthday">
     </Component>
   </SubComponents>
 </Form>

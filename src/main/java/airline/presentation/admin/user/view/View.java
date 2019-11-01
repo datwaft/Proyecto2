@@ -1,5 +1,6 @@
 package airline.presentation.admin.user.view;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
 
@@ -31,15 +32,6 @@ public class View extends javax.swing.JPanel implements Observer
     LabelEmail = new javax.swing.JLabel();
     FieldEmail = new javax.swing.JTextField();
     LabelBirthday = new javax.swing.JLabel();
-    SpinnerBirthday = new javax.swing.JSpinner()
-    {
-      @Override
-      public void setEditor(JComponent editor)
-      {
-        super.setEditor(editor);
-        this.fireStateChanged();
-      }
-    };
     LabelAddress = new javax.swing.JLabel();
     ScrollPaneAddress = new javax.swing.JScrollPane();
     AreaAddress = new javax.swing.JTextArea();
@@ -47,6 +39,7 @@ public class View extends javax.swing.JPanel implements Observer
     FieldWorkphone = new javax.swing.JTextField();
     LabelCellphone = new javax.swing.JLabel();
     FieldCellphone = new javax.swing.JTextField();
+    FieldBirthday = new javax.swing.JTextField();
 
     setMaximumSize(new java.awt.Dimension(389, 283));
     setMinimumSize(new java.awt.Dimension(389, 283));
@@ -54,7 +47,7 @@ public class View extends javax.swing.JPanel implements Observer
 
     LabelTitle.setFont(new java.awt.Font("Calibri Light", 1, 14)); // NOI18N
     LabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    LabelTitle.setText("Registrarse");
+    LabelTitle.setText("Ver información del usuario");
     LabelTitle.setToolTipText("");
 
     ButtonOk.setText("Aceptar");
@@ -68,23 +61,34 @@ public class View extends javax.swing.JPanel implements Observer
 
     LabelUsername.setText("Nombre de usuario:");
 
+    FieldUsername.setEditable(false);
+    FieldUsername.setBackground(new java.awt.Color(255, 255, 255));
+
     LabelPassword.setText("Contraseña:");
+
+    FieldPassword.setEditable(false);
+    FieldPassword.setBackground(new java.awt.Color(255, 255, 255));
 
     LabelName.setText("Nombre:");
 
+    FieldName.setEditable(false);
+    FieldName.setBackground(new java.awt.Color(255, 255, 255));
+
     LabelLastname.setText("Apellido:");
+
+    FieldLastname.setEditable(false);
+    FieldLastname.setBackground(new java.awt.Color(255, 255, 255));
 
     LabelEmail.setText("Correo electrónico:");
 
-    LabelBirthday.setText("Fecha de nacimiento:");
+    FieldEmail.setEditable(false);
+    FieldEmail.setBackground(new java.awt.Color(255, 255, 255));
 
-    SpinnerBirthday.setModel(new javax.swing.SpinnerDateModel());
-    JSpinner.DateEditor editor = new JSpinner.DateEditor(SpinnerBirthday, "yyyy-MM-dd");
-    editor.getFormat().setTimeZone(TimeZone.getTimeZone("UTC"));
-    SpinnerBirthday.setEditor(editor);
+    LabelBirthday.setText("Fecha de nacimiento:");
 
     LabelAddress.setText("Dirección:");
 
+    AreaAddress.setEditable(false);
     AreaAddress.setColumns(20);
     AreaAddress.setFont(new java.awt.Font("Monospaced", 0, 10)); // NOI18N
     AreaAddress.setRows(5);
@@ -92,7 +96,13 @@ public class View extends javax.swing.JPanel implements Observer
 
     LabelWorkphone.setText("Teléfono de trabajo:");
 
+    FieldWorkphone.setEditable(false);
+    FieldWorkphone.setBackground(new java.awt.Color(255, 255, 255));
+
     LabelCellphone.setText("Teléfono personal:");
+
+    FieldCellphone.setEditable(false);
+    FieldCellphone.setBackground(new java.awt.Color(255, 255, 255));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -121,10 +131,10 @@ public class View extends javax.swing.JPanel implements Observer
               .addComponent(FieldName)
               .addComponent(FieldLastname)
               .addComponent(FieldEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-              .addComponent(SpinnerBirthday, javax.swing.GroupLayout.Alignment.TRAILING)
               .addComponent(FieldWorkphone)
               .addComponent(ScrollPaneAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-              .addComponent(FieldCellphone)))
+              .addComponent(FieldCellphone)
+              .addComponent(FieldBirthday)))
           .addGroup(layout.createSequentialGroup()
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(ButtonOk)
@@ -163,7 +173,7 @@ public class View extends javax.swing.JPanel implements Observer
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(LabelBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(SpinnerBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(FieldBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(ScrollPaneAddress)
@@ -198,7 +208,9 @@ public class View extends javax.swing.JPanel implements Observer
       FieldName.setText(model.getObject().getName());
       FieldLastname.setText(model.getObject().getLastname());
       FieldEmail.setText(model.getObject().getEmail());
-      SpinnerBirthday.setValue(model.getObject().getBirthday());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+      FieldBirthday.setText(formatter.format(model.getObject().getBirthday()));
       AreaAddress.setText(model.getObject().getAddress());
       FieldWorkphone.setText(model.getObject().getWorkphone());
       FieldCellphone.setText(model.getObject().getCellphone());
@@ -231,6 +243,7 @@ public class View extends javax.swing.JPanel implements Observer
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JTextArea AreaAddress;
   private javax.swing.JButton ButtonOk;
+  private javax.swing.JTextField FieldBirthday;
   private javax.swing.JTextField FieldCellphone;
   private javax.swing.JTextField FieldEmail;
   private javax.swing.JTextField FieldLastname;
@@ -249,6 +262,5 @@ public class View extends javax.swing.JPanel implements Observer
   private javax.swing.JLabel LabelUsername;
   private javax.swing.JLabel LabelWorkphone;
   private javax.swing.JScrollPane ScrollPaneAddress;
-  private javax.swing.JSpinner SpinnerBirthday;
   // End of variables declaration//GEN-END:variables
 }

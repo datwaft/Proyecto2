@@ -1,5 +1,4 @@
 SET @@global.time_zone = '+00:00';
-SELECT @@global.time_zone;
 
 insert into planetype values ("001", 2011, "Ace", "Toshiba", 15, 6),
 ("002", 2017, "Alpha", "Mitsubishi", 20, 9),
@@ -20,7 +19,7 @@ insert into city values ("SJO", "San José", "CR"),
 ("MSY", "New Orleans", "US"),
 ("LON", "London", "UK"),
 ("SRB", "Santa Rosa", "BO"),
-("YFO", "Flin FLon", "CA"),
+("YFO", "Flin Flon", "CA"),
 ("YHM", "Hamilton", "CA");
 
 insert into payment (name) values ("MasterCard"),

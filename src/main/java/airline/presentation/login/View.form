@@ -93,8 +93,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="FieldUsername">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FieldUsernameActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="FieldPassword">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FieldPasswordActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ButtonLogin">
       <Properties>
