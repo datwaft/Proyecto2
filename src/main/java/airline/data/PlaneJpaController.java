@@ -1,14 +1,13 @@
 package airline.data;
 
-import airline.exceptions.NonexistentEntityException;
-import airline.exceptions.PreexistingEntityException;
-import airline.logic.Plane;
+import airline.exceptions.*;
+import airline.logic.*;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import airline.logic.Planetype;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -27,6 +26,10 @@ public class PlaneJpaController implements Serializable
 
   public void create(Plane plane) throws PreexistingEntityException, Exception
   {
+    if (plane.getTripList() == null)
+    {
+      plane.setTripList(new ArrayList<Trip>());
+    }
     EntityManager em = null;
     try
     {
@@ -38,11 +41,29 @@ public class PlaneJpaController implements Serializable
         type = em.getReference(type.getClass(), type.getIdentifier());
         plane.setType(type);
       }
+      List<Trip> attachedTripList = new ArrayList<Trip>();
+      for (Trip tripListTripToAttach : plane.getTripList())
+      {
+        tripListTripToAttach = em.getReference(tripListTripToAttach.getClass(), tripListTripToAttach.getIdentifier());
+        attachedTripList.add(tripListTripToAttach);
+      }
+      plane.setTripList(attachedTripList);
       em.persist(plane);
       if (type != null)
       {
         type.getPlaneList().add(plane);
         type = em.merge(type);
+      }
+      for (Trip tripListTrip : plane.getTripList())
+      {
+        Plane oldPlaneOfTripListTrip = tripListTrip.getPlane();
+        tripListTrip.setPlane(plane);
+        tripListTrip = em.merge(tripListTrip);
+        if (oldPlaneOfTripListTrip != null)
+        {
+          oldPlaneOfTripListTrip.getTripList().remove(tripListTrip);
+          oldPlaneOfTripListTrip = em.merge(oldPlaneOfTripListTrip);
+        }
       }
       em.getTransaction().commit();
     }
@@ -63,7 +84,7 @@ public class PlaneJpaController implements Serializable
     }
   }
 
-  public void edit(Plane plane) throws NonexistentEntityException, Exception
+  public void edit(Plane plane) throws IllegalOrphanException, NonexistentEntityException, Exception
   {
     EntityManager em = null;
     try
@@ -73,11 +94,37 @@ public class PlaneJpaController implements Serializable
       Plane persistentPlane = em.find(Plane.class, plane.getIdentifier());
       Planetype typeOld = persistentPlane.getType();
       Planetype typeNew = plane.getType();
+      List<Trip> tripListOld = persistentPlane.getTripList();
+      List<Trip> tripListNew = plane.getTripList();
+      List<String> illegalOrphanMessages = null;
+      for (Trip tripListOldTrip : tripListOld)
+      {
+        if (!tripListNew.contains(tripListOldTrip))
+        {
+          if (illegalOrphanMessages == null)
+          {
+            illegalOrphanMessages = new ArrayList<String>();
+          }
+          illegalOrphanMessages.add("You must retain Trip " + tripListOldTrip + " since its plane field is not nullable.");
+        }
+      }
+      if (illegalOrphanMessages != null)
+      {
+        throw new IllegalOrphanException(illegalOrphanMessages);
+      }
       if (typeNew != null)
       {
         typeNew = em.getReference(typeNew.getClass(), typeNew.getIdentifier());
         plane.setType(typeNew);
       }
+      List<Trip> attachedTripListNew = new ArrayList<Trip>();
+      for (Trip tripListNewTripToAttach : tripListNew)
+      {
+        tripListNewTripToAttach = em.getReference(tripListNewTripToAttach.getClass(), tripListNewTripToAttach.getIdentifier());
+        attachedTripListNew.add(tripListNewTripToAttach);
+      }
+      tripListNew = attachedTripListNew;
+      plane.setTripList(tripListNew);
       plane = em.merge(plane);
       if (typeOld != null && !typeOld.equals(typeNew))
       {
@@ -88,6 +135,20 @@ public class PlaneJpaController implements Serializable
       {
         typeNew.getPlaneList().add(plane);
         typeNew = em.merge(typeNew);
+      }
+      for (Trip tripListNewTrip : tripListNew)
+      {
+        if (!tripListOld.contains(tripListNewTrip))
+        {
+          Plane oldPlaneOfTripListNewTrip = tripListNewTrip.getPlane();
+          tripListNewTrip.setPlane(plane);
+          tripListNewTrip = em.merge(tripListNewTrip);
+          if (oldPlaneOfTripListNewTrip != null && !oldPlaneOfTripListNewTrip.equals(plane))
+          {
+            oldPlaneOfTripListNewTrip.getTripList().remove(tripListNewTrip);
+            oldPlaneOfTripListNewTrip = em.merge(oldPlaneOfTripListNewTrip);
+          }
+        }
       }
       em.getTransaction().commit();
     }
@@ -113,7 +174,7 @@ public class PlaneJpaController implements Serializable
     }
   }
 
-  public void destroy(String id) throws NonexistentEntityException
+  public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException
   {
     EntityManager em = null;
     try
@@ -129,6 +190,20 @@ public class PlaneJpaController implements Serializable
       catch (EntityNotFoundException enfe)
       {
         throw new NonexistentEntityException("The plane with id " + id + " no longer exists.", enfe);
+      }
+      List<String> illegalOrphanMessages = null;
+      List<Trip> tripListOrphanCheck = plane.getTripList();
+      for (Trip tripListOrphanCheckTrip : tripListOrphanCheck)
+      {
+        if (illegalOrphanMessages == null)
+        {
+          illegalOrphanMessages = new ArrayList<String>();
+        }
+        illegalOrphanMessages.add("This Plane (" + plane + ") cannot be destroyed since the Trip " + tripListOrphanCheckTrip + " in its tripList field has a non-nullable plane field.");
+      }
+      if (illegalOrphanMessages != null)
+      {
+        throw new IllegalOrphanException(illegalOrphanMessages);
       }
       Planetype type = plane.getType();
       if (type != null)

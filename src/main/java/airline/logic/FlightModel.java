@@ -17,6 +17,7 @@ public class FlightModel
   public void create(Flight object) throws Exception
   {
     dao.create(object);
+    dao.clearCache(object);
   }
   
   public void update(Flight object)
@@ -74,6 +75,51 @@ public class FlightModel
     return dao.findByDiscount(discount, origin, destination);
   }
 
+  public List<Flight> findAllWithDiscount()
+  {
+    return dao.findAllWithDiscount();
+  }
+  
+  public List<Flight> findByCitiesWithDiscount(City origin, City destination)
+  {
+    return dao.findByCitiesWithDiscount(origin, destination);
+  }
+  
+  public List<Flight> findByIdentifierWithDiscount(String identifier, City origin, City destination)
+  {
+    return dao.findByIdentifierWithDiscount(identifier, origin, destination);
+  }
+  
+  public List<Flight> findByWeekdayWithDiscount(String weekday, City origin, City destination)
+  {
+    return dao.findByWeekdayWithDiscount(weekday, origin, destination);
+  }
+  
+  public List<Flight> findByDepartureWithDiscount(String departure, City origin, City destination)
+  {
+    return dao.findByDepartureWithDiscount(departure, origin, destination);
+  }
+  
+  public List<Flight> findByDurationWithDiscount(String duration, City origin, City destination)
+  {
+    return dao.findByDurationWithDiscount(duration, origin, destination);
+  }
+  
+  public List<Flight> findByArrivalWithDiscount(String arrival, City origin, City destination)
+  {
+    return dao.findByArrivalWithDiscount(arrival, origin, destination);
+  }
+  
+  public List<Flight> findByPriceWithDiscount(String price, City origin, City destination)
+  {
+    return dao.findByPriceWithDiscount(price, origin, destination);
+  }
+  
+  public List<Flight> findByDiscountWithDiscount(String discount, City origin, City destination)
+  {
+    return dao.findByDiscountWithDiscount(discount, origin, destination);
+  }
+  
   public static FlightModel getInstance() 
   {
     return FlightModelHolder.INSTANCE;

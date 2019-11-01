@@ -45,7 +45,7 @@ public class View extends javax.swing.JPanel implements Observer
     ComboBoxDestination = new javax.swing.JComboBox<>();
     LabelDestination = new javax.swing.JLabel();
     TextFieldFlight = new javax.swing.JTextField();
-    ComboBoxTypes = new javax.swing.JComboBox<>();
+    ComboBoxTypesFlight = new javax.swing.JComboBox<>();
     ComboBoxWeekdays = new javax.swing.JComboBox<>();
     ComboBoxOrigin = new javax.swing.JComboBox<>();
     LabelOrigin = new javax.swing.JLabel();
@@ -73,6 +73,13 @@ public class View extends javax.swing.JPanel implements Observer
     ButtonUser.setMaximumSize(new java.awt.Dimension(131, 21));
     ButtonUser.setMinimumSize(new java.awt.Dimension(131, 21));
     ButtonUser.setPreferredSize(new java.awt.Dimension(131, 21));
+    ButtonUser.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonUserActionPerformed(evt);
+      }
+    });
 
     LabelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     LabelMessage.setText("Si desea comprar tiquetes, proceda al menú de usuario");
@@ -210,12 +217,12 @@ public class View extends javax.swing.JPanel implements Observer
       }
     });
 
-    ComboBoxTypes.setModel(new DefaultComboBoxModel<>(Model.getSearchTypesFlight()));
-    ComboBoxTypes.addActionListener(new java.awt.event.ActionListener()
+    ComboBoxTypesFlight.setModel(new DefaultComboBoxModel<>(Model.getSearchTypesFlight()));
+    ComboBoxTypesFlight.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        ComboBoxTypesActionPerformed(evt);
+        ComboBoxTypesFlightActionPerformed(evt);
       }
     });
 
@@ -235,27 +242,27 @@ public class View extends javax.swing.JPanel implements Observer
     PanelFlightLayout.setHorizontalGroup(
       PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(PanelFlightLayout.createSequentialGroup()
-        .addGap(48, 48, 48)
-        .addGroup(PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(ComboBoxOrigin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(LabelOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addGroup(PanelFlightLayout.createSequentialGroup()
-            .addComponent(ComboBoxWeekdays, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(TextFieldFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(ComboBoxDestination, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(LabelDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(ButtonSearchFlight)
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-      .addGroup(PanelFlightLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(jScrollPane1)
+        .addGroup(PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jScrollPane1)
+          .addGroup(PanelFlightLayout.createSequentialGroup()
+            .addGroup(PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(ComboBoxOrigin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(LabelOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(ComboBoxTypesFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGroup(PanelFlightLayout.createSequentialGroup()
+                .addComponent(ComboBoxWeekdays, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TextFieldFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(ComboBoxDestination, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(LabelDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(ButtonSearchFlight)
+            .addGap(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
     );
     PanelFlightLayout.setVerticalGroup(
@@ -264,7 +271,7 @@ public class View extends javax.swing.JPanel implements Observer
         .addContainerGap()
         .addGroup(PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(LabelDestination)
-          .addComponent(ComboBoxTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(ComboBoxTypesFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(LabelOrigin))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(PanelFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -315,15 +322,15 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonSearchFlightActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonSearchFlightActionPerformed
   {//GEN-HEADEREND:event_ButtonSearchFlightActionPerformed
-    if (ComboBoxTypes.getSelectedIndex() == 2)
+    if (ComboBoxTypesFlight.getSelectedIndex() == 2)
     {
       controller.searchFlight((String)ComboBoxWeekdays.getSelectedItem(), (City)ComboBoxOrigin.getSelectedItem()
-        , (City)ComboBoxDestination.getSelectedItem(), ComboBoxTypes.getSelectedIndex());
+        , (City)ComboBoxDestination.getSelectedItem(), ComboBoxTypesFlight.getSelectedIndex());
     }
     else
     {
       controller.searchFlight(TextFieldFlight.getText(), (City)ComboBoxOrigin.getSelectedItem()
-        , (City)ComboBoxDestination.getSelectedItem(), ComboBoxTypes.getSelectedIndex());
+        , (City)ComboBoxDestination.getSelectedItem(), ComboBoxTypesFlight.getSelectedIndex());
     }
   }//GEN-LAST:event_ButtonSearchFlightActionPerformed
 
@@ -332,9 +339,9 @@ public class View extends javax.swing.JPanel implements Observer
     ButtonSearchFlightActionPerformed(evt);
   }//GEN-LAST:event_TextFieldFlightActionPerformed
 
-  private void ComboBoxTypesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ComboBoxTypesActionPerformed
-  {//GEN-HEADEREND:event_ComboBoxTypesActionPerformed
-    switch (ComboBoxTypes.getSelectedIndex())
+  private void ComboBoxTypesFlightActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ComboBoxTypesFlightActionPerformed
+  {//GEN-HEADEREND:event_ComboBoxTypesFlightActionPerformed
+    switch (ComboBoxTypesFlight.getSelectedIndex())
     {
       case 0:
       TextFieldFlight.setEnabled(false);
@@ -349,12 +356,12 @@ public class View extends javax.swing.JPanel implements Observer
       ComboBoxWeekdays.setEnabled(false);
       break;
     }
-  }//GEN-LAST:event_ComboBoxTypesActionPerformed
+  }//GEN-LAST:event_ComboBoxTypesFlightActionPerformed
 
   private void ButtonSearchTripActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonSearchTripActionPerformed
   {//GEN-HEADEREND:event_ButtonSearchTripActionPerformed
-    controller.searchTrip(TextFieldFlight.getText(), ComboBoxPlanes.getSelectedItem(), ComboBoxOutward.getSelectedItem()
-      , ComboBoxInward.getSelectedItem(), ComboBoxTypes.getSelectedIndex());
+    controller.searchTrip(TextFieldTrip.getText(), ComboBoxPlanes.getSelectedItem(), ComboBoxOutward.getSelectedItem()
+      , ComboBoxInward.getSelectedItem(), ComboBoxTypesTrip.getSelectedIndex());
   }//GEN-LAST:event_ButtonSearchTripActionPerformed
 
   private void TextFieldTripActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_TextFieldTripActionPerformed
@@ -364,11 +371,11 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonAdminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonAdminActionPerformed
   {//GEN-HEADEREND:event_ButtonAdminActionPerformed
-    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Añadir viaje", true);
+    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Iniciar sesión", true);
     dialog.setResizable(false);
     
     airline.presentation.login.Model loginModel = 
-            new airline.presentation.login.Model(true, dialog, controller);
+            new airline.presentation.login.Model(true, dialog, controller, model.getWindowController());
     airline.presentation.login.View loginView = 
             new airline.presentation.login.View();
     airline.presentation.login.Controller loginController =
@@ -379,6 +386,24 @@ public class View extends javax.swing.JPanel implements Observer
     dialog.setLocationRelativeTo(this.model.getWindowController().getView());
     dialog.setVisible(true);
   }//GEN-LAST:event_ButtonAdminActionPerformed
+
+  private void ButtonUserActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonUserActionPerformed
+  {//GEN-HEADEREND:event_ButtonUserActionPerformed
+    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Iniciar sesión", true);
+    dialog.setResizable(false);
+    
+    airline.presentation.login.Model loginModel = 
+            new airline.presentation.login.Model(false, dialog, controller, model.getWindowController());
+    airline.presentation.login.View loginView = 
+            new airline.presentation.login.View();
+    airline.presentation.login.Controller loginController =
+            new airline.presentation.login.Controller(loginModel, loginView);
+    
+    dialog.getContentPane().add(loginView);
+    dialog.pack();
+    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+    dialog.setVisible(true);
+  }//GEN-LAST:event_ButtonUserActionPerformed
 
   @Override
   public void update(Observable o, Object arg)
@@ -447,7 +472,7 @@ public class View extends javax.swing.JPanel implements Observer
   private javax.swing.JComboBox<Object> ComboBoxOrigin;
   private javax.swing.JComboBox<Object> ComboBoxOutward;
   private javax.swing.JComboBox<Object> ComboBoxPlanes;
-  private javax.swing.JComboBox<String> ComboBoxTypes;
+  private javax.swing.JComboBox<String> ComboBoxTypesFlight;
   private javax.swing.JComboBox<String> ComboBoxTypesTrip;
   private javax.swing.JComboBox<String> ComboBoxWeekdays;
   private javax.swing.JLabel LabelDestination;

@@ -221,6 +221,52 @@ public class TripDao extends TripJpaController
     }
   }
   
+  public List<Trip> findByPassengers(String string, Object plane, Object outward, Object inward)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      if(inward == null)
+      {
+        return em.createQuery("SELECT t FROM Trip t WHERE CAST(t.plane.type.rownumber * t.plane.type.rowseats AS CHAR) LIKE :passangers "
+        + "AND t.plane.identifier LIKE :plane "
+        + "AND CAST(t.outward.identifier AS CHAR) LIKE :outward "
+        + "AND t.inward IS NULL")
+        .setParameter("passangers", "%" + string + "%")
+        .setParameter("plane", (plane.getClass() == Plane.class ? ((Plane)plane).getIdentifier() : "%%"))
+        .setParameter("outward", (outward.getClass() == Flight.class ? ((Flight)outward).getIdentifier() : "%%"))
+        .getResultList();
+      }
+      else if(inward.getClass() == String.class)
+      {
+        return em.createQuery("SELECT t FROM Trip t WHERE CAST(t.plane.type.rownumber * t.plane.type.rowseats AS CHAR) LIKE :passangers "
+        + "AND t.plane.identifier LIKE :plane "
+        + "AND CAST(t.outward.identifier AS CHAR) LIKE :outward")
+        .setParameter("passangers", "%" + string + "%")
+        .setParameter("plane", (plane.getClass() == Plane.class ? ((Plane)plane).getIdentifier() : "%%"))
+        .setParameter("outward", (outward.getClass() == Flight.class ? ((Flight)outward).getIdentifier() : "%%"))
+        .getResultList();
+      }
+      else
+      {
+        return em.createQuery("SELECT t FROM Trip t WHERE CAST(t.plane.type.rownumber * t.plane.type.rowseats AS CHAR) LIKE :passangers "
+        + "AND t.plane.identifier LIKE :plane "
+        + "AND CAST(t.outward.identifier AS CHAR) LIKE :outward "
+        + "AND CAST(t.inward.identifier AS CHAR) LIKE :inward"
+        + (inward.getClass() == String.class ? " OR t.inward IS NULL" : ""))
+        .setParameter("passangers", "%" + string + "%")
+        .setParameter("plane", (plane.getClass() == Plane.class ? ((Plane)plane).getIdentifier() : "%%"))
+        .setParameter("outward", (outward.getClass() == Flight.class ? ((Flight)outward).getIdentifier() : "%%"))
+        .setParameter("inward", ((Flight)inward).getIdentifier())
+        .getResultList();
+      }
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   public static TripDao getInstance() 
   {
     return TripDaoHolder.INSTANCE;

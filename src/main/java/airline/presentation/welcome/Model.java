@@ -105,6 +105,7 @@ public class Model extends Observable
       searchTypesTrip.add("Identificador");
       searchTypesTrip.add("Fecha de salida");
       searchTypesTrip.add("Fecha de regreso");
+      searchTypesTrip.add("Cantidad de pasajeros");
     }
     return searchTypesTrip;
   }

@@ -34,7 +34,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="FieldPasseword" max="32767" attributes="0"/>
+                          <Component id="FieldPassword" max="32767" attributes="0"/>
                           <Component id="FieldUsername" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -58,7 +58,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="FieldPasseword" max="32767" attributes="0"/>
+                  <Component id="FieldPassword" max="32767" attributes="0"/>
                   <Component id="LabelPassword" min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -94,7 +94,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="FieldUsername">
     </Component>
-    <Component class="javax.swing.JPasswordField" name="FieldPasseword">
+    <Component class="javax.swing.JPasswordField" name="FieldPassword">
     </Component>
     <Component class="javax.swing.JButton" name="ButtonLogin">
       <Properties>
@@ -117,6 +117,9 @@
         <Property name="text" type="java.lang.String" value="Registrarse"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonRegisterActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -1,7 +1,8 @@
 package airline.presentation.login;
 
-import java.util.Observable;
-import java.util.Observer;
+import airline.logic.User;
+import java.util.*;
+import javax.swing.*;
 
 public class View extends javax.swing.JPanel implements Observer
 { 
@@ -22,7 +23,7 @@ public class View extends javax.swing.JPanel implements Observer
     LabelUsername = new javax.swing.JLabel();
     LabelPassword = new javax.swing.JLabel();
     FieldUsername = new javax.swing.JTextField();
-    FieldPasseword = new javax.swing.JPasswordField();
+    FieldPassword = new javax.swing.JPasswordField();
     ButtonLogin = new javax.swing.JButton();
     ButtonCancel = new javax.swing.JButton();
     ButtonRegister = new javax.swing.JButton();
@@ -55,6 +56,13 @@ public class View extends javax.swing.JPanel implements Observer
 
     ButtonRegister.setText("Registrarse");
     ButtonRegister.setEnabled(false);
+    ButtonRegister.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonRegisterActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -76,7 +84,7 @@ public class View extends javax.swing.JPanel implements Observer
               .addComponent(LabelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGap(18, 18, 18)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(FieldPasseword)
+              .addComponent(FieldPassword)
               .addComponent(FieldUsername))))
         .addContainerGap())
     );
@@ -93,7 +101,7 @@ public class View extends javax.swing.JPanel implements Observer
             .addComponent(LabelUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(FieldPasseword)
+          .addComponent(FieldPassword)
           .addComponent(LabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -112,10 +120,58 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonLoginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonLoginActionPerformed
   {//GEN-HEADEREND:event_ButtonLoginActionPerformed
-    model.getParentController().changeWindow("admin");
-    model.getParent().dispose();
-    model.getParent().setVisible(false);
+    List<User> users;
+    if(model.isAdminMode())
+      users = controller.findAdminUsers();
+    else
+      users = controller.findNormalUsers();
+    
+    User user = new User();
+    user.setUsername(FieldUsername.getText());
+    user.setPassword(String.valueOf(FieldPassword.getPassword()));
+    
+    if(users.contains(user))
+    {
+      if(model.isAdminMode())
+        model.getParentController().changeWindow("admin");
+      else
+        model.getParentController().changeWindow("admin");
+      model.getParent().dispose();
+      model.getParent().setVisible(false); 
+    }
+    else
+    {
+      JLabel label = new JLabel("<html><center>Los datos de inicio se sesión son incorrectos.</center></html>");
+        Object[] options = {"Aceptar"};
+        JOptionPane dialog = new JOptionPane();
+        JOptionPane.showOptionDialog(this
+              , label
+              , "Ha ocurrido un error"
+              , JOptionPane.DEFAULT_OPTION
+              , JOptionPane.ERROR_MESSAGE
+              , null
+              , options
+              , options[0]);
+    }
   }//GEN-LAST:event_ButtonLoginActionPerformed
+
+  private void ButtonRegisterActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonRegisterActionPerformed
+  {//GEN-HEADEREND:event_ButtonRegisterActionPerformed
+    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Registrarse", true);
+    dialog.setResizable(false);
+    
+    airline.presentation.register.Model registerModel = 
+            new airline.presentation.register.Model(null, dialog);
+    airline.presentation.register.View registerView = 
+            new airline.presentation.register.View();
+    airline.presentation.register.Controller registerController =
+            new airline.presentation.register.Controller(registerModel, registerView);
+    
+    dialog.getContentPane().add(registerView);
+    dialog.pack();
+    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+    dialog.setVisible(true);
+  }//GEN-LAST:event_ButtonRegisterActionPerformed
 
   @Override
   public void update(Observable o, Object arg)
@@ -148,7 +204,7 @@ public class View extends javax.swing.JPanel implements Observer
   private javax.swing.JButton ButtonCancel;
   private javax.swing.JButton ButtonLogin;
   private javax.swing.JButton ButtonRegister;
-  private javax.swing.JPasswordField FieldPasseword;
+  private javax.swing.JPasswordField FieldPassword;
   private javax.swing.JTextField FieldUsername;
   private javax.swing.JLabel LabelPassword;
   private javax.swing.JLabel LabelTitle;

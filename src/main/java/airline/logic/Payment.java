@@ -1,6 +1,7 @@
 package airline.logic;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +14,8 @@ import javax.persistence.*;
 })
 public class Payment implements Serializable
 {
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "payment")
+  private List<Reservation> reservationList;
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,6 +89,16 @@ public class Payment implements Serializable
   public String toString()
   {
     return "airline.logic.Payment[ id=" + id + " ]";
+  }
+
+  public List<Reservation> getReservationList()
+  {
+    return reservationList;
+  }
+
+  public void setReservationList(List<Reservation> reservationList)
+  {
+    this.reservationList = reservationList;
   }
 
 }

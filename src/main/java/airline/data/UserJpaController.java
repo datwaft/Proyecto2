@@ -1,21 +1,20 @@
 package airline.data;
 
-import airline.exceptions.IllegalOrphanException;
-import airline.exceptions.NonexistentEntityException;
-import airline.logic.Payment;
+import airline.exceptions.*;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import airline.logic.Reservation;
+import airline.logic.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-public class PaymentJpaController implements Serializable
+public class UserJpaController implements Serializable
 {
-  public PaymentJpaController(EntityManagerFactory emf)
+  public UserJpaController(EntityManagerFactory emf)
   {
     this.emf = emf;
   }
@@ -26,11 +25,11 @@ public class PaymentJpaController implements Serializable
     return emf.createEntityManager();
   }
 
-  public void create(Payment payment)
+  public void create(User user) throws PreexistingEntityException, Exception
   {
-    if (payment.getReservationList() == null)
+    if (user.getReservationList() == null)
     {
-      payment.setReservationList(new ArrayList<Reservation>());
+      user.setReservationList(new ArrayList<Reservation>());
     }
     EntityManager em = null;
     try
@@ -38,25 +37,33 @@ public class PaymentJpaController implements Serializable
       em = getEntityManager();
       em.getTransaction().begin();
       List<Reservation> attachedReservationList = new ArrayList<Reservation>();
-      for (Reservation reservationListReservationToAttach : payment.getReservationList())
+      for (Reservation reservationListReservationToAttach : user.getReservationList())
       {
         reservationListReservationToAttach = em.getReference(reservationListReservationToAttach.getClass(), reservationListReservationToAttach.getId());
         attachedReservationList.add(reservationListReservationToAttach);
       }
-      payment.setReservationList(attachedReservationList);
-      em.persist(payment);
-      for (Reservation reservationListReservation : payment.getReservationList())
+      user.setReservationList(attachedReservationList);
+      em.persist(user);
+      for (Reservation reservationListReservation : user.getReservationList())
       {
-        Payment oldPaymentOfReservationListReservation = reservationListReservation.getPayment();
-        reservationListReservation.setPayment(payment);
+        User oldUserOfReservationListReservation = reservationListReservation.getUser();
+        reservationListReservation.setUser(user);
         reservationListReservation = em.merge(reservationListReservation);
-        if (oldPaymentOfReservationListReservation != null)
+        if (oldUserOfReservationListReservation != null)
         {
-          oldPaymentOfReservationListReservation.getReservationList().remove(reservationListReservation);
-          oldPaymentOfReservationListReservation = em.merge(oldPaymentOfReservationListReservation);
+          oldUserOfReservationListReservation.getReservationList().remove(reservationListReservation);
+          oldUserOfReservationListReservation = em.merge(oldUserOfReservationListReservation);
         }
       }
       em.getTransaction().commit();
+    }
+    catch (Exception ex)
+    {
+      if (findUser(user.getUsername()) != null)
+      {
+        throw new PreexistingEntityException("User " + user + " already exists.", ex);
+      }
+      throw ex;
     }
     finally
     {
@@ -67,16 +74,16 @@ public class PaymentJpaController implements Serializable
     }
   }
 
-  public void edit(Payment payment) throws IllegalOrphanException, NonexistentEntityException, Exception
+  public void edit(User user) throws IllegalOrphanException, NonexistentEntityException, Exception
   {
     EntityManager em = null;
     try
     {
       em = getEntityManager();
       em.getTransaction().begin();
-      Payment persistentPayment = em.find(Payment.class, payment.getId());
-      List<Reservation> reservationListOld = persistentPayment.getReservationList();
-      List<Reservation> reservationListNew = payment.getReservationList();
+      User persistentUser = em.find(User.class, user.getUsername());
+      List<Reservation> reservationListOld = persistentUser.getReservationList();
+      List<Reservation> reservationListNew = user.getReservationList();
       List<String> illegalOrphanMessages = null;
       for (Reservation reservationListOldReservation : reservationListOld)
       {
@@ -86,7 +93,7 @@ public class PaymentJpaController implements Serializable
           {
             illegalOrphanMessages = new ArrayList<String>();
           }
-          illegalOrphanMessages.add("You must retain Reservation " + reservationListOldReservation + " since its payment field is not nullable.");
+          illegalOrphanMessages.add("You must retain Reservation " + reservationListOldReservation + " since its user field is not nullable.");
         }
       }
       if (illegalOrphanMessages != null)
@@ -100,19 +107,19 @@ public class PaymentJpaController implements Serializable
         attachedReservationListNew.add(reservationListNewReservationToAttach);
       }
       reservationListNew = attachedReservationListNew;
-      payment.setReservationList(reservationListNew);
-      payment = em.merge(payment);
+      user.setReservationList(reservationListNew);
+      user = em.merge(user);
       for (Reservation reservationListNewReservation : reservationListNew)
       {
         if (!reservationListOld.contains(reservationListNewReservation))
         {
-          Payment oldPaymentOfReservationListNewReservation = reservationListNewReservation.getPayment();
-          reservationListNewReservation.setPayment(payment);
+          User oldUserOfReservationListNewReservation = reservationListNewReservation.getUser();
+          reservationListNewReservation.setUser(user);
           reservationListNewReservation = em.merge(reservationListNewReservation);
-          if (oldPaymentOfReservationListNewReservation != null && !oldPaymentOfReservationListNewReservation.equals(payment))
+          if (oldUserOfReservationListNewReservation != null && !oldUserOfReservationListNewReservation.equals(user))
           {
-            oldPaymentOfReservationListNewReservation.getReservationList().remove(reservationListNewReservation);
-            oldPaymentOfReservationListNewReservation = em.merge(oldPaymentOfReservationListNewReservation);
+            oldUserOfReservationListNewReservation.getReservationList().remove(reservationListNewReservation);
+            oldUserOfReservationListNewReservation = em.merge(oldUserOfReservationListNewReservation);
           }
         }
       }
@@ -123,10 +130,10 @@ public class PaymentJpaController implements Serializable
       String msg = ex.getLocalizedMessage();
       if (msg == null || msg.length() == 0)
       {
-        Integer id = payment.getId();
-        if (findPayment(id) == null)
+        String id = user.getUsername();
+        if (findUser(id) == null)
         {
-          throw new NonexistentEntityException("The payment with id " + id + " no longer exists.");
+          throw new NonexistentEntityException("The user with id " + id + " no longer exists.");
         }
       }
       throw ex;
@@ -140,38 +147,38 @@ public class PaymentJpaController implements Serializable
     }
   }
 
-  public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException
+  public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException
   {
     EntityManager em = null;
     try
     {
       em = getEntityManager();
       em.getTransaction().begin();
-      Payment payment;
+      User user;
       try
       {
-        payment = em.getReference(Payment.class, id);
-        payment.getId();
+        user = em.getReference(User.class, id);
+        user.getUsername();
       }
       catch (EntityNotFoundException enfe)
       {
-        throw new NonexistentEntityException("The payment with id " + id + " no longer exists.", enfe);
+        throw new NonexistentEntityException("The user with id " + id + " no longer exists.", enfe);
       }
       List<String> illegalOrphanMessages = null;
-      List<Reservation> reservationListOrphanCheck = payment.getReservationList();
+      List<Reservation> reservationListOrphanCheck = user.getReservationList();
       for (Reservation reservationListOrphanCheckReservation : reservationListOrphanCheck)
       {
         if (illegalOrphanMessages == null)
         {
           illegalOrphanMessages = new ArrayList<String>();
         }
-        illegalOrphanMessages.add("This Payment (" + payment + ") cannot be destroyed since the Reservation " + reservationListOrphanCheckReservation + " in its reservationList field has a non-nullable payment field.");
+        illegalOrphanMessages.add("This User (" + user + ") cannot be destroyed since the Reservation " + reservationListOrphanCheckReservation + " in its reservationList field has a non-nullable user field.");
       }
       if (illegalOrphanMessages != null)
       {
         throw new IllegalOrphanException(illegalOrphanMessages);
       }
-      em.remove(payment);
+      em.remove(user);
       em.getTransaction().commit();
     }
     finally
@@ -183,23 +190,23 @@ public class PaymentJpaController implements Serializable
     }
   }
 
-  public List<Payment> findPaymentEntities()
+  public List<User> findUserEntities()
   {
-    return findPaymentEntities(true, -1, -1);
+    return findUserEntities(true, -1, -1);
   }
 
-  public List<Payment> findPaymentEntities(int maxResults, int firstResult)
+  public List<User> findUserEntities(int maxResults, int firstResult)
   {
-    return findPaymentEntities(false, maxResults, firstResult);
+    return findUserEntities(false, maxResults, firstResult);
   }
 
-  private List<Payment> findPaymentEntities(boolean all, int maxResults, int firstResult)
+  private List<User> findUserEntities(boolean all, int maxResults, int firstResult)
   {
     EntityManager em = getEntityManager();
     try
     {
       CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-      cq.select(cq.from(Payment.class));
+      cq.select(cq.from(User.class));
       Query q = em.createQuery(cq);
       if (!all)
       {
@@ -214,12 +221,12 @@ public class PaymentJpaController implements Serializable
     }
   }
 
-  public Payment findPayment(Integer id)
+  public User findUser(String id)
   {
     EntityManager em = getEntityManager();
     try
     {
-      return em.find(Payment.class, id);
+      return em.find(User.class, id);
     }
     finally
     {
@@ -227,13 +234,13 @@ public class PaymentJpaController implements Serializable
     }
   }
 
-  public int getPaymentCount()
+  public int getUserCount()
   {
     EntityManager em = getEntityManager();
     try
     {
       CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-      Root<Payment> rt = cq.from(Payment.class);
+      Root<User> rt = cq.from(User.class);
       cq.select(em.getCriteriaBuilder().count(rt));
       Query q = em.createQuery(cq);
       return ((Long) q.getSingleResult()).intValue();

@@ -70,6 +70,7 @@ public class Model extends Observable
       searchTypes.add("Identificador");
       searchTypes.add("Fecha de salida");
       searchTypes.add("Fecha de regreso");
+      searchTypes.add("Cantidad de pasajeros");
     }
     return searchTypes;
   }

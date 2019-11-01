@@ -70,6 +70,7 @@ public class Controller
       case 0: list = TripModel.getInstance().findByIdentifier(string, plane, outward, inward); break;
       case 1: list = TripModel.getInstance().findByDeparture(string, plane, outward, inward); break;
       case 2: list = TripModel.getInstance().findByArrival(string, plane, outward, inward); break;
+      case 3: list = TripModel.getInstance().findByPassengers(string, plane, outward, inward); break;
       default: list = null; break;
     }
     model.updateTableModel(list);

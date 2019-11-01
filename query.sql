@@ -49,11 +49,10 @@ insert into trip (plane, outward, departure, inward, arrival) values
 ("PD43", 6, "2019-11-02", null, null);
 
 insert into user values
-("admin", 1, "admin", "admin@empresa.com", "1999-11-09", "address", "22377678", "89081545"),
-("root", 1, "root", "root@empresa.com", "2000-12-04", "address", "22346699", "83081813"),
-("user", 0, "user", "user@empresa.com", "1996-07-05", "address", "22345338", "86071713"),
-("cliente", 0, "cliente", "cliente@empresa.com", "1987-09-06", "address", "22345458", "85081593");
-
+("admin", 1, "admin", "admin", "admin", "admin@empresa.com", "1999-11-09", "address", "22377678", "89081545"),
+("root", 1, "root", "root", "root", "root@empresa.com", "2000-12-04", "address", "22346699", "83081813"),
+("user", 0, "user", "user", "user", "user@empresa.com", "1996-07-05", "address", "22345338", "86071713"),
+("cliente", 0, "cliente", "cliente", "cliente", "cliente@empresa.com", "1987-09-06", "address", "22345458", "85081593");
 
 select * from planetype;
 select * from city;

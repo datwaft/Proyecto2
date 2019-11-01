@@ -8,15 +8,23 @@ public class Model extends Observable
 {
   private Controller controller;
   private final airline.presentation.welcome.Controller parentController;
+  private final airline.presentation.mainwindow.Controller windowController;
   private JDialog parent;
   
-  public boolean adminMode;
+  private boolean adminMode;
   
-  public Model(boolean adminMode, JDialog parent, airline.presentation.welcome.Controller parentController)
+  public Model(boolean adminMode, JDialog parent, airline.presentation.welcome.Controller parentController
+    , airline.presentation.mainwindow.Controller windowController)
   {
     this.adminMode = adminMode;
     this.parent = parent;
     this.parentController = parentController;
+    this.windowController = windowController;
+  }
+
+  public airline.presentation.mainwindow.Controller getWindowController()
+  {
+    return windowController;
   }
 
   public boolean isAdminMode()

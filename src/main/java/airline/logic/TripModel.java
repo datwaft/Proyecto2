@@ -49,6 +49,11 @@ public class TripModel
     return dao.findByArrival(string, plane, outward, inward);
   }
   
+  public List<Trip> findByPassengers(String string, Object plane, Object outward, Object inward)
+  {
+    return dao.findByPassengers(string, plane, outward, inward);
+  }
+  
   public static TripModel getInstance() 
   {
     return TripModelHolder.INSTANCE;

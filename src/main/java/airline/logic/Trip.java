@@ -2,6 +2,7 @@ package airline.logic;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +16,8 @@ import javax.persistence.*;
 })
 public class Trip implements Serializable
 {
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+  private List<Ticket> ticketList;
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -141,6 +144,16 @@ public class Trip implements Serializable
   public String toString()
   {
     return this.outward.toString() + " | " + this.inward.toString();
+  }
+
+  public List<Ticket> getTicketList()
+  {
+    return ticketList;
+  }
+
+  public void setTicketList(List<Ticket> ticketList)
+  {
+    this.ticketList = ticketList;
   }
 
 }

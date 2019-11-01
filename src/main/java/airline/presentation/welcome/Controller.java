@@ -85,6 +85,7 @@ public class Controller
       case 0: list = TripModel.getInstance().findByIdentifier(string, plane, outward, inward); break;
       case 1: list = TripModel.getInstance().findByDeparture(string, plane, outward, inward); break;
       case 2: list = TripModel.getInstance().findByArrival(string, plane, outward, inward); break;
+      case 3: list = TripModel.getInstance().findByPassengers(string, plane, outward, inward); break;
       default: list = null; break;
     }
     model.updateTableModelTrip(list);
@@ -95,14 +96,14 @@ public class Controller
     List<Flight> list;
     switch (selection)
     {
-      case 0: list = FlightModel.getInstance().findByIdentifier("", origin, destination); break;
-      case 1: list = FlightModel.getInstance().findByIdentifier(string, origin, destination); break;
-      case 2: list = FlightModel.getInstance().findByWeekday(parseWeekday(string), origin, destination); break;
-      case 3: list = FlightModel.getInstance().findByDeparture(string, origin, destination); break;
-      case 4: list = FlightModel.getInstance().findByDuration(string, origin, destination); break;
-      case 5: list = FlightModel.getInstance().findByArrival(string, origin, destination); break;
-      case 6: list = FlightModel.getInstance().findByPrice(string, origin, destination); break;
-      case 7: list = FlightModel.getInstance().findByDiscount(string, origin, destination); break;
+      case 0: list = FlightModel.getInstance().findByIdentifierWithDiscount("", origin, destination); break;
+      case 1: list = FlightModel.getInstance().findByIdentifierWithDiscount(string, origin, destination); break;
+      case 2: list = FlightModel.getInstance().findByWeekdayWithDiscount(parseWeekday(string), origin, destination); break;
+      case 3: list = FlightModel.getInstance().findByDepartureWithDiscount(string, origin, destination); break;
+      case 4: list = FlightModel.getInstance().findByDurationWithDiscount(string, origin, destination); break;
+      case 5: list = FlightModel.getInstance().findByArrivalWithDiscount(string, origin, destination); break;
+      case 6: list = FlightModel.getInstance().findByPriceWithDiscount(string, origin, destination); break;
+      case 7: list = FlightModel.getInstance().findByDiscountWithDiscount(string, origin, destination); break;
       default: list = null; break;
     }
     model.updateTableModelFlight(list);
@@ -116,7 +117,7 @@ public class Controller
   
   public void updateFlight()
   {
-    List<Flight> list = FlightModel.getInstance().findAll();
+    List<Flight> list = FlightModel.getInstance().findAllWithDiscount();
     model.updateTableModelFlight(list);
   }
   

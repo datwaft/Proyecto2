@@ -1,8 +1,7 @@
-package airline.presentation.login;
+package airline.presentation.register;
 
 import airline.logic.User;
 import airline.logic.UserModel;
-import java.util.List;
 
 public class Controller
 {
@@ -18,14 +17,14 @@ public class Controller
     model.setController(this);
   }
   
-  public List<User> findNormalUsers()
+  public void Add(User object) throws Exception
   {
-    return UserModel.getInstance().findByAdmin(false);
+    UserModel.getInstance().create(object);
   }
   
-  public List<User> findAdminUsers()
+  public void Modify(User object) throws Exception
   {
-    return UserModel.getInstance().findByAdmin(true);
+    UserModel.getInstance().update(object);
   }
   
   public Model getModel()

@@ -41,6 +41,19 @@ public class FlightDao extends FlightJpaController
     }
   }
   
+  public void clearCache(Flight object)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      em.getEntityManagerFactory().getCache().evict(Flight.class, object.getIdentifier());
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   public List<Flight> findAll()
   {
     EntityManager em = getEntityManager();
@@ -189,7 +202,156 @@ public class FlightDao extends FlightJpaController
       em.close();
     }
   }
-
+  
+  public List<Flight> findAllWithDiscount()
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT f FROM Flight f where cast(f.discount as double) > 0")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
+  public List<Flight> findByCitiesWithDiscount(City origin, City destination)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT f FROM Flight f WHERE f.origin.code LIKE :origin AND f.destination.code LIKE :destination AND cast(f.discount as double) > 0")
+        .setParameter("origin", "%"+origin.getCode()+"%")
+        .setParameter("destination", "%"+destination.getCode()+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
+  public List<Flight> findByIdentifierWithDiscount(String identifier, City origin, City destination)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT f FROM Flight f WHERE CAST(f.identifier AS CHAR) LIKE :identifier AND f.origin.code LIKE :origin AND f.destination.code LIKE :destination AND cast(f.discount as double) > 0")
+        .setParameter("identifier", "%" + identifier + "%")
+        .setParameter("origin", "%"+origin.getCode()+"%")
+        .setParameter("destination", "%"+destination.getCode()+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
+  public List<Flight> findByWeekdayWithDiscount(String weekday, City origin, City destination)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT f FROM Flight f WHERE CAST(f.weekday AS CHAR) LIKE :weekday AND f.origin.code LIKE :origin AND f.destination.code LIKE :destination AND cast(f.discount as double) > 0")
+        .setParameter("weekday", "%"+weekday+"%")
+        .setParameter("origin", "%"+origin.getCode()+"%")
+        .setParameter("destination", "%"+destination.getCode()+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
+  public List<Flight> findByDepartureWithDiscount(String departure, City origin, City destination)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT f FROM Flight f WHERE CAST(f.departure AS CHAR) LIKE :departure AND f.origin.code LIKE :origin AND f.destination.code LIKE :destination AND cast(f.discount as double) > 0")
+        .setParameter("departure", "%" + departure + "%")
+        .setParameter("origin", "%"+origin.getCode()+"%")
+        .setParameter("destination", "%"+destination.getCode()+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
+  public List<Flight> findByDurationWithDiscount(String duration, City origin, City destination)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT f FROM Flight f WHERE CAST(f.duration AS CHAR) LIKE :duration AND f.origin.code LIKE :origin AND f.destination.code LIKE :destination AND cast(f.discount as double) > 0")
+        .setParameter("duration", "%" + duration + "%")
+        .setParameter("origin", "%"+origin.getCode()+"%")
+        .setParameter("destination", "%"+destination.getCode()+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
+  public List<Flight> findByArrivalWithDiscount(String arrival, City origin, City destination)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT f FROM Flight f WHERE CAST(f.arrival AS CHAR) LIKE :arrival AND f.origin.code LIKE :origin AND f.destination.code LIKE :destination AND cast(f.discount as double) > 0")
+        .setParameter("arrival", "%" + arrival + "%")
+        .setParameter("origin", "%"+origin.getCode()+"%")
+        .setParameter("destination", "%"+destination.getCode()+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
+  public List<Flight> findByPriceWithDiscount(String price, City origin, City destination)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT f FROM Flight f WHERE CAST(f.price AS CHAR) LIKE :price AND f.origin.code LIKE :origin AND f.destination.code LIKE :destination AND cast(f.discount as double) > 0")
+        .setParameter("price", "%" + price + "%")
+        .setParameter("origin", "%"+origin.getCode()+"%")
+        .setParameter("destination", "%"+destination.getCode()+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
+  public List<Flight> findByDiscountWithDiscount(String discount, City origin, City destination)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT f FROM Flight f WHERE CAST(f.discount*100 AS CHAR) LIKE :discount AND f.origin.code LIKE :origin AND f.destination.code LIKE :destination AND cast(f.discount as double) > 0")
+        .setParameter("discount", "%" + discount + "%")
+        .setParameter("origin", "%"+origin.getCode()+"%")
+        .setParameter("destination", "%"+destination.getCode()+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+  
   private static class FlightDaoHolder 
   {
     private static final FlightDao INSTANCE = new FlightDao();
