@@ -1,6 +1,7 @@
 package airline;
 
 import airline.presentation.mainwindow.*;
+import java.util.TimeZone;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -12,6 +13,8 @@ public class App
   
   public static void main(String[] args)
   {
+    TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+    
     try
     {
       UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");

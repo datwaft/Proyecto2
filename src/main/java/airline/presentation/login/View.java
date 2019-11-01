@@ -1,6 +1,7 @@
 package airline.presentation.login;
 
 import airline.logic.User;
+import airline.logic.UserModel;
 import java.util.*;
 import javax.swing.*;
 
@@ -133,9 +134,15 @@ public class View extends javax.swing.JPanel implements Observer
     if(users.contains(user))
     {
       if(model.isAdminMode())
+      {
+        airline.presentation.admin.Model.setLoggedUser(UserModel.getInstance().findUser(user.getUsername()));
         model.getParentController().changeWindow("admin");
+      }
       else
-        model.getParentController().changeWindow("admin");
+      {
+        //airline.presentation.user.Model.setLoggedUser(UserModel.getInstance().findUser(user.getUsername()));
+        //model.getParentController().changeWindow("user");
+      }
       model.getParent().dispose();
       model.getParent().setVisible(false); 
     }

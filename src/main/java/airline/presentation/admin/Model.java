@@ -1,5 +1,6 @@
 package airline.presentation.admin;
 
+import airline.logic.User;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -36,6 +37,22 @@ public class Model extends Observable
   private final airline.presentation.admin.trip.View tripView;
   public final airline.presentation.admin.trip.Controller tripController;
   
+  private final airline.presentation.admin.user.Model userModel;
+  private final airline.presentation.admin.user.View userView;
+  public final airline.presentation.admin.user.Controller userController;
+  
+  private static User loggedUser = null;
+
+  public static User getLoggedUser()
+  {
+    return loggedUser;
+  }
+
+  public static void setLoggedUser(User loggedUser)
+  {
+    Model.loggedUser = loggedUser;
+  }
+  
   public Model()
   {
     planetypeModel = new airline.presentation.admin.planetype.Model();
@@ -65,6 +82,10 @@ public class Model extends Observable
     tripModel = new airline.presentation.admin.trip.Model();
     tripView = new airline.presentation.admin.trip.View();
     tripController = new airline.presentation.admin.trip.Controller(tripModel, tripView);
+    
+    userModel = new airline.presentation.admin.user.Model();
+    userView = new airline.presentation.admin.user.View();
+    userController = new airline.presentation.admin.user.Controller(userModel, userView);
   }
   
   public Controller getController()
@@ -108,6 +129,9 @@ public class Model extends Observable
     
     tripModel.setWindowController(this.windowController);
     this.windowController.addWindow(tripView, "trip");
+    
+    userModel.setWindowController(this.windowController);
+    this.windowController.addWindow(userView, "user");
   }
   
   @Override

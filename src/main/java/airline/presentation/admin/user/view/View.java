@@ -1,8 +1,5 @@
-package airline.presentation.register;
+package airline.presentation.admin.user.view;
 
-import airline.exceptions.PreexistingEntityException;
-import airline.logic.User;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
 
@@ -22,8 +19,7 @@ public class View extends javax.swing.JPanel implements Observer
   {
 
     LabelTitle = new javax.swing.JLabel();
-    ButtonAccept = new javax.swing.JButton();
-    ButtonCancel = new javax.swing.JButton();
+    ButtonOk = new javax.swing.JButton();
     LabelUsername = new javax.swing.JLabel();
     FieldUsername = new javax.swing.JTextField();
     LabelPassword = new javax.swing.JLabel();
@@ -61,21 +57,12 @@ public class View extends javax.swing.JPanel implements Observer
     LabelTitle.setText("Registrarse");
     LabelTitle.setToolTipText("");
 
-    ButtonAccept.setText("Aceptar");
-    ButtonAccept.addActionListener(new java.awt.event.ActionListener()
+    ButtonOk.setText("Aceptar");
+    ButtonOk.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        ButtonAcceptActionPerformed(evt);
-      }
-    });
-
-    ButtonCancel.setText("Cancelar");
-    ButtonCancel.addActionListener(new java.awt.event.ActionListener()
-    {
-      public void actionPerformed(java.awt.event.ActionEvent evt)
-      {
-        ButtonCancelActionPerformed(evt);
+        ButtonOkActionPerformed(evt);
       }
     });
 
@@ -138,10 +125,10 @@ public class View extends javax.swing.JPanel implements Observer
               .addComponent(FieldWorkphone)
               .addComponent(ScrollPaneAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
               .addComponent(FieldCellphone)))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addComponent(ButtonAccept)
+          .addGroup(layout.createSequentialGroup()
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ButtonCancel)))
+            .addComponent(ButtonOk)
+            .addGap(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -190,198 +177,16 @@ public class View extends javax.swing.JPanel implements Observer
           .addComponent(LabelCellphone)
           .addComponent(FieldCellphone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGap(18, 18, 18)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(ButtonCancel)
-          .addComponent(ButtonAccept))
+        .addComponent(ButtonOk)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
   }// </editor-fold>//GEN-END:initComponents
 
-  private void ButtonAcceptActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonAcceptActionPerformed
-  {//GEN-HEADEREND:event_ButtonAcceptActionPerformed
-    String error = "";
-    
-    if(FieldUsername.getText().isBlank())
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El nombre de usuario está en blanco.";
-    }
-    else if(FieldUsername .getText().length() > 15)
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El nombre de usuario es demasiado grande.";
-    }
-    
-    if(String.valueOf(FieldPassword.getPassword()).isBlank())
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "La contraseña está en blanco.";
-    }
-    else if(String.valueOf(FieldPassword.getPassword()).length() > 45)
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "La contraseña es demasiado grande.";
-    }
-    
-    if(FieldName.getText().isBlank())
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El nombre está en blanco.";
-    }
-    else if(FieldName.getText().length() > 45)
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El nombre es demasiado grande.";
-    }
-    
-    if(FieldLastname.getText().isBlank())
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El apellido está en blanco.";
-    }
-    else if(FieldLastname.getText().length() > 45)
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El apellido es demasiado grande.";
-    }
-    
-    if(FieldEmail.getText().isBlank())
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El correo electrónico está en blanco.";
-    }
-    else if(FieldEmail.getText().length() > 45)
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El correo electrónico es demasiado grande.";
-    }
-    
-    if(AreaAddress.getText().isBlank())
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "La dirección está en blanco.";
-    }
-    else if(AreaAddress.getText().length() > 200)
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "La dirección es demasiado grande.";
-    }
-    
-    if(FieldWorkphone.getText().isBlank())
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El teléfono del trabajo está en blanco.";
-    }
-    else if(FieldWorkphone.getText().length() > 45)
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El teléfono del trabajo es demasiado grande.";
-    }
-    
-    if(FieldCellphone.getText().isBlank())
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El teléfono celular está en blanco.";
-    }
-    else if(FieldCellphone.getText().length() > 45)
-    {
-      if(!error.isBlank())
-        error += "<br>";
-      error += "El teléfono celular es demasiado grande.";
-    }
-    
-    if (error.isBlank())
-    {
-      try
-      {
-        User object = new User(FieldUsername.getText());
-        object.setAdmin(false);
-        object.setPassword(String.valueOf(FieldPassword.getPassword()));
-        object.setName(FieldName.getText());
-        object.setLastname(FieldLastname.getText());
-        object.setEmail(FieldEmail.getText());
-        object.setBirthday((Date)SpinnerBirthday.getValue());
-        object.setAddress(AreaAddress.getText());
-        object.setWorkphone(FieldWorkphone.getText());
-        object.setCellphone(FieldCellphone.getText());
-        
-        if (model.getObject() == null)
-        {
-          controller.Add(object);
-        }
-        else
-        {
-          controller.Modify(object);
-        }
-        
-        model.getParent().dispose();
-        model.getParent().setVisible(false);
-      }
-      catch(PreexistingEntityException ex)
-      {
-        JLabel label = new JLabel("<html><center>El usuario ya existe</center></html>");
-        Object[] options = {"Aceptar"};
-        JOptionPane dialog = new JOptionPane();
-        JOptionPane.showOptionDialog(this
-              , label
-              , "Ha ocurrido un error"
-              , JOptionPane.DEFAULT_OPTION
-              , JOptionPane.ERROR_MESSAGE
-              , null
-              , options
-              , options[0]);
-      }
-      catch(Exception ex)
-      {
-        JLabel label = new JLabel("<html><center>"+ ex.getMessage() +"</center></html>");
-        Object[] options = {"Aceptar"};
-        JOptionPane dialog = new JOptionPane();
-        JOptionPane.showOptionDialog(this
-              , label
-              , "Ha ocurrido un error"
-              , JOptionPane.DEFAULT_OPTION
-              , JOptionPane.ERROR_MESSAGE
-              , null
-              , options
-              , options[0]);
-      }
-    }
-    else
-    {
-      JLabel label = new JLabel("<html><center>"+ error +"</center></html>");
-      Object[] options = {"Aceptar"};
-      JOptionPane dialog = new JOptionPane();
-      JOptionPane.showOptionDialog(this
-              , label
-              , "Ha ocurrido un error"
-              , JOptionPane.DEFAULT_OPTION
-              , JOptionPane.ERROR_MESSAGE
-              , null
-              , options
-              , options[0]);
-    }
-  }//GEN-LAST:event_ButtonAcceptActionPerformed
-
-  private void ButtonCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonCancelActionPerformed
-  {//GEN-HEADEREND:event_ButtonCancelActionPerformed
+  private void ButtonOkActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonOkActionPerformed
+  {//GEN-HEADEREND:event_ButtonOkActionPerformed
     model.getParent().dispose();
     model.getParent().setVisible(false);
-  }//GEN-LAST:event_ButtonCancelActionPerformed
+  }//GEN-LAST:event_ButtonOkActionPerformed
 
   @Override
   public void update(Observable o, Object arg)
@@ -399,8 +204,7 @@ public class View extends javax.swing.JPanel implements Observer
       FieldCellphone.setText(model.getObject().getCellphone());
     }
     
-    LabelTitle.setText((model.getObject() == null ? "Registrarse" : "Modificar información del usuario"));
-    FieldUsername.setEditable(model.getObject() == null);
+    LabelTitle.setText("Ver información del usuario");
   }
   
   public Model getModel()
@@ -426,8 +230,7 @@ public class View extends javax.swing.JPanel implements Observer
   
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JTextArea AreaAddress;
-  private javax.swing.JButton ButtonAccept;
-  private javax.swing.JButton ButtonCancel;
+  private javax.swing.JButton ButtonOk;
   private javax.swing.JTextField FieldCellphone;
   private javax.swing.JTextField FieldEmail;
   private javax.swing.JTextField FieldLastname;

@@ -68,6 +68,81 @@ public class UserDao extends UserJpaController
     return UserDaoHolder.INSTANCE;
   }
 
+  public List<User> findByUsername(String string)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT u FROM User u WHERE u.username like :username")
+        .setParameter("username", "%"+string+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+
+  public List<User> findByName(String string)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT u FROM User u WHERE u.name like :name")
+        .setParameter("name", "%"+string+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+
+  public List<User> findByLastname(String string)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT u FROM User u WHERE u.lastname like :lastname")
+        .setParameter("lastname", "%"+string+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+
+  public List<User> findByEmail(String string)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT u FROM User u WHERE u.email like :email")
+        .setParameter("email", "%"+string+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+
+  public List<User> findByBirthday(String string)
+  {
+    EntityManager em = getEntityManager();
+    try
+    {
+      return em.createQuery("SELECT u FROM User u WHERE CAST(u.birthday AS CHAR) like :birthday")
+        .setParameter("birthday", "%"+string+"%")
+        .getResultList();
+    }
+    finally
+    {
+      em.close();
+    }
+  }
+
   private static class UserDaoHolder 
   {
     private static final UserDao INSTANCE = new UserDao();

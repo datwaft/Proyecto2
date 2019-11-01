@@ -371,38 +371,52 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonAdminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonAdminActionPerformed
   {//GEN-HEADEREND:event_ButtonAdminActionPerformed
-    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Iniciar sesión", true);
-    dialog.setResizable(false);
-    
-    airline.presentation.login.Model loginModel = 
-            new airline.presentation.login.Model(true, dialog, controller, model.getWindowController());
-    airline.presentation.login.View loginView = 
-            new airline.presentation.login.View();
-    airline.presentation.login.Controller loginController =
-            new airline.presentation.login.Controller(loginModel, loginView);
-    
-    dialog.getContentPane().add(loginView);
-    dialog.pack();
-    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
-    dialog.setVisible(true);
+    if (airline.presentation.admin.Model.getLoggedUser() != null)
+    {
+      controller.changeWindow("admin");
+    }
+    else
+    {
+      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Iniciar sesión", true);
+      dialog.setResizable(false);
+
+      airline.presentation.login.Model loginModel = 
+              new airline.presentation.login.Model(true, dialog, controller, model.getWindowController());
+      airline.presentation.login.View loginView = 
+              new airline.presentation.login.View();
+      airline.presentation.login.Controller loginController =
+              new airline.presentation.login.Controller(loginModel, loginView);
+
+      dialog.getContentPane().add(loginView);
+      dialog.pack();
+      dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+      dialog.setVisible(true);
+    }
   }//GEN-LAST:event_ButtonAdminActionPerformed
 
   private void ButtonUserActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonUserActionPerformed
   {//GEN-HEADEREND:event_ButtonUserActionPerformed
-    JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Iniciar sesión", true);
-    dialog.setResizable(false);
-    
-    airline.presentation.login.Model loginModel = 
-            new airline.presentation.login.Model(false, dialog, controller, model.getWindowController());
-    airline.presentation.login.View loginView = 
-            new airline.presentation.login.View();
-    airline.presentation.login.Controller loginController =
-            new airline.presentation.login.Controller(loginModel, loginView);
-    
-    dialog.getContentPane().add(loginView);
-    dialog.pack();
-    dialog.setLocationRelativeTo(this.model.getWindowController().getView());
-    dialog.setVisible(true);
+    if (airline.presentation.admin.Model.getLoggedUser() != null)
+    {
+      // controller.changeWindow("user");
+    }
+    else
+    {
+      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Iniciar sesión", true);
+      dialog.setResizable(false);
+
+      airline.presentation.login.Model loginModel = 
+              new airline.presentation.login.Model(false, dialog, controller, model.getWindowController());
+      airline.presentation.login.View loginView = 
+              new airline.presentation.login.View();
+      airline.presentation.login.Controller loginController =
+              new airline.presentation.login.Controller(loginModel, loginView);
+
+      dialog.getContentPane().add(loginView);
+      dialog.pack();
+      dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+      dialog.setVisible(true);
+    }
   }//GEN-LAST:event_ButtonUserActionPerformed
 
   @Override

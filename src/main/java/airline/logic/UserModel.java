@@ -32,9 +32,39 @@ public class UserModel
     return dao.findByAdmin(admin);
   }
   
+  public User findUser(String string)
+  {
+    return dao.findUser(string);
+  }
+  
   public static UserModel getInstance() 
   {
     return UserModelHolder.INSTANCE;
+  }
+
+  public List<User> findByUsername(String string)
+  {
+    return dao.findByUsername(string);
+  }
+
+  public List<User> findByName(String string)
+  {
+    return dao.findByName(string);
+  }
+
+  public List<User> findByLastname(String string)
+  {
+    return dao.findByLastname(string);
+  }
+
+  public List<User> findByEmail(String string)
+  {
+    return dao.findByEmail(string);
+  }
+
+  public List<User> findByBirthday(String string)
+  {
+    return dao.findByBirthday(string);
   }
 
   private static class UserModelHolder 

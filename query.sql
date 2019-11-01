@@ -1,3 +1,6 @@
+SET @@global.time_zone = '+00:00';
+SELECT @@global.time_zone;
+
 insert into planetype values ("001", 2011, "Ace", "Toshiba", 15, 6),
 ("002", 2017, "Alpha", "Mitsubishi", 20, 9),
 ("003", 2000, "Kakeru", "Kawasaki", 15, 9),

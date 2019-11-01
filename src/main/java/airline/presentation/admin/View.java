@@ -252,7 +252,7 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonUserActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonUserActionPerformed
   {//GEN-HEADEREND:event_ButtonUserActionPerformed
-    // TODO add your handling code here:
+    controller.changeWindow("user");
   }//GEN-LAST:event_ButtonUserActionPerformed
 
   private void ButtonCityActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonCityActionPerformed
