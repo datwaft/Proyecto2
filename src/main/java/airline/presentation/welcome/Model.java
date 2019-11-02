@@ -13,6 +13,10 @@ public class Model extends Observable
   private final airline.presentation.admin.View adminView;
   public final airline.presentation.admin.Controller adminController;
   
+  private final airline.presentation.user.Model userModel;
+  private final airline.presentation.user.View userView;
+  public final airline.presentation.user.Controller userController;
+  
   private static Vector<String> searchTypesTrip = null;
   private static Vector<String> searchTypesFlight = null;
   private static Vector<String> weekdays = null;
@@ -24,6 +28,10 @@ public class Model extends Observable
     adminModel = new airline.presentation.admin.Model();
     adminView = new airline.presentation.admin.View();
     adminController = new airline.presentation.admin.Controller(adminModel, adminView);
+    
+    userModel = new airline.presentation.user.Model();
+    userView = new airline.presentation.user.View();
+    userController = new airline.presentation.user.Controller(userModel, userView);
     
     tableModelFlight = new TableModelFlight();
     tableModelTrip = new TableModelTrip();
@@ -133,6 +141,9 @@ public class Model extends Observable
     
     adminModel.setWindowController(this.windowController);
     this.windowController.addWindow(adminView, "admin");
+    
+    userModel.setWindowController(this.windowController);
+    this.windowController.addWindow(userView, "user");
   }
   
   @Override

@@ -79,24 +79,24 @@ public class FlightJpaController implements Serializable
       }
       for (Trip tripListTrip : flight.getTripList())
       {
-        Flight oldOutwardOfTripListTrip = tripListTrip.getOutward();
-        tripListTrip.setOutward(flight);
+        Flight oldInwardOfTripListTrip = tripListTrip.getInward();
+        tripListTrip.setInward(flight);
         tripListTrip = em.merge(tripListTrip);
-        if (oldOutwardOfTripListTrip != null)
+        if (oldInwardOfTripListTrip != null)
         {
-          oldOutwardOfTripListTrip.getTripList().remove(tripListTrip);
-          oldOutwardOfTripListTrip = em.merge(oldOutwardOfTripListTrip);
+          oldInwardOfTripListTrip.getTripList().remove(tripListTrip);
+          oldInwardOfTripListTrip = em.merge(oldInwardOfTripListTrip);
         }
       }
       for (Trip tripList1Trip : flight.getTripList1())
       {
-        Flight oldInwardOfTripList1Trip = tripList1Trip.getInward();
-        tripList1Trip.setInward(flight);
+        Flight oldOutwardOfTripList1Trip = tripList1Trip.getOutward();
+        tripList1Trip.setOutward(flight);
         tripList1Trip = em.merge(tripList1Trip);
-        if (oldInwardOfTripList1Trip != null)
+        if (oldOutwardOfTripList1Trip != null)
         {
-          oldInwardOfTripList1Trip.getTripList1().remove(tripList1Trip);
-          oldInwardOfTripList1Trip = em.merge(oldInwardOfTripList1Trip);
+          oldOutwardOfTripList1Trip.getTripList1().remove(tripList1Trip);
+          oldOutwardOfTripList1Trip = em.merge(oldOutwardOfTripList1Trip);
         }
       }
       em.getTransaction().commit();
@@ -127,15 +127,15 @@ public class FlightJpaController implements Serializable
       List<Trip> tripList1Old = persistentFlight.getTripList1();
       List<Trip> tripList1New = flight.getTripList1();
       List<String> illegalOrphanMessages = null;
-      for (Trip tripListOldTrip : tripListOld)
+      for (Trip tripList1OldTrip : tripList1Old)
       {
-        if (!tripListNew.contains(tripListOldTrip))
+        if (!tripList1New.contains(tripList1OldTrip))
         {
           if (illegalOrphanMessages == null)
           {
             illegalOrphanMessages = new ArrayList<String>();
           }
-          illegalOrphanMessages.add("You must retain Trip " + tripListOldTrip + " since its outward field is not nullable.");
+          illegalOrphanMessages.add("You must retain Trip " + tripList1OldTrip + " since its outward field is not nullable.");
         }
       }
       if (illegalOrphanMessages != null)
@@ -189,39 +189,39 @@ public class FlightJpaController implements Serializable
         destinationNew.getFlightList().add(flight);
         destinationNew = em.merge(destinationNew);
       }
+      for (Trip tripListOldTrip : tripListOld)
+      {
+        if (!tripListNew.contains(tripListOldTrip))
+        {
+          tripListOldTrip.setInward(null);
+          tripListOldTrip = em.merge(tripListOldTrip);
+        }
+      }
       for (Trip tripListNewTrip : tripListNew)
       {
         if (!tripListOld.contains(tripListNewTrip))
         {
-          Flight oldOutwardOfTripListNewTrip = tripListNewTrip.getOutward();
-          tripListNewTrip.setOutward(flight);
+          Flight oldInwardOfTripListNewTrip = tripListNewTrip.getInward();
+          tripListNewTrip.setInward(flight);
           tripListNewTrip = em.merge(tripListNewTrip);
-          if (oldOutwardOfTripListNewTrip != null && !oldOutwardOfTripListNewTrip.equals(flight))
+          if (oldInwardOfTripListNewTrip != null && !oldInwardOfTripListNewTrip.equals(flight))
           {
-            oldOutwardOfTripListNewTrip.getTripList().remove(tripListNewTrip);
-            oldOutwardOfTripListNewTrip = em.merge(oldOutwardOfTripListNewTrip);
+            oldInwardOfTripListNewTrip.getTripList().remove(tripListNewTrip);
+            oldInwardOfTripListNewTrip = em.merge(oldInwardOfTripListNewTrip);
           }
-        }
-      }
-      for (Trip tripList1OldTrip : tripList1Old)
-      {
-        if (!tripList1New.contains(tripList1OldTrip))
-        {
-          tripList1OldTrip.setInward(null);
-          tripList1OldTrip = em.merge(tripList1OldTrip);
         }
       }
       for (Trip tripList1NewTrip : tripList1New)
       {
         if (!tripList1Old.contains(tripList1NewTrip))
         {
-          Flight oldInwardOfTripList1NewTrip = tripList1NewTrip.getInward();
-          tripList1NewTrip.setInward(flight);
+          Flight oldOutwardOfTripList1NewTrip = tripList1NewTrip.getOutward();
+          tripList1NewTrip.setOutward(flight);
           tripList1NewTrip = em.merge(tripList1NewTrip);
-          if (oldInwardOfTripList1NewTrip != null && !oldInwardOfTripList1NewTrip.equals(flight))
+          if (oldOutwardOfTripList1NewTrip != null && !oldOutwardOfTripList1NewTrip.equals(flight))
           {
-            oldInwardOfTripList1NewTrip.getTripList1().remove(tripList1NewTrip);
-            oldInwardOfTripList1NewTrip = em.merge(oldInwardOfTripList1NewTrip);
+            oldOutwardOfTripList1NewTrip.getTripList1().remove(tripList1NewTrip);
+            oldOutwardOfTripList1NewTrip = em.merge(oldOutwardOfTripList1NewTrip);
           }
         }
       }
@@ -267,14 +267,14 @@ public class FlightJpaController implements Serializable
         throw new NonexistentEntityException("The flight with id " + id + " no longer exists.", enfe);
       }
       List<String> illegalOrphanMessages = null;
-      List<Trip> tripListOrphanCheck = flight.getTripList();
-      for (Trip tripListOrphanCheckTrip : tripListOrphanCheck)
+      List<Trip> tripList1OrphanCheck = flight.getTripList1();
+      for (Trip tripList1OrphanCheckTrip : tripList1OrphanCheck)
       {
         if (illegalOrphanMessages == null)
         {
           illegalOrphanMessages = new ArrayList<String>();
         }
-        illegalOrphanMessages.add("This Flight (" + flight + ") cannot be destroyed since the Trip " + tripListOrphanCheckTrip + " in its tripList field has a non-nullable outward field.");
+        illegalOrphanMessages.add("This Flight (" + flight + ") cannot be destroyed since the Trip " + tripList1OrphanCheckTrip + " in its tripList1 field has a non-nullable outward field.");
       }
       if (illegalOrphanMessages != null)
       {
@@ -292,11 +292,11 @@ public class FlightJpaController implements Serializable
         destination.getFlightList().remove(flight);
         destination = em.merge(destination);
       }
-      List<Trip> tripList1 = flight.getTripList1();
-      for (Trip tripList1Trip : tripList1)
+      List<Trip> tripList = flight.getTripList();
+      for (Trip tripListTrip : tripList)
       {
-        tripList1Trip.setInward(null);
-        tripList1Trip = em.merge(tripList1Trip);
+        tripListTrip.setInward(null);
+        tripListTrip = em.merge(tripListTrip);
       }
       em.remove(flight);
       em.getTransaction().commit();

@@ -131,7 +131,7 @@ public class Model extends Observable
     this.windowController.addWindow(tripView, "trip");
     
     userModel.setWindowController(this.windowController);
-    this.windowController.addWindow(userView, "user");
+    this.windowController.addWindow(userView, "userview");
   }
   
   @Override

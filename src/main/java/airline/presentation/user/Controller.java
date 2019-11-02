@@ -1,8 +1,7 @@
-package airline.presentation.login;
+package airline.presentation.user;
 
-import airline.logic.User;
 import airline.logic.UserModel;
-import java.util.List;
+import airline.logic.User;
 
 public class Controller
 {
@@ -18,14 +17,19 @@ public class Controller
     model.setController(this);
   }
   
-  public List<User> findNormalUsers()
+  public void changeWindow(String window)
   {
-    return UserModel.getInstance().findByAdmin(false);
+    switch(window)
+    {
+      case "trips": model.tripsController.initialize();
+    }
+    
+    model.getWindowController().swapWindow(window);
   }
   
-  public List<User> findAdminUsers()
+  public void initiliaze()
   {
-    return UserModel.getInstance().findByAdmin(true);
+    view.initialize();
   }
   
   public User findUser(String string)

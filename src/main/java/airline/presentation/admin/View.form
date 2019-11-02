@@ -62,6 +62,11 @@
               <Component id="LabelTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="271" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="ButtonLogout" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -116,7 +121,9 @@
               </Group>
               <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="ButtonTopFlights" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="177" max="32767" attributes="0"/>
+              <EmptySpace pref="146" max="32767" attributes="0"/>
+              <Component id="ButtonLogout" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -264,6 +271,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Los 5 vuelos con m&#xe1;s reservaciones"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="ButtonLogout">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cerrar Sesi&#xf3;n"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonLogoutActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

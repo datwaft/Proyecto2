@@ -38,7 +38,7 @@ public class Flight implements Serializable
   @Column(name = "duration")
   @Temporal(TemporalType.TIME)
   private Date duration;
-  @Column(name = "arrival", insertable = false, updatable = false)
+  @Column(name = "arrival")
   @Temporal(TemporalType.TIME)
   private Date arrival;
   @Basic(optional = false)
@@ -54,9 +54,9 @@ public class Flight implements Serializable
   @JoinColumn(name = "destination", referencedColumnName = "code")
   @ManyToOne(optional = false)
   private City destination;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "outward")
-  private List<Trip> tripList;
   @OneToMany(mappedBy = "inward")
+  private List<Trip> tripList;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "outward")
   private List<Trip> tripList1;
 
   public Flight()

@@ -27,26 +27,26 @@ public class TripJpaController implements Serializable
 
   public void create(Trip trip)
   {
-    if (trip.getTicketList() == null)
+    if (trip.getReservationList() == null)
     {
-      trip.setTicketList(new ArrayList<Ticket>());
+      trip.setReservationList(new ArrayList<Reservation>());
     }
     EntityManager em = null;
     try
     {
       em = getEntityManager();
       em.getTransaction().begin();
-      Flight outward = trip.getOutward();
-      if (outward != null)
-      {
-        outward = em.getReference(outward.getClass(), outward.getIdentifier());
-        trip.setOutward(outward);
-      }
       Flight inward = trip.getInward();
       if (inward != null)
       {
         inward = em.getReference(inward.getClass(), inward.getIdentifier());
         trip.setInward(inward);
+      }
+      Flight outward = trip.getOutward();
+      if (outward != null)
+      {
+        outward = em.getReference(outward.getClass(), outward.getIdentifier());
+        trip.setOutward(outward);
       }
       Plane plane = trip.getPlane();
       if (plane != null)
@@ -54,38 +54,38 @@ public class TripJpaController implements Serializable
         plane = em.getReference(plane.getClass(), plane.getIdentifier());
         trip.setPlane(plane);
       }
-      List<Ticket> attachedTicketList = new ArrayList<Ticket>();
-      for (Ticket ticketListTicketToAttach : trip.getTicketList())
+      List<Reservation> attachedReservationList = new ArrayList<Reservation>();
+      for (Reservation reservationListReservationToAttach : trip.getReservationList())
       {
-        ticketListTicketToAttach = em.getReference(ticketListTicketToAttach.getClass(), ticketListTicketToAttach.getId());
-        attachedTicketList.add(ticketListTicketToAttach);
+        reservationListReservationToAttach = em.getReference(reservationListReservationToAttach.getClass(), reservationListReservationToAttach.getId());
+        attachedReservationList.add(reservationListReservationToAttach);
       }
-      trip.setTicketList(attachedTicketList);
+      trip.setReservationList(attachedReservationList);
       em.persist(trip);
-      if (outward != null)
-      {
-        outward.getTripList().add(trip);
-        outward = em.merge(outward);
-      }
       if (inward != null)
       {
         inward.getTripList().add(trip);
         inward = em.merge(inward);
+      }
+      if (outward != null)
+      {
+        outward.getTripList().add(trip);
+        outward = em.merge(outward);
       }
       if (plane != null)
       {
         plane.getTripList().add(trip);
         plane = em.merge(plane);
       }
-      for (Ticket ticketListTicket : trip.getTicketList())
+      for (Reservation reservationListReservation : trip.getReservationList())
       {
-        Trip oldTripOfTicketListTicket = ticketListTicket.getTrip();
-        ticketListTicket.setTrip(trip);
-        ticketListTicket = em.merge(ticketListTicket);
-        if (oldTripOfTicketListTicket != null)
+        Trip oldTripOfReservationListReservation = reservationListReservation.getTrip();
+        reservationListReservation.setTrip(trip);
+        reservationListReservation = em.merge(reservationListReservation);
+        if (oldTripOfReservationListReservation != null)
         {
-          oldTripOfTicketListTicket.getTicketList().remove(ticketListTicket);
-          oldTripOfTicketListTicket = em.merge(oldTripOfTicketListTicket);
+          oldTripOfReservationListReservation.getReservationList().remove(reservationListReservation);
+          oldTripOfReservationListReservation = em.merge(oldTripOfReservationListReservation);
         }
       }
       em.getTransaction().commit();
@@ -107,64 +107,54 @@ public class TripJpaController implements Serializable
       em = getEntityManager();
       em.getTransaction().begin();
       Trip persistentTrip = em.find(Trip.class, trip.getIdentifier());
-      Flight outwardOld = persistentTrip.getOutward();
-      Flight outwardNew = trip.getOutward();
       Flight inwardOld = persistentTrip.getInward();
       Flight inwardNew = trip.getInward();
+      Flight outwardOld = persistentTrip.getOutward();
+      Flight outwardNew = trip.getOutward();
       Plane planeOld = persistentTrip.getPlane();
       Plane planeNew = trip.getPlane();
-      List<Ticket> ticketListOld = persistentTrip.getTicketList();
-      List<Ticket> ticketListNew = trip.getTicketList();
+      List<Reservation> reservationListOld = persistentTrip.getReservationList();
+      List<Reservation> reservationListNew = trip.getReservationList();
       List<String> illegalOrphanMessages = null;
-      for (Ticket ticketListOldTicket : ticketListOld)
+      for (Reservation reservationListOldReservation : reservationListOld)
       {
-        if (!ticketListNew.contains(ticketListOldTicket))
+        if (!reservationListNew.contains(reservationListOldReservation))
         {
           if (illegalOrphanMessages == null)
           {
             illegalOrphanMessages = new ArrayList<String>();
           }
-          illegalOrphanMessages.add("You must retain Ticket " + ticketListOldTicket + " since its trip field is not nullable.");
+          illegalOrphanMessages.add("You must retain Reservation " + reservationListOldReservation + " since its trip field is not nullable.");
         }
       }
       if (illegalOrphanMessages != null)
       {
         throw new IllegalOrphanException(illegalOrphanMessages);
       }
-      if (outwardNew != null)
-      {
-        outwardNew = em.getReference(outwardNew.getClass(), outwardNew.getIdentifier());
-        trip.setOutward(outwardNew);
-      }
       if (inwardNew != null)
       {
         inwardNew = em.getReference(inwardNew.getClass(), inwardNew.getIdentifier());
         trip.setInward(inwardNew);
+      }
+      if (outwardNew != null)
+      {
+        outwardNew = em.getReference(outwardNew.getClass(), outwardNew.getIdentifier());
+        trip.setOutward(outwardNew);
       }
       if (planeNew != null)
       {
         planeNew = em.getReference(planeNew.getClass(), planeNew.getIdentifier());
         trip.setPlane(planeNew);
       }
-      List<Ticket> attachedTicketListNew = new ArrayList<Ticket>();
-      for (Ticket ticketListNewTicketToAttach : ticketListNew)
+      List<Reservation> attachedReservationListNew = new ArrayList<Reservation>();
+      for (Reservation reservationListNewReservationToAttach : reservationListNew)
       {
-        ticketListNewTicketToAttach = em.getReference(ticketListNewTicketToAttach.getClass(), ticketListNewTicketToAttach.getId());
-        attachedTicketListNew.add(ticketListNewTicketToAttach);
+        reservationListNewReservationToAttach = em.getReference(reservationListNewReservationToAttach.getClass(), reservationListNewReservationToAttach.getId());
+        attachedReservationListNew.add(reservationListNewReservationToAttach);
       }
-      ticketListNew = attachedTicketListNew;
-      trip.setTicketList(ticketListNew);
+      reservationListNew = attachedReservationListNew;
+      trip.setReservationList(reservationListNew);
       trip = em.merge(trip);
-      if (outwardOld != null && !outwardOld.equals(outwardNew))
-      {
-        outwardOld.getTripList().remove(trip);
-        outwardOld = em.merge(outwardOld);
-      }
-      if (outwardNew != null && !outwardNew.equals(outwardOld))
-      {
-        outwardNew.getTripList().add(trip);
-        outwardNew = em.merge(outwardNew);
-      }
       if (inwardOld != null && !inwardOld.equals(inwardNew))
       {
         inwardOld.getTripList().remove(trip);
@@ -174,6 +164,16 @@ public class TripJpaController implements Serializable
       {
         inwardNew.getTripList().add(trip);
         inwardNew = em.merge(inwardNew);
+      }
+      if (outwardOld != null && !outwardOld.equals(outwardNew))
+      {
+        outwardOld.getTripList().remove(trip);
+        outwardOld = em.merge(outwardOld);
+      }
+      if (outwardNew != null && !outwardNew.equals(outwardOld))
+      {
+        outwardNew.getTripList().add(trip);
+        outwardNew = em.merge(outwardNew);
       }
       if (planeOld != null && !planeOld.equals(planeNew))
       {
@@ -185,17 +185,17 @@ public class TripJpaController implements Serializable
         planeNew.getTripList().add(trip);
         planeNew = em.merge(planeNew);
       }
-      for (Ticket ticketListNewTicket : ticketListNew)
+      for (Reservation reservationListNewReservation : reservationListNew)
       {
-        if (!ticketListOld.contains(ticketListNewTicket))
+        if (!reservationListOld.contains(reservationListNewReservation))
         {
-          Trip oldTripOfTicketListNewTicket = ticketListNewTicket.getTrip();
-          ticketListNewTicket.setTrip(trip);
-          ticketListNewTicket = em.merge(ticketListNewTicket);
-          if (oldTripOfTicketListNewTicket != null && !oldTripOfTicketListNewTicket.equals(trip))
+          Trip oldTripOfReservationListNewReservation = reservationListNewReservation.getTrip();
+          reservationListNewReservation.setTrip(trip);
+          reservationListNewReservation = em.merge(reservationListNewReservation);
+          if (oldTripOfReservationListNewReservation != null && !oldTripOfReservationListNewReservation.equals(trip))
           {
-            oldTripOfTicketListNewTicket.getTicketList().remove(ticketListNewTicket);
-            oldTripOfTicketListNewTicket = em.merge(oldTripOfTicketListNewTicket);
+            oldTripOfReservationListNewReservation.getReservationList().remove(reservationListNewReservation);
+            oldTripOfReservationListNewReservation = em.merge(oldTripOfReservationListNewReservation);
           }
         }
       }
@@ -241,30 +241,30 @@ public class TripJpaController implements Serializable
         throw new NonexistentEntityException("The trip with id " + id + " no longer exists.", enfe);
       }
       List<String> illegalOrphanMessages = null;
-      List<Ticket> ticketListOrphanCheck = trip.getTicketList();
-      for (Ticket ticketListOrphanCheckTicket : ticketListOrphanCheck)
+      List<Reservation> reservationListOrphanCheck = trip.getReservationList();
+      for (Reservation reservationListOrphanCheckReservation : reservationListOrphanCheck)
       {
         if (illegalOrphanMessages == null)
         {
           illegalOrphanMessages = new ArrayList<String>();
         }
-        illegalOrphanMessages.add("This Trip (" + trip + ") cannot be destroyed since the Ticket " + ticketListOrphanCheckTicket + " in its ticketList field has a non-nullable trip field.");
+        illegalOrphanMessages.add("This Trip (" + trip + ") cannot be destroyed since the Reservation " + reservationListOrphanCheckReservation + " in its reservationList field has a non-nullable trip field.");
       }
       if (illegalOrphanMessages != null)
       {
         throw new IllegalOrphanException(illegalOrphanMessages);
-      }
-      Flight outward = trip.getOutward();
-      if (outward != null)
-      {
-        outward.getTripList().remove(trip);
-        outward = em.merge(outward);
       }
       Flight inward = trip.getInward();
       if (inward != null)
       {
         inward.getTripList().remove(trip);
         inward = em.merge(inward);
+      }
+      Flight outward = trip.getOutward();
+      if (outward != null)
+      {
+        outward.getTripList().remove(trip);
+        outward = em.merge(outward);
       }
       Plane plane = trip.getPlane();
       if (plane != null)

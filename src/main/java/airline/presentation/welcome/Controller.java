@@ -30,6 +30,11 @@ public class Controller
   
   public void changeWindow(String window)
   {
+    switch(window)
+    {
+      case "user": model.userController.initiliaze();
+    }
+    
     model.getWindowController().swapWindow(window);
   }
   

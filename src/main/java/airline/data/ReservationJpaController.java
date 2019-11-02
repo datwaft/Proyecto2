@@ -42,6 +42,12 @@ public class ReservationJpaController implements Serializable
         payment = em.getReference(payment.getClass(), payment.getId());
         reservation.setPayment(payment);
       }
+      Trip trip = reservation.getTrip();
+      if (trip != null)
+      {
+        trip = em.getReference(trip.getClass(), trip.getIdentifier());
+        reservation.setTrip(trip);
+      }
       User user = reservation.getUser();
       if (user != null)
       {
@@ -60,6 +66,11 @@ public class ReservationJpaController implements Serializable
       {
         payment.getReservationList().add(reservation);
         payment = em.merge(payment);
+      }
+      if (trip != null)
+      {
+        trip.getReservationList().add(reservation);
+        trip = em.merge(trip);
       }
       if (user != null)
       {
@@ -98,6 +109,8 @@ public class ReservationJpaController implements Serializable
       Reservation persistentReservation = em.find(Reservation.class, reservation.getId());
       Payment paymentOld = persistentReservation.getPayment();
       Payment paymentNew = reservation.getPayment();
+      Trip tripOld = persistentReservation.getTrip();
+      Trip tripNew = reservation.getTrip();
       User userOld = persistentReservation.getUser();
       User userNew = reservation.getUser();
       List<Ticket> ticketListOld = persistentReservation.getTicketList();
@@ -123,6 +136,11 @@ public class ReservationJpaController implements Serializable
         paymentNew = em.getReference(paymentNew.getClass(), paymentNew.getId());
         reservation.setPayment(paymentNew);
       }
+      if (tripNew != null)
+      {
+        tripNew = em.getReference(tripNew.getClass(), tripNew.getIdentifier());
+        reservation.setTrip(tripNew);
+      }
       if (userNew != null)
       {
         userNew = em.getReference(userNew.getClass(), userNew.getUsername());
@@ -146,6 +164,16 @@ public class ReservationJpaController implements Serializable
       {
         paymentNew.getReservationList().add(reservation);
         paymentNew = em.merge(paymentNew);
+      }
+      if (tripOld != null && !tripOld.equals(tripNew))
+      {
+        tripOld.getReservationList().remove(reservation);
+        tripOld = em.merge(tripOld);
+      }
+      if (tripNew != null && !tripNew.equals(tripOld))
+      {
+        tripNew.getReservationList().add(reservation);
+        tripNew = em.merge(tripNew);
       }
       if (userOld != null && !userOld.equals(userNew))
       {
@@ -231,6 +259,12 @@ public class ReservationJpaController implements Serializable
       {
         payment.getReservationList().remove(reservation);
         payment = em.merge(payment);
+      }
+      Trip trip = reservation.getTrip();
+      if (trip != null)
+      {
+        trip.getReservationList().remove(reservation);
+        trip = em.merge(trip);
       }
       User user = reservation.getUser();
       if (user != null)

@@ -13,6 +13,8 @@ import javax.persistence.*;
   @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
   @NamedQuery(name = "User.findByAdmin", query = "SELECT u FROM User u WHERE u.admin = :admin"),
   @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
+  @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name"),
+  @NamedQuery(name = "User.findByLastname", query = "SELECT u FROM User u WHERE u.lastname = :lastname"),
   @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
   @NamedQuery(name = "User.findByBirthday", query = "SELECT u FROM User u WHERE u.birthday = :birthday"),
   @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
@@ -21,14 +23,6 @@ import javax.persistence.*;
 })
 public class User implements Serializable
 {
-  @Basic(optional = false)
-  @Column(name = "name")
-  private String name;
-  @Basic(optional = false)
-  @Column(name = "lastname")
-  private String lastname;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-  private List<Reservation> reservationList;
   private static final long serialVersionUID = 1L;
   @Id
   @Basic(optional = false)
@@ -40,6 +34,12 @@ public class User implements Serializable
   @Basic(optional = false)
   @Column(name = "password")
   private String password;
+  @Basic(optional = false)
+  @Column(name = "name")
+  private String name;
+  @Basic(optional = false)
+  @Column(name = "lastname")
+  private String lastname;
   @Basic(optional = false)
   @Column(name = "email")
   private String email;
@@ -56,6 +56,8 @@ public class User implements Serializable
   @Basic(optional = false)
   @Column(name = "cellphone")
   private String cellphone;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+  private List<Reservation> reservationList;
 
   public User()
   {
@@ -66,11 +68,13 @@ public class User implements Serializable
     this.username = username;
   }
 
-  public User(String username, boolean admin, String password, String email, Date birthday, String address, String workphone, String cellphone)
+  public User(String username, boolean admin, String password, String name, String lastname, String email, Date birthday, String address, String workphone, String cellphone)
   {
     this.username = username;
     this.admin = admin;
     this.password = password;
+    this.name = name;
+    this.lastname = lastname;
     this.email = email;
     this.birthday = birthday;
     this.address = address;
@@ -106,6 +110,26 @@ public class User implements Serializable
   public void setPassword(String password)
   {
     this.password = password;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public void setName(String name)
+  {
+    this.name = name;
+  }
+
+  public String getLastname()
+  {
+    return lastname;
+  }
+
+  public void setLastname(String lastname)
+  {
+    this.lastname = lastname;
   }
 
   public String getEmail()
@@ -158,6 +182,16 @@ public class User implements Serializable
     this.cellphone = cellphone;
   }
 
+  public List<Reservation> getReservationList()
+  {
+    return reservationList;
+  }
+
+  public void setReservationList(List<Reservation> reservationList)
+  {
+    this.reservationList = reservationList;
+  }
+
   @Override
   public int hashCode()
   {
@@ -175,44 +209,17 @@ public class User implements Serializable
       return false;
     }
     User other = (User) object;
-    return !((this.username == null && other.username != null) || (this.username != null && this.password != null 
-      && !this.username.equals(other.username) && !this.password.equals(other.password)));
+    if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username)))
+    {
+      return false;
+    }
+    return true;
   }
 
   @Override
   public String toString()
   {
     return this.username;
-  }
-
-  public String getName()
-  {
-    return name;
-  }
-
-  public void setName(String name)
-  {
-    this.name = name;
-  }
-
-  public String getLastname()
-  {
-    return lastname;
-  }
-
-  public void setLastname(String lastname)
-  {
-    this.lastname = lastname;
-  }
-
-  public List<Reservation> getReservationList()
-  {
-    return reservationList;
-  }
-
-  public void setReservationList(List<Reservation> reservationList)
-  {
-    this.reservationList = reservationList;
   }
 
 }

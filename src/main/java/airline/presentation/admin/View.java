@@ -41,6 +41,7 @@ public class View extends javax.swing.JPanel implements Observer
     ButtonRevenueByYear = new javax.swing.JButton();
     ButtonClientByPlane = new javax.swing.JButton();
     ButtonTopFlights = new javax.swing.JButton();
+    ButtonLogout = new javax.swing.JButton();
 
     setMaximumSize(new java.awt.Dimension(800, 500));
     setMinimumSize(new java.awt.Dimension(800, 500));
@@ -170,6 +171,15 @@ public class View extends javax.swing.JPanel implements Observer
 
     ButtonTopFlights.setText("Los 5 vuelos con más reservaciones");
 
+    ButtonLogout.setText("Cerrar Sesión");
+    ButtonLogout.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonLogoutActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -203,6 +213,10 @@ public class View extends javax.swing.JPanel implements Observer
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(LabelTitle)
         .addGap(271, 271, 271))
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(ButtonLogout)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,13 +260,15 @@ public class View extends javax.swing.JPanel implements Observer
           .addComponent(ButtonClientByPlane))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(ButtonTopFlights)
-        .addContainerGap(177, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+        .addComponent(ButtonLogout)
+        .addContainerGap())
     );
   }// </editor-fold>//GEN-END:initComponents
 
   private void ButtonUserActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonUserActionPerformed
   {//GEN-HEADEREND:event_ButtonUserActionPerformed
-    controller.changeWindow("user");
+    controller.changeWindow("userview");
   }//GEN-LAST:event_ButtonUserActionPerformed
 
   private void ButtonCityActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonCityActionPerformed
@@ -305,6 +321,12 @@ public class View extends javax.swing.JPanel implements Observer
     model.getWindowController().changeWindow("welcome");
   }//GEN-LAST:event_ButtonReturnActionPerformed
 
+  private void ButtonLogoutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonLogoutActionPerformed
+  {//GEN-HEADEREND:event_ButtonLogoutActionPerformed
+    Model.setLoggedUser(null);
+    model.getWindowController().changeWindow("welcome");
+  }//GEN-LAST:event_ButtonLogoutActionPerformed
+
   @Override
   public void update(Observable o, Object arg)
   {
@@ -338,6 +360,7 @@ public class View extends javax.swing.JPanel implements Observer
   private javax.swing.JButton ButtonCountry;
   private javax.swing.JButton ButtonFacturedByMonth;
   private javax.swing.JButton ButtonFlight;
+  private javax.swing.JButton ButtonLogout;
   private javax.swing.JButton ButtonPayment;
   private javax.swing.JButton ButtonPlane;
   private javax.swing.JButton ButtonPlanetype;

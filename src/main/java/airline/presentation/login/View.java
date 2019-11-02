@@ -147,7 +147,7 @@ public class View extends javax.swing.JPanel implements Observer
     user.setUsername(FieldUsername.getText());
     user.setPassword(String.valueOf(FieldPassword.getPassword()));
     
-    if(users.contains(user))
+    if(users.contains(user) && controller.findUser(user.getUsername()).getPassword().equals(user.getPassword()))
     {
       if(model.isAdminMode())
       {
@@ -156,8 +156,8 @@ public class View extends javax.swing.JPanel implements Observer
       }
       else
       {
-        //airline.presentation.user.Model.setLoggedUser(UserModel.getInstance().findUser(user.getUsername()));
-        //model.getParentController().changeWindow("user");
+        airline.presentation.user.Model.setLoggedUser(UserModel.getInstance().findUser(user.getUsername()));
+        model.getParentController().changeWindow("user");
       }
       model.getParent().dispose();
       model.getParent().setVisible(false); 

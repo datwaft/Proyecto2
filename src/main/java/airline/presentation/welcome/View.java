@@ -396,9 +396,9 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void ButtonUserActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonUserActionPerformed
   {//GEN-HEADEREND:event_ButtonUserActionPerformed
-    if (airline.presentation.admin.Model.getLoggedUser() != null)
+    if (airline.presentation.user.Model.getLoggedUser() != null)
     {
-      // controller.changeWindow("user");
+      controller.changeWindow("user");
     }
     else
     {

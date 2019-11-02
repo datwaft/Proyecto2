@@ -64,3 +64,5 @@ select * from plane;
 select * from flight;
 select * from trip;
 select * from user;
+
+select * from reservation;

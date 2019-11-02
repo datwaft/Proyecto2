@@ -16,8 +16,6 @@ import javax.persistence.*;
 })
 public class Trip implements Serializable
 {
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
-  private List<Ticket> ticketList;
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,15 +29,17 @@ public class Trip implements Serializable
   @Column(name = "arrival")
   @Temporal(TemporalType.DATE)
   private Date arrival;
-  @JoinColumn(name = "outward", referencedColumnName = "identifier")
-  @ManyToOne(optional = false)
-  private Flight outward;
   @JoinColumn(name = "inward", referencedColumnName = "identifier")
   @ManyToOne
   private Flight inward;
+  @JoinColumn(name = "outward", referencedColumnName = "identifier")
+  @ManyToOne(optional = false)
+  private Flight outward;
   @JoinColumn(name = "plane", referencedColumnName = "identifier")
   @ManyToOne(optional = false)
   private Plane plane;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+  private List<Reservation> reservationList;
 
   public Trip()
   {
@@ -86,16 +86,6 @@ public class Trip implements Serializable
     this.arrival = arrival;
   }
 
-  public Flight getOutward()
-  {
-    return outward;
-  }
-
-  public void setOutward(Flight outward)
-  {
-    this.outward = outward;
-  }
-
   public Flight getInward()
   {
     return inward;
@@ -106,6 +96,16 @@ public class Trip implements Serializable
     this.inward = inward;
   }
 
+  public Flight getOutward()
+  {
+    return outward;
+  }
+
+  public void setOutward(Flight outward)
+  {
+    this.outward = outward;
+  }
+
   public Plane getPlane()
   {
     return plane;
@@ -114,6 +114,16 @@ public class Trip implements Serializable
   public void setPlane(Plane plane)
   {
     this.plane = plane;
+  }
+
+  public List<Reservation> getReservationList()
+  {
+    return reservationList;
+  }
+
+  public void setReservationList(List<Reservation> reservationList)
+  {
+    this.reservationList = reservationList;
   }
 
   @Override
@@ -144,16 +154,6 @@ public class Trip implements Serializable
   public String toString()
   {
     return this.outward.toString() + " | " + this.inward.toString();
-  }
-
-  public List<Ticket> getTicketList()
-  {
-    return ticketList;
-  }
-
-  public void setTicketList(List<Ticket> ticketList)
-  {
-    this.ticketList = ticketList;
   }
 
 }

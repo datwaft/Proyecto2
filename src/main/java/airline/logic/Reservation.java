@@ -1,6 +1,7 @@
 package airline.logic;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
@@ -10,7 +11,8 @@ import javax.persistence.*;
 {
   @NamedQuery(name = "Reservation.findAll", query = "SELECT r FROM Reservation r"),
   @NamedQuery(name = "Reservation.findById", query = "SELECT r FROM Reservation r WHERE r.id = :id"),
-  @NamedQuery(name = "Reservation.findByAmount", query = "SELECT r FROM Reservation r WHERE r.amount = :amount")
+  @NamedQuery(name = "Reservation.findByAmount", query = "SELECT r FROM Reservation r WHERE r.amount = :amount"),
+  @NamedQuery(name = "Reservation.findByTimestamp", query = "SELECT r FROM Reservation r WHERE r.timestamp = :timestamp")
 })
 public class Reservation implements Serializable
 {
@@ -23,11 +25,18 @@ public class Reservation implements Serializable
   @Basic(optional = false)
   @Column(name = "amount")
   private double amount;
+  @Basic(optional = false)
+  @Column(name = "timestamp")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date timestamp;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation")
   private List<Ticket> ticketList;
   @JoinColumn(name = "payment", referencedColumnName = "id")
   @ManyToOne(optional = false)
   private Payment payment;
+  @JoinColumn(name = "trip", referencedColumnName = "identifier")
+  @ManyToOne(optional = false)
+  private Trip trip;
   @JoinColumn(name = "user", referencedColumnName = "username")
   @ManyToOne(optional = false)
   private User user;
@@ -41,10 +50,11 @@ public class Reservation implements Serializable
     this.id = id;
   }
 
-  public Reservation(Integer id, double amount)
+  public Reservation(Integer id, double amount, Date timestamp)
   {
     this.id = id;
     this.amount = amount;
+    this.timestamp = timestamp;
   }
 
   public Integer getId()
@@ -67,6 +77,16 @@ public class Reservation implements Serializable
     this.amount = amount;
   }
 
+  public Date getTimestamp()
+  {
+    return timestamp;
+  }
+
+  public void setTimestamp(Date timestamp)
+  {
+    this.timestamp = timestamp;
+  }
+
   public List<Ticket> getTicketList()
   {
     return ticketList;
@@ -85,6 +105,16 @@ public class Reservation implements Serializable
   public void setPayment(Payment payment)
   {
     this.payment = payment;
+  }
+
+  public Trip getTrip()
+  {
+    return trip;
+  }
+
+  public void setTrip(Trip trip)
+  {
+    this.trip = trip;
   }
 
   public User getUser()

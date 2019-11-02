@@ -1,7 +1,6 @@
 package airline.logic;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +10,6 @@ import javax.persistence.*;
   @NamedQuery(name = "Ticket.findAll", query = "SELECT t FROM Ticket t"),
   @NamedQuery(name = "Ticket.findById", query = "SELECT t FROM Ticket t WHERE t.id = :id"),
   @NamedQuery(name = "Ticket.findByName", query = "SELECT t FROM Ticket t WHERE t.name = :name"),
-  @NamedQuery(name = "Ticket.findByMoment", query = "SELECT t FROM Ticket t WHERE t.moment = :moment"),
   @NamedQuery(name = "Ticket.findByRow", query = "SELECT t FROM Ticket t WHERE t.row = :row"),
   @NamedQuery(name = "Ticket.findBySeat", query = "SELECT t FROM Ticket t WHERE t.seat = :seat")
 })
@@ -27,10 +25,6 @@ public class Ticket implements Serializable
   @Column(name = "name")
   private String name;
   @Basic(optional = false)
-  @Column(name = "moment")
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date moment;
-  @Basic(optional = false)
   @Column(name = "row")
   private int row;
   @Basic(optional = false)
@@ -39,9 +33,6 @@ public class Ticket implements Serializable
   @JoinColumn(name = "reservation", referencedColumnName = "id")
   @ManyToOne(optional = false)
   private Reservation reservation;
-  @JoinColumn(name = "trip", referencedColumnName = "identifier")
-  @ManyToOne(optional = false)
-  private Trip trip;
 
   public Ticket()
   {
@@ -52,11 +43,10 @@ public class Ticket implements Serializable
     this.id = id;
   }
 
-  public Ticket(Integer id, String name, Date moment, int row, String seat)
+  public Ticket(Integer id, String name, int row, String seat)
   {
     this.id = id;
     this.name = name;
-    this.moment = moment;
     this.row = row;
     this.seat = seat;
   }
@@ -79,16 +69,6 @@ public class Ticket implements Serializable
   public void setName(String name)
   {
     this.name = name;
-  }
-
-  public Date getMoment()
-  {
-    return moment;
-  }
-
-  public void setMoment(Date moment)
-  {
-    this.moment = moment;
   }
 
   public int getRow()
@@ -119,16 +99,6 @@ public class Ticket implements Serializable
   public void setReservation(Reservation reservation)
   {
     this.reservation = reservation;
-  }
-
-  public Trip getTrip()
-  {
-    return trip;
-  }
-
-  public void setTrip(Trip trip)
-  {
-    this.trip = trip;
   }
 
   @Override

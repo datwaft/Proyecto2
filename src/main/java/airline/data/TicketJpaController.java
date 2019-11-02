@@ -1,12 +1,13 @@
 package airline.data;
 
 import airline.exceptions.NonexistentEntityException;
-import airline.logic.*;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import airline.logic.Reservation;
+import airline.logic.Ticket;
 import java.util.List;
 import javax.persistence.*;
 
@@ -36,22 +37,11 @@ public class TicketJpaController implements Serializable
         reservation = em.getReference(reservation.getClass(), reservation.getId());
         ticket.setReservation(reservation);
       }
-      Trip trip = ticket.getTrip();
-      if (trip != null)
-      {
-        trip = em.getReference(trip.getClass(), trip.getIdentifier());
-        ticket.setTrip(trip);
-      }
       em.persist(ticket);
       if (reservation != null)
       {
         reservation.getTicketList().add(ticket);
         reservation = em.merge(reservation);
-      }
-      if (trip != null)
-      {
-        trip.getTicketList().add(ticket);
-        trip = em.merge(trip);
       }
       em.getTransaction().commit();
     }
@@ -74,17 +64,10 @@ public class TicketJpaController implements Serializable
       Ticket persistentTicket = em.find(Ticket.class, ticket.getId());
       Reservation reservationOld = persistentTicket.getReservation();
       Reservation reservationNew = ticket.getReservation();
-      Trip tripOld = persistentTicket.getTrip();
-      Trip tripNew = ticket.getTrip();
       if (reservationNew != null)
       {
         reservationNew = em.getReference(reservationNew.getClass(), reservationNew.getId());
         ticket.setReservation(reservationNew);
-      }
-      if (tripNew != null)
-      {
-        tripNew = em.getReference(tripNew.getClass(), tripNew.getIdentifier());
-        ticket.setTrip(tripNew);
       }
       ticket = em.merge(ticket);
       if (reservationOld != null && !reservationOld.equals(reservationNew))
@@ -96,16 +79,6 @@ public class TicketJpaController implements Serializable
       {
         reservationNew.getTicketList().add(ticket);
         reservationNew = em.merge(reservationNew);
-      }
-      if (tripOld != null && !tripOld.equals(tripNew))
-      {
-        tripOld.getTicketList().remove(ticket);
-        tripOld = em.merge(tripOld);
-      }
-      if (tripNew != null && !tripNew.equals(tripOld))
-      {
-        tripNew.getTicketList().add(ticket);
-        tripNew = em.merge(tripNew);
       }
       em.getTransaction().commit();
     }
@@ -153,12 +126,6 @@ public class TicketJpaController implements Serializable
       {
         reservation.getTicketList().remove(ticket);
         reservation = em.merge(reservation);
-      }
-      Trip trip = ticket.getTrip();
-      if (trip != null)
-      {
-        trip.getTicketList().remove(ticket);
-        trip = em.merge(trip);
       }
       em.remove(ticket);
       em.getTransaction().commit();
