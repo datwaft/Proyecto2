@@ -191,7 +191,21 @@ public class View extends javax.swing.JPanel implements Observer
   {//GEN-HEADEREND:event_TableMouseClicked
     if(evt.getClickCount() == 2)
     {
-      
+      int row = this.Table.getSelectedRow();
+      JDialog dialog = new JDialog(this.model.getWindowController().getView(), "Ingresar datos", true);
+      dialog.setResizable(false);
+
+      airline.presentation.user.passangers.Model passangerModel = 
+              new airline.presentation.user.passangers.Model(model.getElement(Table.convertRowIndexToModel(row)), dialog, model.getUserController());
+      airline.presentation.user.passangers.View passangerView = 
+              new airline.presentation.user.passangers.View();
+      airline.presentation.user.passangers.Controller passangerController =
+              new airline.presentation.user.passangers.Controller(passangerModel, passangerView);
+
+      dialog.getContentPane().add(passangerView);
+      dialog.pack();
+      dialog.setLocationRelativeTo(this.model.getWindowController().getView());
+      dialog.setVisible(true);
     }
   }//GEN-LAST:event_TableMouseClicked
 

@@ -8,6 +8,7 @@ public class Model extends Observable
   private Controller controller;
 
   private airline.presentation.mainwindow.Controller windowController;
+  private airline.presentation.user.Controller userController;
   
   private static Vector<String> searchTypes = null;
   private TableModel tableModel;
@@ -60,6 +61,16 @@ public class Model extends Observable
   public void setWindowController(airline.presentation.mainwindow.Controller windowController)
   {
     this.windowController = windowController;
+  }
+
+  public airline.presentation.user.Controller getUserController()
+  {
+    return userController;
+  }
+
+  public void setUserController(airline.presentation.user.Controller userController)
+  {
+    this.userController = userController;
   }
   
   public static Vector<String> getSearchTypes()

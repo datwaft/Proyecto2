@@ -98,7 +98,7 @@ public class Payment implements Serializable
   @Override
   public String toString()
   {
-    return "airline.logic.Payment[ id=" + id + " ]";
+    return this.getName();
   }
 
 }

@@ -13,6 +13,10 @@ public class Model extends Observable
   private final airline.presentation.user.trips.View tripsView;
   public final airline.presentation.user.trips.Controller tripsController;
   
+  private final airline.presentation.user.selectseats.Model seatsModel;
+  private final airline.presentation.user.selectseats.View seatsView;
+  public final airline.presentation.user.selectseats.Controller seatsController;
+  
   private static User loggedUser = null;
 
   public static User getLoggedUser()
@@ -30,6 +34,10 @@ public class Model extends Observable
     tripsModel = new airline.presentation.user.trips.Model();
     tripsView = new airline.presentation.user.trips.View();
     tripsController = new airline.presentation.user.trips.Controller(tripsModel, tripsView);
+    
+    seatsModel = new airline.presentation.user.selectseats.Model();
+    seatsView = new airline.presentation.user.selectseats.View();
+    seatsController = new airline.presentation.user.selectseats.Controller(seatsModel, seatsView);
   }
   
   public Controller getController()
@@ -54,7 +62,12 @@ public class Model extends Observable
     this.windowController = windowController;
     
     tripsModel.setWindowController(this.windowController);
+    tripsModel.setUserController(controller);
     this.windowController.addWindow(tripsView, "trips");
+    
+    seatsModel.setWindowController(this.windowController);
+    seatsModel.setUserController(controller);
+    this.windowController.addWindow(seatsView, "seats");
   }
   
   @Override

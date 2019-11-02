@@ -1,4 +1,4 @@
-package airline.presentation.user;
+package airline.presentation.user.selectseats;
 
 import airline.logic.UserModel;
 import airline.logic.User;
@@ -21,8 +21,7 @@ public class Controller
   {
     switch(window)
     {
-      case "trips": model.tripsController.initialize();
-      case "seats": model.seatsController.initiliaze();
+      
     }
     
     model.getWindowController().swapWindow(window);
