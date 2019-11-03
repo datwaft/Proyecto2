@@ -161,8 +161,10 @@ public class View extends javax.swing.JPanel implements Observer
 
   private void SpinnerSeatsStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_SpinnerSeatsStateChanged
   {//GEN-HEADEREND:event_SpinnerSeatsStateChanged
-    FieldPrice.setText("$" + Double.toString((model.getTrip().getOutward().getPrice() 
-      + (model.getTrip().getInward() != null ? model.getTrip().getInward().getPrice() : 0)) * ((int)SpinnerSeats.getValue())));
+    FieldPrice.setText("$" + Double.toString(
+        ((model.getTrip().getOutward().getPrice() * (1 - model.getTrip().getOutward().getDiscount().doubleValue()))
+      + (model.getTrip().getInward() != null ? (model.getTrip().getInward().getPrice() *  (1 - model.getTrip().getInward().getDiscount().doubleValue())) : 0))
+      * ((int)SpinnerSeats.getValue())));
     ((TableModel)Table.getModel()).changeList((int)SpinnerSeats.getValue());
   }//GEN-LAST:event_SpinnerSeatsStateChanged
 
@@ -187,9 +189,10 @@ public class View extends javax.swing.JPanel implements Observer
       airline.presentation.user.selectseats.Model.setLoggedUser(airline.presentation.user.Model.getLoggedUser());
       airline.presentation.user.selectseats.Model.setNames(list);
       airline.presentation.user.selectseats.Model.setPaymentType((Payment)ComboBoxPayment.getSelectedItem());
-      airline.presentation.user.selectseats.Model.setPrice((model.getTrip().getOutward().getPrice() * model.getTrip().getOutward().getDiscount().doubleValue()
-        + (model.getTrip().getInward() != null ? model.getTrip().getInward().getPrice() * model.getTrip().getInward().getDiscount().doubleValue() : 0))
-        * (int)SpinnerSeats.getValue());
+      airline.presentation.user.selectseats.Model.setPrice(
+        ((model.getTrip().getOutward().getPrice() * (1 - model.getTrip().getOutward().getDiscount().doubleValue()))
+      + (model.getTrip().getInward() != null ? (model.getTrip().getInward().getPrice() *  (1 - model.getTrip().getInward().getDiscount().doubleValue())) : 0))
+      * ((int)SpinnerSeats.getValue()));
       airline.presentation.user.selectseats.Model.setSelectedTrip(model.getTrip());
       
       model.getUserController().changeWindow("seats");
@@ -217,10 +220,10 @@ public class View extends javax.swing.JPanel implements Observer
   public void update(Observable o, Object arg)
   {
     FieldTrip.setText(model.getTrip().toString());
-    ((SpinnerNumberModel)SpinnerSeats.getModel()).setMaximum(Controller.getAvailableSeats(model.getTrip()));
-    FieldPrice.setText("$" + Double.toString((model.getTrip().getOutward().getPrice() * model.getTrip().getOutward().getDiscount().doubleValue()
-      + (model.getTrip().getInward() != null ? model.getTrip().getInward().getPrice() * model.getTrip().getInward().getDiscount().doubleValue() : 0))
-      * (int)SpinnerSeats.getValue()));
+    FieldPrice.setText("$" + Double.toString(
+        ((model.getTrip().getOutward().getPrice() * (1 - model.getTrip().getOutward().getDiscount().doubleValue()))
+      + (model.getTrip().getInward() != null ? (model.getTrip().getInward().getPrice() *  (1 - model.getTrip().getInward().getDiscount().doubleValue())) : 0))
+      * ((int)SpinnerSeats.getValue())));
     ((TableModel)Table.getModel()).changeList((int)SpinnerSeats.getValue());
   }
   

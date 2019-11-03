@@ -1,7 +1,10 @@
 package airline.presentation.user.selectseats;
 
-import java.util.Observable;
-import java.util.Observer;
+import airline.logic.*;
+import java.awt.*;
+import java.util.*;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class View extends javax.swing.JPanel implements Observer
 { 
@@ -20,6 +23,18 @@ public class View extends javax.swing.JPanel implements Observer
 
     LabelTitle = new javax.swing.JLabel();
     ButtonCancel = new javax.swing.JButton();
+    LabelRemainder = new javax.swing.JLabel();
+    FieldRemainder = new javax.swing.JTextField();
+    PanelDraw = new javax.swing.JPanel()
+    {
+      @Override
+      public void paintComponent(Graphics g)
+      {
+        super.paintComponent(g);
+        renderModel(g);
+      }
+    };
+    ButtonFinish = new javax.swing.JButton();
 
     setMaximumSize(new java.awt.Dimension(800, 500));
     setMinimumSize(new java.awt.Dimension(800, 500));
@@ -40,6 +55,35 @@ public class View extends javax.swing.JPanel implements Observer
       }
     });
 
+    LabelRemainder.setText("Asientos restantes:");
+
+    FieldRemainder.setEditable(false);
+    FieldRemainder.setBackground(new java.awt.Color(255, 255, 255));
+    FieldRemainder.setText("0");
+
+    PanelDraw.setBackground(new java.awt.Color(255, 255, 255));
+    PanelDraw.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+    javax.swing.GroupLayout PanelDrawLayout = new javax.swing.GroupLayout(PanelDraw);
+    PanelDraw.setLayout(PanelDrawLayout);
+    PanelDrawLayout.setHorizontalGroup(
+      PanelDrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGap(0, 0, Short.MAX_VALUE)
+    );
+    PanelDrawLayout.setVerticalGroup(
+      PanelDrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGap(0, 377, Short.MAX_VALUE)
+    );
+
+    ButtonFinish.setText("Finalizar");
+    ButtonFinish.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonFinishActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -47,12 +91,24 @@ public class View extends javax.swing.JPanel implements Observer
       .addGroup(layout.createSequentialGroup()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addComponent(ButtonCancel))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(278, 278, 278)
+                .addComponent(LabelTitle))
+              .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelRemainder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(FieldRemainder, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGap(0, 268, Short.MAX_VALUE))
           .addGroup(layout.createSequentialGroup()
-            .addGap(278, 278, 278)
-            .addComponent(LabelTitle)
-            .addGap(0, 268, Short.MAX_VALUE)))
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(ButtonFinish)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonCancel))
+              .addComponent(PanelDraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -60,8 +116,16 @@ public class View extends javax.swing.JPanel implements Observer
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
         .addComponent(LabelTitle)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 429, Short.MAX_VALUE)
-        .addComponent(ButtonCancel)
+        .addGap(1, 1, 1)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(LabelRemainder)
+          .addComponent(FieldRemainder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(18, 18, 18)
+        .addComponent(PanelDraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(ButtonCancel)
+          .addComponent(ButtonFinish))
         .addContainerGap())
     );
   }// </editor-fold>//GEN-END:initComponents
@@ -72,15 +136,64 @@ public class View extends javax.swing.JPanel implements Observer
     model.getUserController().changeWindow("trips");
   }//GEN-LAST:event_ButtonCancelActionPerformed
 
+  private void ButtonFinishActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonFinishActionPerformed
+  {//GEN-HEADEREND:event_ButtonFinishActionPerformed
+     String error = "";
+    
+    if(Model.getNames().size() > model.getSelected().size())
+    {
+      if(!error.isBlank())
+        error += "<br>";
+      error += "No se han seleccionado todos los asientos.";
+    }
+    
+    if (error.isBlank())
+    {
+      JLabel label = new JLabel("<html><center>Gracias por su compra.</center></html>");
+      Object[] options = {"Aceptar"};
+      JOptionPane dialog = new JOptionPane();
+      JOptionPane.showOptionDialog(this
+        , label
+        , "Ha ocurrido un error"
+        , JOptionPane.DEFAULT_OPTION
+        , JOptionPane.ERROR_MESSAGE
+        , null
+        , options
+        , options[0]);
+      
+      model.getUserController().changeWindow("trips");
+    }
+    else
+    {
+      JLabel label = new JLabel("<html><center>"+ error +"</center></html>");
+      Object[] options = {"Aceptar"};
+      JOptionPane dialog = new JOptionPane();
+      JOptionPane.showOptionDialog(this
+        , label
+        , "Ha ocurrido un error"
+        , JOptionPane.DEFAULT_OPTION
+        , JOptionPane.ERROR_MESSAGE
+        , null
+        , options
+        , options[0]);
+    }
+  }//GEN-LAST:event_ButtonFinishActionPerformed
+
   @Override
   public void update(Observable o, Object arg)
   {
-    
+    if(Model.getNames() != null)
+      FieldRemainder.setText(Integer.toString(Model.getNames().size() - model.getSelected().size()));
+    if(Model.getSelectedTrip() != null)
+      this.generateSeats();
   }
   
   public void initialize()
   {
-    
+    if(Model.getNames() != null)
+      FieldRemainder.setText(Integer.toString(Model.getNames().size() - model.getSelected().size()));
+    if(Model.getSelectedTrip() != null)
+      this.generateSeats();
   }
   
   public Model getModel()
@@ -104,8 +217,106 @@ public class View extends javax.swing.JPanel implements Observer
     this.controller = controller;
   }
   
+  private void renderModel(Graphics g)
+  {
+    Graphics2D media = (Graphics2D) g;
+    
+    RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+    media.setRenderingHints(rh);
+    
+    renderSeats(media);
+  }
+  
+  private void generateSeats()
+  {
+    int seatWidth = 20;
+    int seatHeight = 20;
+    int width = (PanelDraw.getWidth() - Model.getSelectedTrip().getPlane().getType().getRownumber() * seatWidth)/2;
+    int height;
+    
+    if(Model.getSelectedTrip().getPlane().getType().getRowseats() == 6)
+      height = (PanelDraw.getHeight() - (Model.getSelectedTrip().getPlane().getType().getRowseats() + 1) * seatHeight)/2;
+    else
+      height = (PanelDraw.getHeight() - (Model.getSelectedTrip().getPlane().getType().getRowseats() + 2) * seatHeight)/2;
+    
+    ArrayList<ArrayList<Seat>> seats = new ArrayList<>();
+    
+    for(int i = 0; i < Model.getSelectedTrip().getPlane().getType().getRownumber(); ++i)
+    {
+      seats.add(new ArrayList<>());
+    }
+    
+    for(int i = 0; i < Model.getSelectedTrip().getPlane().getType().getRownumber(); ++i)
+    {
+      for(int j = 0; j < Model.getSelectedTrip().getPlane().getType().getRowseats(); ++j)
+      {
+        Seat seat;
+        
+        if(Model.getSelectedTrip().getPlane().getType().getRowseats() == 6)
+        {
+          if(j < 3)
+            seat = new Seat(i * seatWidth + width,j * seatHeight + height,seatWidth - 5, seatHeight - 5);
+          else
+            seat = new Seat(i * seatWidth + width,(j+1) * seatHeight + height,seatWidth - 5, seatHeight - 5);
+        }
+        else
+        {
+          if(j < 3)
+            seat = new Seat(i * seatWidth + width,j * seatHeight + height,seatWidth - 5, seatHeight - 5);
+          else if(j < 6)
+            seat = new Seat(i * seatWidth + width,(j+1) * seatHeight + height,seatWidth - 5, seatHeight - 5);
+          else
+            seat = new Seat(i * seatWidth + width,(j+2) * seatHeight + height,seatWidth - 5, seatHeight - 5);
+        }
+        
+        seat.setRow(i);
+        seat.setSeat((char)(65 + j));
+        seat.setColor(Color.white);
+        seats.get(i).add(seat);
+      }
+    }
+    checkSeats(seats);
+    model.setSeats(seats);
+  }
+  
+  private void checkSeats(ArrayList<ArrayList<Seat>> seats)
+  {
+    java.util.List<Ticket> occupied = controller.getTripSeats();
+    for(int i = 0; i < occupied.size(); ++i)
+    {
+      int row = occupied.get(i).getRow();
+      int seat = occupied.get(i).getSeat().codePointAt(i) - 65;
+      seats.get(row).get(seat).setColor(Color.pink);
+    }
+  }
+  
+  private void renderSeats(Graphics2D media)
+  {
+    for(int i = 0; i < Model.getSelectedTrip().getPlane().getType().getRownumber(); ++i)
+    {
+      for(int j = 0; j < Model.getSelectedTrip().getPlane().getType().getRowseats(); ++j)
+      {
+        renderRectangle(model.getSeats().get(i).get(j), media);
+      }
+    }
+  }
+  
+  private void renderRectangle(Seat rect, Graphics2D media)
+  {
+    media.setColor(rect.getColor());
+    media.fill(rect);
+    media.setColor(Color.black);
+    media.draw(rect);
+  }
+  
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton ButtonCancel;
+  private javax.swing.JButton ButtonFinish;
+  private javax.swing.JTextField FieldRemainder;
+  private javax.swing.JLabel LabelRemainder;
   private javax.swing.JLabel LabelTitle;
+  private javax.swing.JPanel PanelDraw;
   // End of variables declaration//GEN-END:variables
 }

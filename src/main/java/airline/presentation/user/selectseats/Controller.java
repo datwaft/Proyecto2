@@ -1,7 +1,9 @@
 package airline.presentation.user.selectseats;
 
-import airline.logic.UserModel;
-import airline.logic.User;
+import airline.logic.Ticket;
+import airline.logic.TicketModel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller
 {
@@ -32,9 +34,9 @@ public class Controller
     view.initialize();
   }
   
-  public User findUser(String string)
+  public List<Ticket> getTripSeats()
   {
-    return UserModel.getInstance().findUser(string);
+    return TicketModel.getInstance().findByTrip(Model.getSelectedTrip());
   }
   
   public Model getModel()
