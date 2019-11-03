@@ -10,8 +10,8 @@ import javax.persistence.*;
   @NamedQuery(name = "Ticket.findAll", query = "SELECT t FROM Ticket t"),
   @NamedQuery(name = "Ticket.findById", query = "SELECT t FROM Ticket t WHERE t.id = :id"),
   @NamedQuery(name = "Ticket.findByName", query = "SELECT t FROM Ticket t WHERE t.name = :name"),
-  @NamedQuery(name = "Ticket.findByRow", query = "SELECT t FROM Ticket t WHERE t.row = :row"),
-  @NamedQuery(name = "Ticket.findBySeat", query = "SELECT t FROM Ticket t WHERE t.seat = :seat")
+  @NamedQuery(name = "Ticket.findByRownumber", query = "SELECT t FROM Ticket t WHERE t.rownumber = :rownumber"),
+  @NamedQuery(name = "Ticket.findBySeatletter", query = "SELECT t FROM Ticket t WHERE t.seatletter = :seatletter")
 })
 public class Ticket implements Serializable
 {
@@ -25,11 +25,11 @@ public class Ticket implements Serializable
   @Column(name = "name")
   private String name;
   @Basic(optional = false)
-  @Column(name = "row")
-  private int row;
+  @Column(name = "rownumber")
+  private int rownumber;
   @Basic(optional = false)
-  @Column(name = "seat")
-  private String seat;
+  @Column(name = "seatletter")
+  private String seatletter;
   @JoinColumn(name = "reservation", referencedColumnName = "id")
   @ManyToOne(optional = false)
   private Reservation reservation;
@@ -43,12 +43,12 @@ public class Ticket implements Serializable
     this.id = id;
   }
 
-  public Ticket(Integer id, String name, int row, String seat)
+  public Ticket(Integer id, String name, int rownumber, String seatletter)
   {
     this.id = id;
     this.name = name;
-    this.row = row;
-    this.seat = seat;
+    this.rownumber = rownumber;
+    this.seatletter = seatletter;
   }
 
   public Integer getId()
@@ -71,24 +71,24 @@ public class Ticket implements Serializable
     this.name = name;
   }
 
-  public int getRow()
+  public int getRownumber()
   {
-    return row;
+    return rownumber;
   }
 
-  public void setRow(int row)
+  public void setRownumber(int rownumber)
   {
-    this.row = row;
+    this.rownumber = rownumber;
   }
 
-  public String getSeat()
+  public String getSeatletter()
   {
-    return seat;
+    return seatletter;
   }
 
-  public void setSeat(String seat)
+  public void setSeatletter(String seatletter)
   {
-    this.seat = seat;
+    this.seatletter = seatletter;
   }
 
   public Reservation getReservation()

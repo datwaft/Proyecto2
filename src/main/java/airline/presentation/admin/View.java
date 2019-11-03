@@ -1,11 +1,7 @@
 package airline.presentation.admin;
 
-import airline.presentation.admin.city.*;
-import airline.exceptions.IllegalOrphanException;
-import airline.logic.Country;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.*;
 
 public class View extends javax.swing.JPanel implements Observer
 { 
@@ -34,7 +30,6 @@ public class View extends javax.swing.JPanel implements Observer
     ButtonTrip = new javax.swing.JButton();
     ButtonUser = new javax.swing.JButton();
     ButtonReservation = new javax.swing.JButton();
-    ButtonTicket = new javax.swing.JButton();
     ButtonReturn = new javax.swing.JButton();
     LabelReports = new javax.swing.JLabel();
     ButtonFacturedByMonth = new javax.swing.JButton();
@@ -133,13 +128,11 @@ public class View extends javax.swing.JPanel implements Observer
     });
 
     ButtonReservation.setText("Reservación");
-
-    ButtonTicket.setText("Tiquetes");
-    ButtonTicket.addActionListener(new java.awt.event.ActionListener()
+    ButtonReservation.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        ButtonTicketActionPerformed(evt);
+        ButtonReservationActionPerformed(evt);
       }
     });
 
@@ -157,10 +150,13 @@ public class View extends javax.swing.JPanel implements Observer
     LabelReports.setText("Reportes");
 
     ButtonFacturedByMonth.setText("Gráfico de cantidad facturado por mes (los últimos 12 meses)");
+    ButtonFacturedByMonth.setEnabled(false);
 
     ButtonRevenueByYear.setText("Gráfico de cantidad de Ingresos por año (el año actual)");
+    ButtonRevenueByYear.setEnabled(false);
 
     ButtonClientByPlane.setText("Listado de clientes por avión");
+    ButtonClientByPlane.setEnabled(false);
     ButtonClientByPlane.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -170,6 +166,7 @@ public class View extends javax.swing.JPanel implements Observer
     });
 
     ButtonTopFlights.setText("Los 5 vuelos con más reservaciones");
+    ButtonTopFlights.setEnabled(false);
 
     ButtonLogout.setText("Cerrar Sesión");
     ButtonLogout.addActionListener(new java.awt.event.ActionListener()
@@ -204,8 +201,7 @@ public class View extends javax.swing.JPanel implements Observer
           .addComponent(ButtonRevenueByYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(ButtonClientByPlane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(ButtonTopFlights, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(ButtonReservation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(ButtonTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addComponent(ButtonReservation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGap(65, 65, 65))
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
@@ -240,9 +236,7 @@ public class View extends javax.swing.JPanel implements Observer
               .addComponent(ButtonCountry)
               .addComponent(ButtonReservation))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(ButtonCity)
-              .addComponent(ButtonTicket))
+            .addComponent(ButtonCity)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(ButtonPlanetype))
           .addComponent(LabelReports))
@@ -286,11 +280,6 @@ public class View extends javax.swing.JPanel implements Observer
     controller.changeWindow("flight");
   }//GEN-LAST:event_ButtonFlightActionPerformed
 
-  private void ButtonTicketActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonTicketActionPerformed
-  {//GEN-HEADEREND:event_ButtonTicketActionPerformed
-    // TODO add your handling code here:
-  }//GEN-LAST:event_ButtonTicketActionPerformed
-
   private void ButtonClientByPlaneActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonClientByPlaneActionPerformed
   {//GEN-HEADEREND:event_ButtonClientByPlaneActionPerformed
     // TODO add your handling code here:
@@ -326,6 +315,11 @@ public class View extends javax.swing.JPanel implements Observer
     Model.setLoggedUser(null);
     model.getWindowController().changeWindow("welcome");
   }//GEN-LAST:event_ButtonLogoutActionPerformed
+
+  private void ButtonReservationActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonReservationActionPerformed
+  {//GEN-HEADEREND:event_ButtonReservationActionPerformed
+    controller.changeWindow("reservation");
+  }//GEN-LAST:event_ButtonReservationActionPerformed
 
   @Override
   public void update(Observable o, Object arg)
@@ -367,7 +361,6 @@ public class View extends javax.swing.JPanel implements Observer
   private javax.swing.JButton ButtonReservation;
   private javax.swing.JButton ButtonReturn;
   private javax.swing.JButton ButtonRevenueByYear;
-  private javax.swing.JButton ButtonTicket;
   private javax.swing.JButton ButtonTopFlights;
   private javax.swing.JButton ButtonTrip;
   private javax.swing.JButton ButtonUser;

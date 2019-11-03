@@ -23,6 +23,7 @@ public class Controller
     {
       case "trips": model.tripsController.initialize(); break;
       case "seats": model.seatsController.initiliaze(); break;
+      case "reservations": model.reservationController.initialize(); break;
     }
     
     model.getWindowController().swapWindow(window);

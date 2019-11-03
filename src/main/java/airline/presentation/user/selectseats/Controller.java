@@ -19,6 +19,7 @@ public class Controller
   
   public void initiliaze()
   {
+    model.setSelected(new ArrayList<>());
     view.initialize();
   }
   
@@ -40,8 +41,8 @@ public class Controller
         ticket = new Ticket();
         ticket.setReservation(reservation);
         ticket.setName(Model.getNames().get(i));
-        ticket.setRow(model.getSelected().get(i).fst);
-        ticket.setSeat(model.getSelected().get(i).snd.toString());
+        ticket.setRownumber(model.getSelected().get(i).fst);
+        ticket.setSeatletter(model.getSelected().get(i).snd.toString());
         TicketModel.getInstance().create(ticket);
       }
     }

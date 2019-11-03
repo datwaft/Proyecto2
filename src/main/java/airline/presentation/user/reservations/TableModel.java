@@ -1,0 +1,81 @@
+package airline.presentation.user.reservations;
+
+import airline.logic.Reservation;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import javax.swing.table.AbstractTableModel;
+
+public class TableModel extends AbstractTableModel
+{
+  List<Reservation> list;
+
+  public TableModel()
+  {
+    list = new ArrayList<>();
+  }
+
+  public TableModel(List<Reservation> list)
+  {
+    this.list = list;
+  }
+
+  public List<Reservation> getList()
+  {
+    return list;
+  }
+
+  public void setList(List<Reservation> list)
+  {
+    this.list = list;
+    this.fireTableStructureChanged();
+  }
+  
+  public Reservation getElement(int index)
+  {
+    return this.list.get(index);
+  }
+  
+  @Override
+  public int getRowCount()
+  {
+    return list.size();
+  }
+
+  @Override
+  public int getColumnCount()
+  {
+    return 5;
+  }
+
+  @Override    
+  public String getColumnName(int columnIndex)
+  {
+    switch(columnIndex)
+    {
+      case 0: return "ID";
+      case 1: return "Viaje";
+      case 2: return "Tipo de pago";
+      case 3: return "Precio";
+      case 4: return "Timestamp";
+      default: return "";
+    }
+  }
+  
+  @Override
+  public Object getValueAt(int rowIndex, int columnIndex)
+  {
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+    
+    Reservation object = list.get(rowIndex);
+    switch(columnIndex)
+    {
+      case 0: return object.getId();
+      case 1: return object.getTrip();
+      case 2: return object.getPayment();
+      case 3: return object.getAmount();
+      case 4: return formatter.format(object.getTimestamp());
+      default: return "";
+    }
+  }
+}

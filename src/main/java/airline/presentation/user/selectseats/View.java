@@ -325,7 +325,7 @@ public class View extends javax.swing.JPanel implements Observer
             seat = new Seat(i * seatWidth + width,(j+2) * seatHeight + height,seatWidth - 5, seatHeight - 5);
         }
         
-        seat.setRow(i);
+        seat.setRow(i+1);
         seat.setSeat((char)(65 + j));
         seat.setColor(Color.white);
         seats.get(i).add(seat);
@@ -340,14 +340,73 @@ public class View extends javax.swing.JPanel implements Observer
     java.util.List<Ticket> occupied = controller.getTripSeats();
     for(int i = 0; i < occupied.size(); ++i)
     {
-      int row = occupied.get(i).getRow();
-      int seat = occupied.get(i).getSeat().codePointAt(i) - 65;
-      seats.get(row).get(seat).setColor(Color.pink);
+      int row = occupied.get(i).getRownumber();
+      int seat = occupied.get(i).getSeatletter().codePointAt(0) - 65;
+      seats.get(row - 1).get(seat).setColor(Color.pink);
     }
   }
   
   private void renderSeats(Graphics2D media)
   {
+    int seatWidth = 20;
+    int seatHeight = 20;
+    int width = (PanelDraw.getWidth() - Model.getSelectedTrip().getPlane().getType().getRownumber() * seatWidth)/2;
+    int widthlimit = width + Model.getSelectedTrip().getPlane().getType().getRownumber() * seatWidth;
+    int height;
+    int heightlimit;
+    
+    if(Model.getSelectedTrip().getPlane().getType().getRowseats() == 6)
+    {
+      height = (PanelDraw.getHeight() - (Model.getSelectedTrip().getPlane().getType().getRowseats() + 1) * seatHeight)/2;
+      heightlimit = height + (Model.getSelectedTrip().getPlane().getType().getRowseats() + 1) * seatHeight;
+    }
+    else
+    {
+      height = (PanelDraw.getHeight() - (Model.getSelectedTrip().getPlane().getType().getRowseats() + 2) * seatHeight)/2;
+      heightlimit = height + (Model.getSelectedTrip().getPlane().getType().getRowseats() + 2) * seatHeight;
+    }
+    
+    for(int i = 0; i < Model.getSelectedTrip().getPlane().getType().getRownumber(); ++i)
+    {
+      renderCenteredString(Integer.toString(i + 1), new Rectangle(i * seatWidth + width, height - seatHeight, seatWidth, seatHeight), media);
+      renderCenteredString(Integer.toString(i + 1), new Rectangle(i * seatWidth + width, heightlimit, seatWidth, seatHeight), media);
+    }
+    
+    for(int j = 0; j < Model.getSelectedTrip().getPlane().getType().getRowseats(); ++j)
+    {
+      if(Model.getSelectedTrip().getPlane().getType().getRowseats() == 6)
+      {
+        if(j < 3)
+        {
+          renderCenteredString(Character.toString(j + 65), new Rectangle(width - seatWidth, (j+0) * seatHeight + height, seatWidth, seatHeight), media);
+          renderCenteredString(Character.toString(j + 65), new Rectangle(widthlimit, (j+0) * seatHeight + height, seatWidth, seatHeight), media);
+        }
+        else
+        {
+          renderCenteredString(Character.toString(j + 65), new Rectangle(width - seatWidth, (j+1) * seatHeight + height, seatWidth, seatHeight), media);
+          renderCenteredString(Character.toString(j + 65), new Rectangle(widthlimit, (j+1) * seatHeight + height, seatWidth, seatHeight), media);
+        }
+      }
+      else
+      {
+        if(j < 3)
+        {
+          renderCenteredString(Character.toString(j + 65), new Rectangle(width - seatWidth, (j+0) * seatHeight + height, seatWidth, seatHeight), media);
+          renderCenteredString(Character.toString(j + 65), new Rectangle(widthlimit, (j+0) * seatHeight + height, seatWidth, seatHeight), media);
+        }
+        else if(j < 6)
+        {
+          renderCenteredString(Character.toString(j + 65), new Rectangle(width - seatWidth, (j+1) * seatHeight + height, seatWidth, seatHeight), media);
+          renderCenteredString(Character.toString(j + 65), new Rectangle(widthlimit, (j+1) * seatHeight + height, seatWidth, seatHeight), media);
+        }
+        else
+        {
+          renderCenteredString(Character.toString(j + 65), new Rectangle(width - seatWidth, (j+2) * seatHeight + height, seatWidth, seatHeight), media);
+          renderCenteredString(Character.toString(j + 65), new Rectangle(widthlimit, (j+2) * seatHeight + height, seatWidth, seatHeight), media);
+        }
+      }
+    }
+    
     for(int i = 0; i < Model.getSelectedTrip().getPlane().getType().getRownumber(); ++i)
     {
       for(int j = 0; j < Model.getSelectedTrip().getPlane().getType().getRowseats(); ++j)
@@ -363,6 +422,19 @@ public class View extends javax.swing.JPanel implements Observer
     media.fill(rect);
     media.setColor(Color.black);
     media.draw(rect);
+  }
+  
+  private void renderCenteredString(String string, Rectangle rect, Graphics2D media)
+  {
+    rect.height -= 5;
+    rect.width -= 5;
+    
+    Font font = new Font("Monospaced", Font.BOLD, 10);
+    FontMetrics metrics = media.getFontMetrics(font);
+    int x = rect.x + (rect.width - metrics.stringWidth(string)) / 2;
+    int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+    media.setFont(font);
+    media.drawString(string, x, y);
   }
   
   // Variables declaration - do not modify//GEN-BEGIN:variables

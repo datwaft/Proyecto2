@@ -41,6 +41,10 @@ public class Model extends Observable
   private final airline.presentation.admin.user.View userView;
   public final airline.presentation.admin.user.Controller userController;
   
+  private final airline.presentation.admin.reservation.Model reservationModel;
+  private final airline.presentation.admin.reservation.View reservationView;
+  public final airline.presentation.admin.reservation.Controller reservationController;
+  
   private static User loggedUser = null;
 
   public static User getLoggedUser()
@@ -86,6 +90,10 @@ public class Model extends Observable
     userModel = new airline.presentation.admin.user.Model();
     userView = new airline.presentation.admin.user.View();
     userController = new airline.presentation.admin.user.Controller(userModel, userView);
+    
+    reservationModel = new airline.presentation.admin.reservation.Model();
+    reservationView = new airline.presentation.admin.reservation.View();
+    reservationController = new airline.presentation.admin.reservation.Controller(reservationModel, reservationView);
   }
   
   public Controller getController()
@@ -132,6 +140,9 @@ public class Model extends Observable
     
     userModel.setWindowController(this.windowController);
     this.windowController.addWindow(userView, "userview");
+    
+    reservationModel.setWindowController(this.windowController);
+    this.windowController.addWindow(reservationView, "reservation");
   }
   
   @Override

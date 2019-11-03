@@ -51,7 +51,6 @@
                   <Component id="ButtonClientByPlane" alignment="0" max="32767" attributes="0"/>
                   <Component id="ButtonTopFlights" alignment="0" max="32767" attributes="0"/>
                   <Component id="ButtonReservation" max="32767" attributes="0"/>
-                  <Component id="ButtonTicket" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
           </Group>
@@ -95,10 +94,7 @@
                           <Component id="ButtonReservation" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="ButtonCity" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ButtonTicket" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="ButtonCity" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="ButtonPlanetype" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -223,13 +219,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reservaci&#xf3;n"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="ButtonTicket">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tiquetes"/>
-      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonTicketActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonReservationActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ButtonReturn">
@@ -252,16 +243,19 @@
     <Component class="javax.swing.JButton" name="ButtonFacturedByMonth">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gr&#xe1;fico de cantidad facturado por mes (los &#xfa;ltimos 12 meses)"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="ButtonRevenueByYear">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gr&#xe1;fico de cantidad de Ingresos por a&#xf1;o (el a&#xf1;o actual)"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="ButtonClientByPlane">
       <Properties>
         <Property name="text" type="java.lang.String" value="Listado de clientes por avi&#xf3;n"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonClientByPlaneActionPerformed"/>
@@ -270,6 +264,7 @@
     <Component class="javax.swing.JButton" name="ButtonTopFlights">
       <Properties>
         <Property name="text" type="java.lang.String" value="Los 5 vuelos con m&#xe1;s reservaciones"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="ButtonLogout">

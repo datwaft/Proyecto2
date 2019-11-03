@@ -24,7 +24,9 @@ public class Controller
       case "payment": model.paymentController.initialize();  break;
       case "plane": model.planeController.initialize();  break;
       case "planetype": model.planetypeController.initialize();  break;
-      case "trip": model.tripController.initialize();
+      case "trip": model.tripController.initialize(); break;
+      case "userview": model.userController.initialize(); break;
+      case "reservation": model.reservationController.initialize(); break;
     }
     model.getWindowController().swapWindow(window);
   }

@@ -16,7 +16,7 @@ public class Model extends Observable
   private static Double price = null;
   private static List<String> names = null;
 
-  private final List<Pair<Integer, Character>> selected;
+  private List<Pair<Integer, Character>> selected;
   
   private ArrayList<ArrayList<Seat>> seats;
   
@@ -98,6 +98,11 @@ public class Model extends Observable
   public List<Pair<Integer, Character>> getSelected()
   {
     return selected;
+  }
+
+  public void setSelected(List<Pair<Integer, Character>> selected)
+  {
+    this.selected = selected;
   }
   
   public void addSelected(Pair<Integer, Character> pair)

@@ -59,6 +59,13 @@ public class View extends javax.swing.JPanel implements Observer
 
     ButtonPurchases.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
     ButtonPurchases.setText("Ver historial de compras");
+    ButtonPurchases.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        ButtonPurchasesActionPerformed(evt);
+      }
+    });
 
     ButtonChangeInformation.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
     ButtonChangeInformation.setText("Cambiar información del usuario");
@@ -168,6 +175,11 @@ public class View extends javax.swing.JPanel implements Observer
   {//GEN-HEADEREND:event_ButtonReservationActionPerformed
     controller.changeWindow("trips");
   }//GEN-LAST:event_ButtonReservationActionPerformed
+
+  private void ButtonPurchasesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonPurchasesActionPerformed
+  {//GEN-HEADEREND:event_ButtonPurchasesActionPerformed
+    controller.changeWindow("reservations");
+  }//GEN-LAST:event_ButtonPurchasesActionPerformed
 
   @Override
   public void update(Observable o, Object arg)
