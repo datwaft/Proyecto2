@@ -4,6 +4,7 @@ import airline.exceptions.IllegalOrphanException;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
 
 public class View extends javax.swing.JPanel implements Observer
 { 
@@ -333,6 +334,25 @@ public class View extends javax.swing.JPanel implements Observer
   public void update(Observable o, Object arg)
   {
     Table.setModel(model.getTableModel());
+    setColumnWidths(Table, 70, 150, 150, 70, 150, 70);
+  }
+  
+  public static void setColumnWidths(JTable table, int... widths) 
+  {
+    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    TableColumnModel columnModel = table.getColumnModel();
+    for (int i = 0; i < widths.length; i++) 
+    {
+      if (i < columnModel.getColumnCount())
+      {
+        columnModel.getColumn(i).setMinWidth(widths[i]);
+        columnModel.getColumn(i).setPreferredWidth(widths[i]);
+        columnModel.getColumn(i).setMaxWidth(widths[i]);
+      }
+      else 
+        break;
+    }
+    table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
   }
   
   public void initialize()

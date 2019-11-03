@@ -38,7 +38,7 @@ public class Flight implements Serializable
   @Column(name = "duration")
   @Temporal(TemporalType.TIME)
   private Date duration;
-  @Column(name = "arrival")
+  @Column(name = "arrival", insertable = false, updatable = false)
   @Temporal(TemporalType.TIME)
   private Date arrival;
   @Basic(optional = false)
@@ -215,7 +215,7 @@ public class Flight implements Serializable
   @Override
   public String toString()
   {
-    return this.origin.getCode() + " - " + this.destination.getCode() + " " + this.identifier;
+    return this.origin.getName() + " - " + this.destination.getName()+ " " + this.identifier;
   }
 
 }

@@ -153,7 +153,7 @@ public class Trip implements Serializable
   @Override
   public String toString()
   {
-    return this.outward.getOrigin().toString() + " - " + this.outward.getDestination() + " ID: " + this.identifier;
+    return this.outward.getOrigin().getName() + " - " + this.outward.getDestination().getName() + " ID: " + this.identifier;
   }
 
 }

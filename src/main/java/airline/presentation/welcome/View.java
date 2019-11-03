@@ -425,6 +425,7 @@ public class View extends javax.swing.JPanel implements Observer
     TableFlight.setModel(model.getTableModelFlight());
     TableTrip.setModel(model.getTableModelTrip());
     setColumnWidths(TableFlight, 70, 140, 140, 60, 60, 60, 60, 60);
+    setColumnWidths(TableTrip, 70, 150, 150, 70, 150, 70);
   }
   
   public void initialize()

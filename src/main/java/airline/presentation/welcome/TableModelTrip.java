@@ -55,9 +55,9 @@ public class TableModelTrip extends AbstractTableModel
       case 0: return "Identificador";
       case 1: return "Avión";
       case 2: return "Viaje de ida";
-      case 3: return "Fecha de salida";
+      case 3: return "Salida";
       case 4: return "Viaje de vuelta";
-      case 5: return "Fecha de regreso";
+      case 5: return "Regreso";
       case 6: return "Pasajeros";
       default: return "";
     }
