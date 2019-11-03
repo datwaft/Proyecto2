@@ -32,7 +32,7 @@ public class Controller
   {
     switch(window)
     {
-      case "user": model.userController.initiliaze();
+      case "user": model.userController.initiliaze();  break;
     }
     
     model.getWindowController().swapWindow(window);

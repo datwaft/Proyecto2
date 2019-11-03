@@ -65,4 +65,5 @@ select * from flight;
 select * from trip;
 select * from user;
 
+select * from ticket;
 select * from reservation;

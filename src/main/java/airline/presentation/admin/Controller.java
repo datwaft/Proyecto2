@@ -18,12 +18,12 @@ public class Controller
   {
     switch(window)
     {
-      case "city": model.cityController.initialize();
-      case "country": model.countryController.initialize();
-      case "flight": model.flightController.initialize();
-      case "payment": model.paymentController.initialize();
-      case "plane": model.planeController.initialize();
-      case "planetype": model.planetypeController.initialize();
+      case "city": model.cityController.initialize(); break;
+      case "country": model.countryController.initialize();  break;
+      case "flight": model.flightController.initialize();  break;
+      case "payment": model.paymentController.initialize();  break;
+      case "plane": model.planeController.initialize();  break;
+      case "planetype": model.planetypeController.initialize();  break;
       case "trip": model.tripController.initialize();
     }
     model.getWindowController().swapWindow(window);

@@ -40,7 +40,7 @@ public class Controller
   {
     switch(window)
     {
-      case "welcome": model.welcomeController.initialize();
+      case "welcome": model.welcomeController.initialize();  break;
     }
     this.swapWindow(window);
   }

@@ -127,6 +127,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PanelDrawMouseClicked"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel()&#xa;{&#xa;  @Override&#xa;  public void paintComponent(Graphics g)&#xa;  {&#xa;    super.paintComponent(g);&#xa;    renderModel(g);&#xa;  }&#xa;}"/>
       </AuxValues>

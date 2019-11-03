@@ -1,10 +1,10 @@
 package airline.presentation.user.selectseats;
 
 import airline.logic.*;
+import com.sun.tools.javac.util.Pair;
 import java.awt.*;
 import java.util.*;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class View extends javax.swing.JPanel implements Observer
 { 
@@ -63,6 +63,13 @@ public class View extends javax.swing.JPanel implements Observer
 
     PanelDraw.setBackground(new java.awt.Color(255, 255, 255));
     PanelDraw.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+    PanelDraw.addMouseListener(new java.awt.event.MouseAdapter()
+    {
+      public void mouseClicked(java.awt.event.MouseEvent evt)
+      {
+        PanelDrawMouseClicked(evt);
+      }
+    });
 
     javax.swing.GroupLayout PanelDrawLayout = new javax.swing.GroupLayout(PanelDraw);
     PanelDraw.setLayout(PanelDrawLayout);
@@ -149,18 +156,39 @@ public class View extends javax.swing.JPanel implements Observer
     
     if (error.isBlank())
     {
-      JLabel label = new JLabel("<html><center>Gracias por su compra.</center></html>");
-      Object[] options = {"Aceptar"};
-      JOptionPane dialog = new JOptionPane();
-      JOptionPane.showOptionDialog(this
-        , label
-        , "Ha ocurrido un error"
-        , JOptionPane.DEFAULT_OPTION
-        , JOptionPane.ERROR_MESSAGE
-        , null
-        , options
-        , options[0]);
+      {
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/plane.png"));
+        JLabel label = new JLabel("<html><center>Gracias por su compra.</center></html>");
+        Object[] options = {"Aceptar"};
+        JOptionPane dialog = new JOptionPane();
+        JOptionPane.showOptionDialog(this
+          , label
+          , "Gracias por su compra"
+          , JOptionPane.DEFAULT_OPTION
+          , JOptionPane.INFORMATION_MESSAGE
+          , null
+          , options
+          , options[0]);
+      }
       
+      try
+      {
+        controller.processPurchase();
+      }
+      catch(Exception ex)
+      {
+        JLabel label = new JLabel("<html><center>"+ ex.getLocalizedMessage() +"</center></html>");
+        Object[] options = {"Aceptar"};
+        JOptionPane dialog = new JOptionPane();
+        JOptionPane.showOptionDialog(this
+          , label
+          , "Ha ocurrido un error"
+          , JOptionPane.DEFAULT_OPTION
+          , JOptionPane.ERROR_MESSAGE
+          , null
+          , options
+          , options[0]);
+      }
       model.getUserController().changeWindow("trips");
     }
     else
@@ -179,21 +207,47 @@ public class View extends javax.swing.JPanel implements Observer
     }
   }//GEN-LAST:event_ButtonFinishActionPerformed
 
+  private void PanelDrawMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_PanelDrawMouseClicked
+  {//GEN-HEADEREND:event_PanelDrawMouseClicked
+    Seat seat;
+    for(int i = 0; i < Model.getSelectedTrip().getPlane().getType().getRownumber(); ++i)
+    {
+      for(int j = 0; j <  Model.getSelectedTrip().getPlane().getType().getRowseats(); ++j)
+      {
+        seat = model.getSeats().get(i).get(j);
+        if(seat.contains(evt.getX(), evt.getY()))
+        {
+          if(seat.getColor() == Color.white)
+          {
+            if(Model.getNames().size() > model.getSelected().size())
+            {
+              model.addSelected(new Pair<>(seat.getRow(), seat.getSeat()));
+              seat.setColor(Color.cyan);
+            }
+          }
+          else if(seat.getColor() == Color.cyan)
+          {
+            model.deleteSelected(new Pair<>(seat.getRow(), seat.getSeat()));
+            seat.setColor(Color.white);
+          }
+          PanelDraw.validate();
+          PanelDraw.repaint();
+        }
+      }
+    }
+  }//GEN-LAST:event_PanelDrawMouseClicked
+
   @Override
   public void update(Observable o, Object arg)
   {
     if(Model.getNames() != null)
       FieldRemainder.setText(Integer.toString(Model.getNames().size() - model.getSelected().size()));
-    if(Model.getSelectedTrip() != null)
-      this.generateSeats();
   }
   
   public void initialize()
   {
-    if(Model.getNames() != null)
-      FieldRemainder.setText(Integer.toString(Model.getNames().size() - model.getSelected().size()));
-    if(Model.getSelectedTrip() != null)
-      this.generateSeats();
+     FieldRemainder.setText(Integer.toString(Model.getNames().size() - model.getSelected().size()));
+     this.generateSeats();
   }
   
   public Model getModel()

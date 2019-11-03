@@ -12,6 +12,11 @@ public class TicketModel
   
   }
 
+  public void create(Ticket object) throws Exception
+  {
+    dao.create(object);
+  }
+  
   public List<Ticket> findByTrip(Trip trip)
   {
     return dao.findByTrip(trip);

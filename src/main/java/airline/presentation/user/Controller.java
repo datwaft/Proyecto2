@@ -21,8 +21,8 @@ public class Controller
   {
     switch(window)
     {
-      case "trips": model.tripsController.initialize();
-      case "seats": model.seatsController.initiliaze();
+      case "trips": model.tripsController.initialize(); break;
+      case "seats": model.seatsController.initiliaze(); break;
     }
     
     model.getWindowController().swapWindow(window);
