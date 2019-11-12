@@ -181,6 +181,13 @@ public class View extends javax.swing.JPanel implements Observer
           error += "<br>";
         error += "El nombre No." + (i+1) + " está en blanco";
       }
+      
+      if(list.get(i).length() > 45)
+      {
+        if(!error.isBlank())
+          error += "<br>";
+        error += "El nombre No." + (i+1) + " es demasiado largo.";
+      }
     }
     
     if (error.isBlank())

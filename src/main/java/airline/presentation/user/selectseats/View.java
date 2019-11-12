@@ -340,9 +340,16 @@ public class View extends javax.swing.JPanel implements Observer
     java.util.List<Ticket> occupied = controller.getTripSeats();
     for(int i = 0; i < occupied.size(); ++i)
     {
-      int row = occupied.get(i).getRownumber();
-      int seat = occupied.get(i).getSeatletter().codePointAt(0) - 65;
-      seats.get(row - 1).get(seat).setColor(Color.pink);
+      try
+      {
+        int row = occupied.get(i).getRownumber();
+        int seat = occupied.get(i).getSeatletter().codePointAt(0) - 65;
+        seats.get(row - 1).get(seat).setColor(Color.pink);
+      }
+      catch(Exception ex)
+      {
+
+      }
     }
   }
   

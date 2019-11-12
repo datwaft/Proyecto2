@@ -66,4 +66,4 @@ select * from trip;
 select * from user;
 
 select * from ticket;
-select * from reservation r where r.user = 'user';
+select * from reservation;
